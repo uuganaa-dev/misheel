@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="MISHEEL" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>MISHEEL</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900%7CMontserrat:300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/perfect-scrollbar.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-extended.css" />
+    <link rel="stylesheet" type="text/css" href="/css/colors.css" />
+    <link rel="stylesheet" type="text/css" href="/css/components.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout-dark.css" />
+    <link rel="stylesheet" type="text/css" href="/css/custom-style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/animate.css" />
+  </head>
+  <body
+    class="vertical-layout vertical-menu 2-columns navbar-sticky"
+    data-menu="vertical-menu"
+    data-col="2-columns"
+  >
+    <div id="root"></div>
+    <button
+      class="btn btn-primary scroll-top a-scrolla"
+      type="button"
+      style="
+        background-color: #1c6dd0 !important;
+        border-color: #1c6dd0 !important;
+      "
+    >
+      <i class="ft-arrow-up"></i>
+    </button>
+
+    <script src="/js/vendors.min.js"></script>
+    <script src="/js/notification-sidebar.js"></script>
+    <script src="/js/scroll-top.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script>
+      if (localStorage.getItem("srs-theme") === "dark") {
+        $("body").addClass("layout-dark");
+      } else {
+        $("body").removeClass("layout-dark");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Grid, Modal, useMediaQuery } from "@mui/material";
+import json2mq from "json2mq";
+import fileBD from "../../asset/backgroundImages/brandDetail/file";
+import breakpoints from "../../utils/contants/breakpoints";
+import TheContext from "../../utils/context/userContext";
+import Appbar from "../../component/Appbar";
+import FooterMain from "../../component/footerMain";
+import ImageSlick from "./imageSlick";
+import BrandInformation from "./brandInformation";
+import SimilarBrands from "./similarBrands";
+// import RedMenuIcon from "./redMenuIcon";
+import BrandDetailModal from "./brandDetailModal";
+import * as API from "../../api/request";
+import Swal from "sweetalert2";
+
+export default function BrandDetail() {
+  const params = useParams();
+  const { tablet } = breakpoints;
+  const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
+  const context = useContext(TheContext);
+  const [openModal, setOpenModal] = useState(false);
+  const [data, setData] = useState();
+  const [brandList, setBrandList] = useState([]);
+  // const redBttnClick = () => {
+  //   setOpenModal(true);
+  // };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      API.getOneBrand(params.id)
+        .then((res) => {
+          if (res.status === 200) {
+            setData(res.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Алдаа гарлаа.",
+            text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
+            confirmButtonColor: "#0f56b3",
+          });
+        });
+    }
+  }, [params.id]);
+
+  useEffect(() => {
+    if (data?.categoryId && params.id) {
+      API.getBrand()
+        .then((res) => {
+          if (res.status === 200) {
+            if (res.data !== null) {
+              var result = [];
+              var aa = Object.entries(res.data);
+              if (aa.length > 0) {
+                // eslint-disable-next-line array-callback-return
+                aa.map((el) => {
+                  var pp = {
+                    id: el[0],
+                    categoryId: el[1].categoryId,
+                    subCategoryId: el[1].subCategoryId,
+                    brandName: el[1].brandName,
+                    brandLogo: el[1].brandLogo,
+                  };
+                  result.push(pp);
+                });
+                var aaasd = result.filter((el) => el.id !== params.id);
+                setBrandList(aaasd);
+              }
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Алдаа гарлаа.",
+            text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
+            confirmButtonColor: "#0f56b3",
+          });
+        });
+    }
+  }, [data?.categoryId, params.id]);
+
+  return (
+    <Grid sx={{ backgroundColor: ["white", "white", "#E5E5E5"] }}>
+      {isTablet && <Appbar />}
+      <Grid
+        sx={{
+          backgroundImage: `url("${data?.brandDetailCoverImg}")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          width: "100%",
+          height: "calc(100vw * 0.37)",
+          position: "relative",
+        }}
+      >
+        {/* <RedMenuIcon
+          sx={{ top: "24%", left: "12%", transform: "translate(-24%, -12%)" }}
+          click={redBttnClick}
+        />
+        <RedMenuIcon
+          sx={{ top: "65%", left: "85%", transform: "translate(-65%, -85%)" }}
+          click={redBttnClick}
+        />
+        <RedMenuIcon
+          sx={{ top: "80%", left: "47%", transform: "translate(-80%, -47%)" }}
+          click={redBttnClick}
+        />
+        <RedMenuIcon
+          sx={{ top: "59%", left: "62%", transform: "translate(-59%, -62%)" }}
+          click={redBttnClick}
+        /> */}
+      </Grid>
+      <ImageSlick txt={context.txt.brandDetail} />
+      {/* <SwipeToSlide /> */}
+      <Grid sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <BrandInformation
+          sx={{
+            mt: ["2px", "0", "21px"],
+            mb: ["44px", "0", "54px"],
+            pt: ["23px", "55px", "74px"],
+            pb: ["0", "64px", "86px"],
+          }}
+          data={data}
+          txt={context.txt.contact}
+        />
+      </Grid>
+      <SimilarBrands txt={context.txt.brandDetail} brandList={brandList} />
+
+      <FooterMain />
+      <Modal open={openModal} onClose={handleClose}>
+        <div>
+          <BrandDetailModal
+            handleClose={handleClose}
+            detail={detail}
+            txt={context.txt.brandDetail}
+          />
+        </div>
+      </Modal>
+    </Grid>
+  );
+}
+
+const detail = {
+  img: [fileBD.pillow, fileBD.table],
+  openStyle: "cotton",
+  style: "modern",
+  usage: "Living Room, Bedding Room, Bathroom, Office, Kitchen",
+  material: "Fabric, Semi-Blackout Fabric",
+  color: "Black/Customized Colors",
+};

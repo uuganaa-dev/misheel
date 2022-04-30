@@ -1,0 +1,27 @@
+.scrollbar {
+  overflow-y: auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(224, 224, 224, 0.2);
+}
+@media only screen and (max-width: 600px) {
+  .scrollbarx {
+    overflow-x: auto;
+  }
+  .scrollbarx::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+  }
+
+  .scrollbarx::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(224, 224, 224, 0.2);
+  }
+}
