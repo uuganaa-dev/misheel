@@ -1,9 +1,9 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const URL =
-  "https://newmisheel-default-rtdb.asia-southeast1.firebasedatabase.app/";
-// const URL = "http://167.172.76.26/api";
+// const URL =
+//   "https://newmisheel-default-rtdb.asia-southeast1.firebasedatabase.app/";
+const URL = "http://167.172.76.26/api";
 
 export function MISHEEL() {
   return createInstance(URL);
@@ -13,14 +13,14 @@ const createInstance = (baseURL) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  // const token =
-  //   typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("data") : null;
 
-  // if (token != null) {
-  //   Object.assign(headers, {
-  //     Authorization: "Bearer " + token,
-  //   });
-  // }
+  if (token != null) {
+    Object.assign(headers, {
+      Authorization: "Bearer " + JSON.parse(token).accessToken,
+    });
+  }
 
   let api = axios.create({
     baseURL: baseURL,
@@ -34,7 +34,7 @@ const createInstance = (baseURL) => {
       if (error.response.status !== 503) {
         if (error.message !== "Network Error") {
           if (error.response.status === 401) {
-            localStorage.removeItem("data");
+            // localStorage.removeItem("data");
           } else {
             throw error;
           }
@@ -61,33 +61,27 @@ const createInstance = (baseURL) => {
 
 // Нүүр хуудас
 
-// export async function postImg(formData) {
-//   const response = await MISHEEL().post("/admin/create_cover", formData, {
-//     headers: { "Content-Type": "multipart/form-data" },
-//   });
-//   return response;
-// }
-export async function postImg(params) {
-  const response = await MISHEEL().post("/admin.json", {
-    ...params,
+export async function postImg(formData) {
+  const response = await MISHEEL().post("/admin", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return response;
 }
 
-export async function putImg(params, id) {
-  const response = await MISHEEL().put("/admin/" + id + ".json", {
-    ...params,
+export async function putImg(formData, id) {
+  const response = await MISHEEL().put("/admin/" + id, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
   });
   return response;
 }
 
 export async function getImg() {
-  const response = await MISHEEL().get("/admin.json");
+  const response = await MISHEEL().get("/admin");
   return response;
 }
 
 export async function deleteImg(id) {
-  const response = await MISHEEL().delete("/admin/" + id + ".json");
+  const response = await MISHEEL().delete("/admin/" + id);
   return response;
 }
 // Нүүр хуудас

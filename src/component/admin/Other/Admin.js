@@ -11,6 +11,8 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
+const URL = "http://167.172.76.26";
+
 const Admin = () => {
   const { admin, setAdmin } = useAdminState();
 
@@ -40,56 +42,57 @@ const Admin = () => {
   );
 
   const HandleChange = (ordern, file) => {
-    getBase64(file, (imageUrl) => {
-      if (admin.uploadType === 1) {
-        var params = {
-          imgType: admin.imgType,
-          imgName: admin.imgName,
-          ordern: ordern,
-          imageUrl: imageUrl,
-        };
-        if (ordern === 1) {
-          if (admin.cover1) {
-            if (admin.cover1.id !== 0) {
-              Update(params, admin.cover1.id);
-            } else {
-              Save(params);
-            }
+    if (admin.uploadType === 1) {
+      var formData = new FormData();
+      formData.append("imgType", admin.imgType);
+      formData.append("imgName", admin.imgName);
+      formData.append("ordern", ordern);
+      formData.append("imageUrl", file);
+
+      if (ordern === 1) {
+        if (admin.cover1) {
+          if (admin.cover1.id !== 0) {
+            Update(formData, admin.cover1.id);
           } else {
-            Save(params);
+            Save(formData);
           }
-        } else if (ordern === 2) {
-          if (admin.cover2) {
-            if (admin.cover2.id !== 0) {
-              Update(params, admin.cover2.id);
-            } else {
-              Save(params);
-            }
-          } else {
-            Save(params);
-          }
-        } else if (ordern === 3) {
-          if (admin.cover3) {
-            if (admin.cover3.id !== 0) {
-              Update(params, admin.cover3.id);
-            } else {
-              Save(params);
-            }
-          } else {
-            Save(params);
-          }
+        } else {
+          Save(formData);
         }
-      } else {
+      } else if (ordern === 2) {
+        if (admin.cover2) {
+          if (admin.cover2.id !== 0) {
+            Update(formData, admin.cover2.id);
+          } else {
+            Save(formData);
+          }
+        } else {
+          Save(formData);
+        }
+      } else if (ordern === 3) {
+        if (admin.cover3) {
+          if (admin.cover3.id !== 0) {
+            Update(formData, admin.cover3.id);
+          } else {
+            Save(formData);
+          }
+        } else {
+          Save(formData);
+        }
+      }
+    } else {
+      getBase64(file, (imageBase) => {
         setAdmin({
           type: "IMAGE",
           data: {
             id: admin.image ? (admin.image.id !== 0 ? admin.image.id : 0) : 0,
             ordern: admin.imgOrdern,
-            imageUrl: imageUrl,
+            imageUrl: file,
+            imageBase: imageBase,
           },
         });
-      }
-    });
+      });
+    }
   };
 
   const Validation = () => {
@@ -103,33 +106,32 @@ const Admin = () => {
         confirmButtonColor: "#0f56b3",
       });
     } else {
+      var formData = new FormData();
       if (admin.image.id === undefined || admin.image.id === 0) {
-        var params = {
-          imgType: admin.imgType,
-          imgName: admin.imgName,
-          ordern: admin.image.ordern,
-          imageUrl: admin.image.imageUrl,
-        };
-        Save(params);
+        formData.append("imgType", admin.imgType);
+        formData.append("imgName", admin.imgName);
+        formData.append("ordern", admin.image.ordern);
+        formData.append("imageUrl", admin.image.imageUrl);
+        Save(formData);
       } else {
-        var paramss = {
-          imgType: admin.imgType,
-          imgName: admin.imgName,
-          ordern: admin.image.ordern,
-          imageUrl: admin.image.imageUrl,
-        };
-        Update(paramss, admin.image.id);
+        formData.append("imgType", admin.imgType);
+        formData.append("imgName", admin.imgName);
+        formData.append("ordern", admin.image.ordern);
+        formData.append("imageUrl", admin.image.imageUrl);
+        Update(formData, admin.image.id);
       }
     }
   };
 
-  const Save = (params) => {
+  const Save = (formData) => {
     setAdmin({ type: "LOADING", data: true });
-    API.postImg(params)
+    API.postImg(formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setAdmin({ type: "REFRESH" });
+          setTimeout(() => {
+            setAdmin({ type: "REFRESH" });
+          }, 2000);
           Swal.fire({
             icon: "success",
             title: "Амжилттай хадгалагдлаа.",
@@ -149,13 +151,15 @@ const Admin = () => {
       .finally(() => setAdmin({ type: "LOADING", data: false }));
   };
 
-  const Update = (paramss, id) => {
+  const Update = (formData, id) => {
     setAdmin({ type: "LOADING", data: true });
-    API.putImg(paramss, id)
+    API.putImg(formData, id)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setAdmin({ type: "REFRESH" });
+          setTimeout(() => {
+            setAdmin({ type: "REFRESH" });
+          }, 2000);
           Swal.fire({
             icon: "success",
             title: "Амжилттай шинэчлэгдлээ.",
@@ -180,7 +184,9 @@ const Admin = () => {
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setAdmin({ type: "REFRESH" });
+          setTimeout(() => {
+            setAdmin({ type: "REFRESH" });
+          }, 2000);
           Swal.fire({
             icon: "success",
             title: "Амжилттай устгагдлаа.",
@@ -242,25 +248,20 @@ const Admin = () => {
   useEffect(() => {
     API.getImg()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  imageUrl: el[1].imageUrl,
-                  imgName: el[1].imgName,
-                  imgType: el[1].imgType,
-                  ordern: el[1].ordern,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "LIST", data: result });
-            }
-          }
+        if (res.data.success) {
+          var result = [];
+          // eslint-disable-next-line array-callback-return
+          res.data.data.map((el) => {
+            var pp = {
+              id: el.id,
+              imageUrl: URL + el.imageUrl,
+              imgName: el.imgName,
+              imgType: el.imgType,
+              ordern: el.ordern,
+            };
+            result.push(pp);
+          });
+          setAdmin({ type: "LIST", data: result });
         }
       })
       .catch((err) => {
@@ -385,7 +386,7 @@ const Admin = () => {
                       >
                         {admin.cover2 ? (
                           <img
-                            src={admin.cover2.imageUrl}
+                            src={admin.cover1.imageUrl}
                             alt=""
                             className="upload-img"
                           />
@@ -469,7 +470,11 @@ const Admin = () => {
                     >
                       {admin.image ? (
                         <img
-                          src={admin.image.imageUrl}
+                          src={
+                            admin.image.imageBase
+                              ? admin.image.imageBase
+                              : admin.image.imageUrl
+                          }
                           alt=""
                           className="upload-img"
                         />
