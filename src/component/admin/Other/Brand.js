@@ -4,6 +4,7 @@ import { useAdminState } from "../../../contexts/AdminContext";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import { LoadingOutlined } from "@ant-design/icons";
+import _ from "lodash";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -12,6 +13,8 @@ function getBase64(img, callback) {
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
 }
+
+const URL = "http://167.172.76.26";
 
 const Brand = () => {
   const { admin, setAdmin } = useAdminState();
@@ -245,21 +248,9 @@ const Brand = () => {
   useEffect(() => {
     API.getCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "CATEGORY_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "CATEGORY_LIST", data: res.data.data });
           }
         }
       })
@@ -277,22 +268,9 @@ const Brand = () => {
   useEffect(() => {
     API.getSubCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  parentId: el[1].parentId,
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "SUB_CATEGORY_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "SUB_CATEGORY_LIST", data: res.data.data });
           }
         }
       })
@@ -311,29 +289,17 @@ const Brand = () => {
     setAdmin({ type: "BRAND_LIST_LOADING", data: true });
     API.getBrand()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
             var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  categoryId: el[1].categoryId,
-                  subCategoryId: el[1].subCategoryId,
-                  brandName: el[1].brandName,
-                  brandLogo: el[1].brandLogo,
-                  brandDetailCoverImg: el[1].brandDetailCoverImg,
-                  brandDetailDesc: el[1].brandDetailDesc,
-                  brandDetailNumber: el[1].brandDetailNumber,
-                  brandDetailEmail: el[1].brandDetailEmail,
-                  brandDetailFacebook: el[1].brandDetailFacebook,
-                };
-                result.push(pp);
+            _.map(res.data.data, (el) => {
+              result.push({
+                ...el,
+                brandDetailCoverImg: URL + el.brandDetailCoverImg,
+                brandLogo: URL + el.brandLogo,
               });
-              setAdmin({ type: "BRAND_LIST", data: result });
-            }
+            });
+            setAdmin({ type: "BRAND_LIST", data: result });
           }
         }
       })

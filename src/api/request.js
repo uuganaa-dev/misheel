@@ -62,16 +62,12 @@ const createInstance = (baseURL) => {
 // Нүүр хуудас
 
 export async function postImg(formData) {
-  const response = await MISHEEL().post("/admin", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const response = await MISHEEL().post("/admin", formData);
   return response;
 }
 
 export async function putImg(formData, id) {
-  const response = await MISHEEL().put("/admin/" + id, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const response = await MISHEEL().put("/admin/" + id, formData);
   return response;
 }
 
@@ -87,50 +83,46 @@ export async function deleteImg(id) {
 // Нүүр хуудас
 // Брэнд
 
-export async function postBrand(params) {
-  const response = await MISHEEL().post("/brand.json", {
-    ...params,
-  });
+export async function postBrand(formData) {
+  const response = await MISHEEL().post("/brand", formData);
   return response;
 }
-export async function putBrand(params, id) {
-  const response = await MISHEEL().put("/brand/" + id + ".json", {
-    ...params,
-  });
+export async function putBrand(formData, id) {
+  const response = await MISHEEL().put("/brand/" + id, formData);
   return response;
 }
 export async function getBrand() {
-  const response = await MISHEEL().get("/brand.json");
+  const response = await MISHEEL().get("/brand");
   return response;
 }
 export async function getOneBrand(id) {
-  const response = await MISHEEL().get("/brand/" + id + ".json");
+  const response = await MISHEEL().get("/brand/" + id);
   return response;
 }
 export async function deleteBrand(id) {
-  const response = await MISHEEL().delete("/brand/" + id + ".json");
+  const response = await MISHEEL().delete("/brand/" + id);
   return response;
 }
 // Брэнд
 // Category
 export async function postCategory(params) {
-  const response = await MISHEEL().post("/category.json", {
+  const response = await MISHEEL().post("/category", {
     ...params,
   });
   return response;
 }
 export async function getCategory() {
-  const response = await MISHEEL().get("/category.json");
+  const response = await MISHEEL().get("/category");
   return response;
 }
 export async function postSubCategory(params) {
-  const response = await MISHEEL().post("/subcategory.json", {
+  const response = await MISHEEL().post("/subcategory", {
     ...params,
   });
   return response;
 }
 export async function getSubCategory() {
-  const response = await MISHEEL().get("/subcategory.json");
+  const response = await MISHEEL().get("/subcategory");
   return response;
 }
 // Category

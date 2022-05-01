@@ -13,6 +13,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
+const URL = "http://167.172.76.26";
+
 export default function Main() {
   const context = useContext(TheContext);
   const { laptop } = breakpoints;
@@ -33,37 +35,35 @@ export default function Main() {
     setLoading(true);
     API.getImg()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
+        if (res.data.success) {
+          var result = [];
+          var aa = Object.entries(res.data);
+          if (aa.length > 0) {
+            // eslint-disable-next-line array-callback-return
+            res.data.data.map((el) => {
+              var pp = {
+                id: el.id,
+                imageUrl: URL + el.imageUrl,
+                imgName: el.imgName,
+                imgType: el.imgType,
+                ordern: el.ordern,
+              };
+              result.push(pp);
+            });
+            setList(result);
+            var filterList = result.filter((el) => el.imgType === "cover");
+            if (filterList.length > 0) {
+              setCount(filterList.length);
               // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  imageUrl: el[1].imageUrl,
-                  imgName: el[1].imgName,
-                  imgType: el[1].imgType,
-                  ordern: el[1].ordern,
-                };
-                result.push(pp);
+              filterList.map((el) => {
+                if (el.ordern === 1) {
+                  setCover1(el);
+                } else if (el.ordern === 2) {
+                  setCover2(el);
+                } else if (el.ordern === 3) {
+                  setCover3(el);
+                }
               });
-              setList(result);
-              var filterList = result.filter((el) => el.imgType === "cover");
-              if (filterList.length > 0) {
-                setCount(filterList.length);
-                // eslint-disable-next-line array-callback-return
-                filterList.map((el) => {
-                  if (el.ordern === 1) {
-                    setCover1(el);
-                  } else if (el.ordern === 2) {
-                    setCover2(el);
-                  } else if (el.ordern === 3) {
-                    setCover3(el);
-                  }
-                });
-              }
             }
           }
         }
