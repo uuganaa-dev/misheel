@@ -17,6 +17,7 @@ function getBase64(img, callback) {
 const URL = "http://167.172.76.26";
 
 const Brand = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
   const [isDelete, setIsDelete] = useState(false);
 
@@ -125,18 +126,23 @@ const Brand = () => {
   const BrandSave = () => {
     setAdmin({ type: "LOADING", data: true });
     setAdmin({ type: "BRAND_LIST_LOADING", data: true });
-    API.postBrand({
-      categoryId: admin.categoryValue,
-      subCategoryId:
-        admin.subCategoryValue === undefined ? "" : admin.subCategoryValue,
-      brandName: admin.brandName,
-      brandLogo: admin.brandLogoUrl,
-      brandDetailCoverImg: admin.brandDetailCoverImg,
-      brandDetailDesc: admin.brandDetailDesc,
-      brandDetailNumber: admin.brandDetailNumber,
-      brandDetailEmail: admin.brandDetailEmail,
-      brandDetailFacebook: admin.brandDetailFacebook,
-    })
+
+    formData.append("categoryId", admin.categoryValue);
+    formData.append(
+      "subCategoryId",
+      admin.subCategoryValue === undefined ? "" : admin.subCategoryValue
+    );
+    formData.append("brandName", admin.brandName);
+    formData.append("brandLogo", admin.brandLogoUrl.brandLogoUrl);
+    formData.append(
+      "brandDetailCoverImg",
+      admin.brandDetailCoverImg.brandDetailCoverImg
+    );
+    formData.append("brandDetailDesc", admin.brandDetailDesc);
+    formData.append("brandDetailNumber", admin.brandDetailNumber);
+    formData.append("brandDetailEmail", admin.brandDetailEmail);
+    formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    API.postBrand(formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({
@@ -168,21 +174,22 @@ const Brand = () => {
   const BrandUpdate = () => {
     setAdmin({ type: "LOADING", data: true });
     setAdmin({ type: "BRAND_LIST_LOADING", data: true });
-    API.putBrand(
-      {
-        categoryId: admin.categoryValue,
-        subCategoryId:
-          admin.subCategoryValue === undefined ? "" : admin.subCategoryValue,
-        brandName: admin.brandName,
-        brandLogo: admin.brandLogoUrl,
-        brandDetailCoverImg: admin.brandDetailCoverImg,
-        brandDetailDesc: admin.brandDetailDesc,
-        brandDetailNumber: admin.brandDetailNumber,
-        brandDetailEmail: admin.brandDetailEmail,
-        brandDetailFacebook: admin.brandDetailFacebook,
-      },
-      admin.brandId
-    )
+    formData.append("categoryId", admin.categoryValue);
+    formData.append(
+      "subCategoryId",
+      admin.subCategoryValue === undefined ? "" : admin.subCategoryValue
+    );
+    formData.append("brandName", admin.brandName);
+    formData.append("brandLogo", admin.brandLogoUrl.brandLogoUrl);
+    formData.append(
+      "brandDetailCoverImg",
+      admin.brandDetailCoverImg.brandDetailCoverImg
+    );
+    formData.append("brandDetailDesc", admin.brandDetailDesc);
+    formData.append("brandDetailNumber", admin.brandDetailNumber);
+    formData.append("brandDetailEmail", admin.brandDetailEmail);
+    formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    API.putBrand(formData, admin.brandId)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({
@@ -295,11 +302,12 @@ const Brand = () => {
             _.map(res.data.data, (el) => {
               result.push({
                 ...el,
-                brandDetailCoverImg: URL + el.brandDetailCoverImg,
-                brandLogo: URL + el.brandLogo,
+                brandDetailCoverImg: el.brandDetailCoverImg,
+                brandLogo: el.brandLogo,
               });
             });
             setAdmin({ type: "BRAND_LIST", data: result });
+            setAdmin({ type: "BRAND_LIST_LOADING", data: false });
           }
         }
       })
@@ -311,9 +319,6 @@ const Brand = () => {
           text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setAdmin({ type: "BRAND_LIST_LOADING", data: false });
       });
   }, [admin.brandListReload, setAdmin]);
 
@@ -499,14 +504,23 @@ const Brand = () => {
                   accept=".jpg, .png, .jpeg"
                   maxCount={1}
                   onChange={({ file }) => {
-                    getBase64(file, (imageUrl) => {
-                      setAdmin({ type: "BRAND_LOGO_URL", data: imageUrl });
+                    getBase64(file, (base) => {
+                      setAdmin({
+                        type: "BRAND_LOGO_URL",
+                        data: { brandLogoUrl: file, brandLogoUrlBase: base },
+                      });
                     });
                   }}
                 >
                   {admin.brandLogoUrl ? (
                     <img
-                      src={admin.brandLogoUrl}
+                      src={
+                        admin.brandLogoUrl.brandLogoUrlBase
+                          ? admin.brandLogoUrl.brandLogoUrlBase
+                          : admin.brandLogoUrl.split("/")[1] === "uploads"
+                          ? URL + admin.brandLogoUrl
+                          : admin.brandLogoUrl
+                      }
                       alt=""
                       className="upload-img"
                     />
@@ -539,17 +553,27 @@ const Brand = () => {
                   accept=".jpg, .png, .jpeg"
                   maxCount={1}
                   onChange={({ file }) => {
-                    getBase64(file, (imageUrl) => {
+                    getBase64(file, (base) => {
                       setAdmin({
                         type: "BRAND_DETAIL_COVER_IMG",
-                        data: imageUrl,
+                        data: {
+                          brandDetailCoverImg: file,
+                          brandDetailCoverImgBase: base,
+                        },
                       });
                     });
                   }}
                 >
                   {admin.brandDetailCoverImg ? (
                     <img
-                      src={admin.brandDetailCoverImg}
+                      src={
+                        admin.brandDetailCoverImg.brandDetailCoverImgBase
+                          ? admin.brandDetailCoverImg.brandDetailCoverImgBase
+                          : admin.brandDetailCoverImg.split("/")[1] ===
+                            "uploads"
+                          ? URL + admin.brandDetailCoverImg
+                          : admin.brandDetailCoverImg
+                      }
                       alt=""
                       className="upload-img"
                     />
@@ -716,7 +740,11 @@ const Brand = () => {
                   >
                     <div className="cat-brand-img">
                       <img
-                        src={el.brandLogo}
+                        src={
+                          el.brandLogo.split("/")[1] === "uploads"
+                            ? URL + el.brandLogo
+                            : el.brandLogo
+                        }
                         alt=""
                         className="cat-brand-logo"
                       />

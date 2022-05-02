@@ -137,6 +137,7 @@ const AdminReducer = (state, action) => {
         ...state,
         categoryValue: action.data,
         subCategoryFilteredList: aa,
+        subCategoryValue: undefined,
       };
     case "CATEGORY_ADD_VALUE":
       return {

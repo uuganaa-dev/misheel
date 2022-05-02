@@ -127,34 +127,30 @@ export async function getSubCategory() {
 }
 // Category
 // Product
-export async function postProduct(params) {
-  const response = await MISHEEL().post("/product.json", {
-    ...params,
-  });
+export async function postProduct(formData) {
+  const response = await MISHEEL().post("/product", formData);
   return response;
 }
 export async function getProduct() {
-  const response = await MISHEEL().get("/product.json");
+  const response = await MISHEEL().get("/product");
   return response;
 }
 export async function deleteProduct(id) {
-  const response = await MISHEEL().delete("/product/" + id + ".json");
+  const response = await MISHEEL().delete("/product/" + id);
   return response;
 }
 // Product
 // Price
-export async function postPrice(params) {
-  const response = await MISHEEL().post("/price.json", {
-    ...params,
-  });
+export async function postPrice(formData) {
+  const response = await MISHEEL().post("/price", formData);
   return response;
 }
 export async function getPrice() {
-  const response = await MISHEEL().get("/price.json");
+  const response = await MISHEEL().get("/price");
   return response;
 }
 export async function deletePrice(id) {
-  const response = await MISHEEL().delete("/price/" + id + ".json");
+  const response = await MISHEEL().delete("/price/" + id);
   return response;
 }
 // Price
