@@ -31,6 +31,7 @@ const svg = (
 );
 
 const CoLeader = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
 
   const [loading, setLoading] = useState(false);
@@ -65,11 +66,10 @@ const CoLeader = () => {
 
   const Save = () => {
     setLoading(true);
-    API.postSocial("coleader", {
-      name: name,
-      txt: txt,
-      img: img,
-    })
+    formData.append("name", name);
+    formData.append("txt", txt);
+    formData.append("img", img.img);
+    API.postSocial("coleader", formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "CO_LEADER", data: false });
@@ -115,11 +115,19 @@ const CoLeader = () => {
                 maxCount={1}
                 onChange={({ file }) => {
                   getBase64(file, (imageUrl) => {
-                    setImg(imageUrl);
+                    setImg({ img: file, imgBase: imageUrl });
                   });
                 }}
               >
-                {img ? <img src={img} alt="" className="upload-img" /> : svg}
+                {img ? (
+                  <img
+                    src={img.imgBase ? img.imgBase : img}
+                    alt=""
+                    className="upload-img"
+                  />
+                ) : (
+                  svg
+                )}
               </Upload>
               <div className="mt-2">Нэр</div>
               <Input

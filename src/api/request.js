@@ -155,18 +155,16 @@ export async function deletePrice(id) {
 }
 // Price
 // Social
-export async function postSocial(name, params) {
-  const response = await MISHEEL().post("/" + name + ".json", {
-    ...params,
-  });
+export async function postSocial(name, formData) {
+  const response = await MISHEEL().post("/" + name, formData);
   return response;
 }
 export async function getSocial(name) {
-  const response = await MISHEEL().get("/" + name + ".json");
+  const response = await MISHEEL().get("/" + name);
   return response;
 }
 export async function deleteSocial(name, id) {
-  const response = await MISHEEL().delete("/" + name + "/" + id + ".json");
+  const response = await MISHEEL().delete("/" + name + "/" + id);
   return response;
 }
 // Social

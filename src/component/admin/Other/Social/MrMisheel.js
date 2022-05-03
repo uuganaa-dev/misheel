@@ -31,6 +31,7 @@ const svg = (
 );
 
 const MrMisheel = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
 
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ const MrMisheel = () => {
   const Validate = () => {
     let validation = "";
     txt || (validation += "Текст бичнэ үү!<br/>");
-    url || (validation += "Зам бичнэ үү!<br/>");
+    url || (validation += "URL бичнэ үү!<br/>");
     if (validation !== "") {
       Swal.fire({
         icon: "warning",
@@ -64,11 +65,10 @@ const MrMisheel = () => {
 
   const Save = () => {
     setLoading(true);
-    API.postSocial("mrmisheel", {
-      txt: txt,
-      url: url,
-      icon: icon === undefined ? "" : icon,
-    })
+    formData.append("txt", txt);
+    formData.append("url", url);
+    formData.append("icon", icon === undefined ? "" : icon.icon);
+    API.postSocial("mrmisheel", formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MR_MISHEEL", data: false });
@@ -128,11 +128,19 @@ const MrMisheel = () => {
                 maxCount={1}
                 onChange={({ file }) => {
                   getBase64(file, (imageUrl) => {
-                    setIcon(imageUrl);
+                    setIcon({ icon: file, iconBase: imageUrl });
                   });
                 }}
               >
-                {icon ? <img src={icon} alt="" className="upload-img" /> : svg}
+                {icon ? (
+                  <img
+                    src={icon.iconBase ? icon.iconBase : icon}
+                    alt=""
+                    className="upload-img"
+                  />
+                ) : (
+                  svg
+                )}
               </Upload>
               <div className="gadot-modal-button">
                 <div

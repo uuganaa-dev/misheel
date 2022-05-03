@@ -121,7 +121,7 @@ const Product = () => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
             setAdmin({ type: "BRAND_LIST", data: res.data.data });
-            setLoading(true);
+            setLoading(false);
           }
         }
       })
@@ -334,7 +334,7 @@ const Product = () => {
                     <div className="cat-brand-img">
                       <img
                         src={
-                          el.productImage[0].split("/")[1] === "uploads"
+                          el?.productImage[0]?.split("/")[1] === "uploads"
                             ? URL + el.productImage[0]
                             : el.productImage[0]
                         }
