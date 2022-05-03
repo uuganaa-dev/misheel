@@ -110,7 +110,7 @@ export default function CoModal({ CloseModal, data }) {
             <Grid sx={{ display: "flex", gap: "30px" }}>
               <Grid
                 sx={{
-                  backgroundImage: `url("${item.img}")`,
+                  backgroundImage: `url("http://167.172.76.26/${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   width: "50%",

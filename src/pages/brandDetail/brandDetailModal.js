@@ -63,7 +63,7 @@ export default function BrandDetailModal({ handleClose, detail, txt }) {
           <ArrowGreyBgColor click={left} />
           <img
             style={{ width: "255px", height: "255px", objectFit: "cover" }}
-            src={detail.productImage[index]}
+            src={"http://167.172.76.26/" + detail.productImage[index]}
             alt="detail"
           />
           <ArrowGreyBgColor

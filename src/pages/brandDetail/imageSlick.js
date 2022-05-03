@@ -96,27 +96,9 @@ export default function ImageSlick({ txt }) {
   useEffect(() => {
     API.getProduct()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  productBrandId: el[1].productBrandId,
-                  productImage: el[1].productImage,
-                  productOpenStyle: el[1].productOpenStyle,
-                  productStyle: el[1].productStyle,
-                  productUsage: el[1].productUsage,
-                  productMaterial: el[1].productMaterial,
-                  productColor: el[1].productColor,
-                };
-                result.push(pp);
-              });
-              setDetail(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setDetail(res.data.data);
           }
         }
       })
@@ -155,7 +137,7 @@ export default function ImageSlick({ txt }) {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("${item.productImage[0]}")`,
+                  backgroundImage: `url("http://167.172.76.26/${item.productImage[0]}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["100px", "244px"],

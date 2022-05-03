@@ -23,6 +23,8 @@ export default function BrandDetail() {
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState();
   const [brandList, setBrandList] = useState([]);
+  const [onebrands, setOnebrands] = useState([]);
+  console.log("onebrands: ", onebrands);
   // const redBttnClick = () => {
   //   setOpenModal(true);
   // };
@@ -33,10 +35,12 @@ export default function BrandDetail() {
 
   useEffect(() => {
     if (params.id) {
-      API.getOneBrand(params.id)
+      API.getBrand()
         .then((res) => {
-          if (res.status === 200) {
-            setData(res.data);
+          if (res.data.success) {
+            if (res.data.data.length > 0) {
+              setData(res.data.data.find((el) => el.id === params.id));
+            }
           }
         })
         .catch((err) => {
@@ -48,6 +52,21 @@ export default function BrandDetail() {
             confirmButtonColor: "#0f56b3",
           });
         });
+      // API.getOneBrand(params.id)
+      //   .then((res) => {
+      //     if (res.status === 200) {
+      //       setData(res.data);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     Swal.fire({
+      //       icon: "error",
+      //       title: "Алдаа гарлаа.",
+      //       text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
+      //       confirmButtonColor: "#0f56b3",
+      //     });
+      //   });
     }
   }, [params.id]);
 
@@ -55,25 +74,10 @@ export default function BrandDetail() {
     if (data?.categoryId && params.id) {
       API.getBrand()
         .then((res) => {
-          if (res.status === 200) {
-            if (res.data !== null) {
-              var result = [];
-              var aa = Object.entries(res.data);
-              if (aa.length > 0) {
-                // eslint-disable-next-line array-callback-return
-                aa.map((el) => {
-                  var pp = {
-                    id: el[0],
-                    categoryId: el[1].categoryId,
-                    subCategoryId: el[1].subCategoryId,
-                    brandName: el[1].brandName,
-                    brandLogo: el[1].brandLogo,
-                  };
-                  result.push(pp);
-                });
-                var aaasd = result.filter((el) => el.id !== params.id);
-                setBrandList(aaasd);
-              }
+          if (res.data.success) {
+            if (res.data.data.length > 0) {
+              var aaasd = res.data.data.filter((el) => el.id !== params.id);
+              setBrandList(aaasd);
             }
           }
         })
@@ -94,7 +98,7 @@ export default function BrandDetail() {
       {isTablet && <Appbar />}
       <Grid
         sx={{
-          backgroundImage: `url("${data?.brandDetailCoverImg}")`,
+          backgroundImage: `url("http://167.172.76.26/${data?.brandDetailCoverImg}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",

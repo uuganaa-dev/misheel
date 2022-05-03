@@ -13,7 +13,14 @@ export default function MrMisheel() {
   return (
     <Grid sx={{ backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"] }}>
       <Appbar />
-      <Grid sx={{ width: "100%", height: "calc(100vw * 0.26)", position: "relative", overflowY: "hidden" }}>
+      <Grid
+        sx={{
+          width: "100%",
+          height: "calc(100vw * 0.26)",
+          position: "relative",
+          overflowY: "hidden",
+        }}
+      >
         <Typography
           sx={{
             fontSize: ["10px", "12px"],
@@ -22,8 +29,9 @@ export default function MrMisheel() {
             textTransform: "uppercase",
             textAlign: "center",
             color: "#707070",
-            pt: ["40px", "80px", "140px"]
-          }}>
+            pt: ["40px", "80px", "140px"],
+          }}
+        >
           ЗӨВЛӨЖ БАЙНА
         </Typography>
         <Typography
@@ -36,8 +44,13 @@ export default function MrMisheel() {
             position: "absolute",
             top: ["72%", "72%", "60%"],
             left: "50%",
-            transform: ["translate(-50%, -72%)", "translate(-50%, -72%)", "translate(-50%, -60%)"]
-          }}>
+            transform: [
+              "translate(-50%, -72%)",
+              "translate(-50%, -72%)",
+              "translate(-50%, -60%)",
+            ],
+          }}
+        >
           #MR МИШЭЭЛ
         </Typography>
       </Grid>
@@ -49,7 +62,7 @@ export default function MrMisheel() {
             backgroundSize: "cover",
             width: "100%",
             height: "calc(100vw * 0.63)",
-            opacity: isLaptop ? 0.5 : 1
+            opacity: isLaptop ? 0.5 : 1,
           }}
         />
         {isLaptop && (
@@ -64,10 +77,14 @@ export default function MrMisheel() {
               pl: "49px",
               position: "absolute",
               top: ["10px", "75px"],
-              left: ["10px", "54px"]
-            }}>
+              left: ["10px", "54px"],
+            }}
+          >
             {text.map((item, index) => (
-              <Grid key={index} sx={{ display: "flex", alignItems: "center", gap: "49px" }}>
+              <Grid
+                key={index}
+                sx={{ display: "flex", alignItems: "center", gap: "49px" }}
+              >
                 <Typography
                   sx={{
                     fontSize: "25px",
@@ -77,12 +94,13 @@ export default function MrMisheel() {
                     cursor: "pointer",
                     textDecoration: "underline",
                     "&:hover": {
-                      textDecoration: "none"
-                    }
+                      textDecoration: "none",
+                    },
                   }}
                   onClick={() => {
                     window.open(item.url, "_blank");
-                  }}>
+                  }}
+                >
                   {index + 1}. {item.txt}
                 </Typography>
                 <img src={item.icon} alt={item.icon} />
@@ -101,41 +119,41 @@ const text = [
   {
     txt: "Хүүхдийн өрөөний интерьер",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: icons.child
+    icon: icons.child,
   },
   {
     txt: "Мод стресс бууруулдаг",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: icons.tree
+    icon: icons.tree,
   },
   {
     txt: "Скандинов орчин",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
+    icon: "",
   },
   {
     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
+    icon: "",
   },
   {
     txt: "Хүүхдийн өрөөний интерьер",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
+    icon: "",
   },
   {
     txt: "Мод стресс бууруулдаг",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
+    icon: "",
   },
   {
     txt: "Скандинов орчин",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
+    icon: "",
   },
   {
     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
     url: "https://www.facebook.com/misheelexpocenter/",
-    icon: ""
-  }
+    icon: "",
+  },
 ];
