@@ -180,11 +180,8 @@ const Brand = () => {
       admin.subCategoryValue === undefined ? "" : admin.subCategoryValue
     );
     formData.append("brandName", admin.brandName);
-    formData.append("brandLogo", admin.brandLogoUrl.brandLogoUrl);
-    formData.append(
-      "brandDetailCoverImg",
-      admin.brandDetailCoverImg.brandDetailCoverImg
-    );
+    formData.append("brandLogo", admin.brandLogoUrl);
+    formData.append("brandDetailCoverImg", admin.brandDetailCoverImg);
     formData.append("brandDetailDesc", admin.brandDetailDesc);
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);

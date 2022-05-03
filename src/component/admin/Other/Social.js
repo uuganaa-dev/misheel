@@ -7,7 +7,7 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import { useAdminState } from "../../../contexts/AdminContext";
 
-// const URL = "http://167.172.76.26/";
+const URL = "http://167.172.76.26/";
 
 const Social = () => {
   const { admin, setAdmin } = useAdminState();
@@ -27,7 +27,9 @@ const Social = () => {
         API.deleteSocial(name, id)
           .then((res) => {
             if (res.status === 200) {
-              setAdmin({ type: "REFRESH" });
+              setTimeout(() => {
+                setAdmin({ type: "REFRESH" });
+              }, 1000);
               Swal.fire({
                 icon: "success",
                 title: "Амжилттай устгагдлаа.",
@@ -176,7 +178,9 @@ const Social = () => {
               return (
                 <div className="social-item-container-item" key={index}>
                   <img
-                    src={el.img}
+                    src={
+                      el.img.split("/")[1] === "uploads" ? URL + el.img : el.img
+                    }
                     alt="Зураггүй"
                     className="social-item-container-item-img"
                   />
@@ -196,34 +200,46 @@ const Social = () => {
             })}
           <h5>Created By</h5>
           {admin.createdbyData.length > 0 &&
-            admin.createdbyData.map((el, index) => (
-              <div className="social-item-container-item" key={index}>
-                <img
-                  src={el.img}
-                  alt="Зураггүй"
-                  className="social-item-container-item-img"
-                />
-                <div className="social-item-container-item-div1">
-                  {el.project}
+            admin.createdbyData.map((el, index) => {
+              return (
+                <div className="social-item-container-item" key={index}>
+                  <img
+                    src={
+                      el.img.split("/")[1] === "uploads" ? URL + el.img : el.img
+                    }
+                    alt="Зураггүй"
+                    className="social-item-container-item-img"
+                  />
+                  <div className="social-item-container-item-div1">
+                    {el.project}
+                  </div>
+                  <div className="social-item-container-item-div2">
+                    {el.title}
+                  </div>
+                  <div className="social-item-container-item-div3">
+                    {el.txt}
+                  </div>
+                  <i
+                    className="fa fa-trash p-1 text-danger cursor-pointer"
+                    onClick={() => {
+                      Delete("createdby", el._id);
+                    }}
+                  ></i>
                 </div>
-                <div className="social-item-container-item-div2">
-                  {el.title}
-                </div>
-                <div className="social-item-container-item-div3">{el.txt}</div>
-                <i
-                  className="fa fa-trash p-1 text-danger cursor-pointer"
-                  onClick={() => {
-                    Delete("createdby", el._id);
-                  }}
-                ></i>
-              </div>
-            ))}
+              );
+            })}
           <h5>Mr.Misheel</h5>
           {admin.mrMisheelData.length > 0 &&
             admin.mrMisheelData.map((el, index) => (
               <div className="social-item-container-item" key={index}>
                 <img
-                  src={el.icon ? el.icon : ""}
+                  src={
+                    el.icon
+                      ? el.icon.split("/")[0] === "uploads"
+                        ? URL + el.icon
+                        : el.icon
+                      : ""
+                  }
                   alt="Зураггүй"
                   className="social-item-container-item-img"
                 />
@@ -243,7 +259,13 @@ const Social = () => {
             admin.coLeaderData.map((el, index) => (
               <div className="social-item-container-item" key={index}>
                 <img
-                  src={el.img ? el.img : ""}
+                  src={
+                    el.img
+                      ? el.img.split("/")[1] === "uploads"
+                        ? URL + el.img
+                        : el.img
+                      : ""
+                  }
                   alt="Зураггүй"
                   className="social-item-container-item-img"
                 />

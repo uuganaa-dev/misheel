@@ -304,7 +304,7 @@ const Product = () => {
                       Validate();
                     }}
                   >
-                    {admin.loading ? <LoadingOutlined /> : "Шинэчлэх"}
+                    {admin.loading ? <LoadingOutlined /> : "Хадгалах"}
                   </div>
                 </div>
               </div>
@@ -343,7 +343,9 @@ const Product = () => {
                       />
                     </div>
                     <div className="cat-brand-title">
-                      <div className="cat-brand-title-name">{aa.brandName}</div>
+                      <div className="cat-brand-title-name">
+                        {aa?.brandName}
+                      </div>
                       <div className="cat-brand-desc">{el.productMaterial}</div>
                       <div className="cat-brand-desc">{el.productUsage}</div>
                     </div>
