@@ -23,11 +23,6 @@ export default function BrandDetail() {
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState();
   const [brandList, setBrandList] = useState([]);
-  const [onebrands, setOnebrands] = useState([]);
-  console.log("onebrands: ", onebrands);
-  // const redBttnClick = () => {
-  //   setOpenModal(true);
-  // };
 
   const handleClose = () => {
     setOpenModal(false);
@@ -39,7 +34,12 @@ export default function BrandDetail() {
         .then((res) => {
           if (res.data.success) {
             if (res.data.data.length > 0) {
-              setData(res.data.data.find((el) => el.id === params.id));
+              var onedata = res.data.data.find((el) => el.id === params.id);
+              var relatedbrands = res.data.data.filter(
+                (el) => el.id !== onedata.id
+              );
+              setData(onedata);
+              setBrandList(relatedbrands);
             }
           }
         })
@@ -52,53 +52,15 @@ export default function BrandDetail() {
             confirmButtonColor: "#0f56b3",
           });
         });
-      // API.getOneBrand(params.id)
-      //   .then((res) => {
-      //     if (res.status === 200) {
-      //       setData(res.data);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     Swal.fire({
-      //       icon: "error",
-      //       title: "Алдаа гарлаа.",
-      //       text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
-      //       confirmButtonColor: "#0f56b3",
-      //     });
-      //   });
     }
   }, [params.id]);
-
-  useEffect(() => {
-    if (data?.categoryId && params.id) {
-      API.getBrand()
-        .then((res) => {
-          if (res.data.success) {
-            if (res.data.data.length > 0) {
-              var aaasd = res.data.data.filter((el) => el.id !== params.id);
-              setBrandList(aaasd);
-            }
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire({
-            icon: "error",
-            title: "Алдаа гарлаа.",
-            text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
-            confirmButtonColor: "#0f56b3",
-          });
-        });
-    }
-  }, [data?.categoryId, params.id]);
 
   return (
     <Grid sx={{ backgroundColor: ["white", "white", "#E5E5E5"] }}>
       {isTablet && <Appbar />}
       <Grid
         sx={{
-          backgroundImage: `url("http://167.172.76.26/${data?.brandDetailCoverImg}")`,
+          backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",

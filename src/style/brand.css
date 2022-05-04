@@ -201,6 +201,7 @@
 .ant-upload.ant-upload-select {
   width: 100%;
 }
+
 @media only screen and (max-width: 480px) {
   .category-body {
     justify-content: center;

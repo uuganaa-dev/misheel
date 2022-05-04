@@ -102,11 +102,12 @@ export default function SimilarBrands({ txt, brandList }) {
               >
                 <Grid
                   sx={{
-                    backgroundImage: `url("http://167.172.76.26/${item.brandLogo}")`,
+                    backgroundImage: `url("http://167.172.76.26${item.brandLogo}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "contain",
                     width: ["67px", "165px", "232px"],
                     height: ["61px", "149px", "200px"],
+                    backgroundColor: "red",
                     "&:hover": {
                       opacity: 0.4,
                     },

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Grid, Modal } from "@mui/material";
@@ -52,7 +53,9 @@ function SamplePrevArrow(props) {
 }
 
 export default function ImageSlick({ txt }) {
+  const params = useParams();
   const [detail, setDetail] = useState([]);
+  console.log("detail: ", detail);
   const [itemDetail, setItemDetail] = useState();
   const [openModal, setOpenModal] = useState(false);
 
@@ -98,7 +101,10 @@ export default function ImageSlick({ txt }) {
       .then((res) => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
-            setDetail(res.data.data);
+            var find = res.data.data.filter(
+              (el) => el.productBrandId === params.id
+            );
+            setDetail(find);
           }
         }
       })
@@ -111,7 +117,7 @@ export default function ImageSlick({ txt }) {
           confirmButtonColor: "#0f56b3",
         });
       });
-  }, []);
+  }, [params.id]);
 
   return (
     <Grid
@@ -137,7 +143,7 @@ export default function ImageSlick({ txt }) {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("http://167.172.76.26/${item.productImage[0]}")`,
+                  backgroundImage: `url("http://167.172.76.26${item.productImage[0]}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["100px", "244px"],
