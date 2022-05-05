@@ -23,25 +23,14 @@ export default function MPrice() {
       setShow(1);
     }
   };
+
   useEffect(() => {
     setLoading(true);
     API.getCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setCatList(result);
-            }
+        if (res.data.success) {
+          if (res.data.length > 0) {
+            setCatList(res.data.data);
           }
         }
       })
@@ -59,27 +48,9 @@ export default function MPrice() {
   useEffect(() => {
     API.getPrice()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  priceImage: el[1].priceImage,
-                  priceTitle: el[1].priceTitle,
-                  priceCategory: el[1].priceCategory,
-                  priceDate: el[1].priceDate,
-                  priceText: el[1].priceText,
-                  priceAllPriceImage: el[1].priceAllPriceImage,
-                  productColor: el[1].productColor,
-                };
-                result.push(pp);
-              });
-              setData(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setData(res.data.data);
           }
         }
       })
@@ -231,7 +202,7 @@ export default function MPrice() {
         {onedata !== undefined && (
           <Grid
             sx={{
-              backgroundImage: `url("${onedata?.priceAllPriceImage}")`,
+              backgroundImage: `url("http://167.172.76.26/${onedata?.priceAllPriceImage}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
               width: "100%",

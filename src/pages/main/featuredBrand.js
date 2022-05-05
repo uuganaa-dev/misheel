@@ -19,7 +19,7 @@ export default function FeaturedBrand({ txt, list }) {
   });
   const navigate = useNavigate();
   const click = () => {
-    navigate("/brandDetail");
+    navigate("/brandPage");
   };
 
   const brand12 = list.filter(
@@ -60,25 +60,28 @@ export default function FeaturedBrand({ txt, list }) {
           }}
         >
           {brand12 &&
-            brand12.map((i, index) => (
-              <Grid key={index} onClick={click}>
-                <HoverImage
-                  i={i}
-                  show={show}
-                  setShow={setShow}
-                  sx={{
-                    width: ["180px", "393px", "505px"],
-                    height: ["128px", "283px", "364px"],
-                  }}
-                  logo={{
-                    width: ["22px", "49px", "63px"],
-                    height: ["22px", "49px", "63px"],
-                    gap: ["18px", "24px", "30px"],
-                  }}
-                  fontSize={{ fontSize: ["18px", "26px", "34px"] }}
-                />
-              </Grid>
-            ))}
+            brand12.map((i, index) => {
+              console.log(i);
+              return (
+                <Grid key={index} onClick={() => click()}>
+                  <HoverImage
+                    i={i}
+                    show={show}
+                    setShow={setShow}
+                    sx={{
+                      width: ["180px", "393px", "505px"],
+                      height: ["128px", "283px", "364px"],
+                    }}
+                    logo={{
+                      width: ["22px", "49px", "63px"],
+                      height: ["22px", "49px", "63px"],
+                      gap: ["18px", "24px", "30px"],
+                    }}
+                    fontSize={{ fontSize: ["18px", "26px", "34px"] }}
+                  />
+                </Grid>
+              );
+            })}
         </Grid>
         <Grid
           sx={{

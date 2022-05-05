@@ -107,7 +107,6 @@ export default function SimilarBrands({ txt, brandList }) {
                     backgroundSize: "contain",
                     width: ["67px", "165px", "232px"],
                     height: ["61px", "149px", "200px"],
-                    backgroundColor: "red",
                     "&:hover": {
                       opacity: 0.4,
                     },
