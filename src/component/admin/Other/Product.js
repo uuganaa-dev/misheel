@@ -12,7 +12,10 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
+const URL = "http://167.172.76.26";
+
 const Product = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,15 +41,18 @@ const Product = () => {
   };
   const ProductSave = () => {
     setAdmin({ type: "LOADING", data: true });
-    API.postProduct({
-      productBrandId: admin.productBrandId,
-      productImage: admin.productImage,
-      productOpenStyle: admin.productOpenStyle,
-      productStyle: admin.productStyle,
-      productUsage: admin.productUsage,
-      productMaterial: admin.productMaterial,
-      productColor: admin.productColor,
-    })
+    formData.append("productBrandId", admin.productBrandId);
+    if (admin.productImage.length > 0) {
+      admin.productImage.map((el) =>
+        formData.append("productImage", el.originFileObj)
+      );
+    }
+    formData.append("productOpenStyle", admin.productOpenStyle);
+    formData.append("productStyle", admin.productStyle);
+    formData.append("productUsage", admin.productUsage);
+    formData.append("productMaterial", admin.productMaterial);
+    formData.append("productColor", admin.productColor);
+    API.postProduct(formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({
@@ -112,29 +118,10 @@ const Product = () => {
     setLoading(true);
     API.getBrand()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  categoryId: el[1].categoryId,
-                  subCategoryId: el[1].subCategoryId,
-                  brandName: el[1].brandName,
-                  brandLogo: el[1].brandLogo,
-                  brandDetailCoverImg: el[1].brandDetailCoverImg,
-                  brandDetailDesc: el[1].brandDetailDesc,
-                  brandDetailNumber: el[1].brandDetailNumber,
-                  brandDetailEmail: el[1].brandDetailEmail,
-                  brandDetailFacebook: el[1].brandDetailFacebook,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "BRAND_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "BRAND_LIST", data: res.data.data });
+            setLoading(false);
           }
         }
       })
@@ -152,27 +139,10 @@ const Product = () => {
   useEffect(() => {
     API.getProduct()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  productBrandId: el[1].productBrandId,
-                  productImage: el[1].productImage,
-                  productOpenStyle: el[1].productOpenStyle,
-                  productStyle: el[1].productStyle,
-                  productUsage: el[1].productUsage,
-                  productMaterial: el[1].productMaterial,
-                  productColor: el[1].productColor,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "PRODUCT_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "PRODUCT_LIST", data: res.data.data });
+            setLoading(false);
           }
         }
       })
@@ -184,9 +154,6 @@ const Product = () => {
           text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, [setAdmin, admin.productListRefresh]);
 
@@ -242,17 +209,10 @@ const Product = () => {
                 <Upload
                   beforeUpload={() => false}
                   multiple
-                  fileList={admin.productImageList}
+                  fileList={admin.productImage}
                   accept=".jpg, .png, .jpeg"
                   onChange={({ fileList }) => {
-                    var result = [];
-                    fileList.map((el) =>
-                      getBase64(el.originFileObj, (imageUrl) => {
-                        result.push(imageUrl);
-                      })
-                    );
-                    setAdmin({ type: "PRODUCT_IMAGE", data: result });
-                    setAdmin({ type: "PRODUCT_IMAGE_LIST", data: fileList });
+                    setAdmin({ type: "PRODUCT_IMAGE", data: fileList });
                   }}
                 >
                   <div className="my-file-upload">
@@ -344,7 +304,7 @@ const Product = () => {
                       Validate();
                     }}
                   >
-                    {admin.loading ? <LoadingOutlined /> : "Шинэчлэх"}
+                    {admin.loading ? <LoadingOutlined /> : "Хадгалах"}
                   </div>
                 </div>
               </div>
@@ -373,13 +333,19 @@ const Product = () => {
                   <div className="cat-card-div">
                     <div className="cat-brand-img">
                       <img
-                        src={el.productImage[0]}
+                        src={
+                          el?.productImage[0]?.split("/")[1] === "uploads"
+                            ? URL + el.productImage[0]
+                            : el.productImage[0]
+                        }
                         alt=""
                         className="cat-brand-logo"
                       />
                     </div>
                     <div className="cat-brand-title">
-                      <div className="cat-brand-title-name">{aa.brandName}</div>
+                      <div className="cat-brand-title-name">
+                        {aa?.brandName}
+                      </div>
                       <div className="cat-brand-desc">{el.productMaterial}</div>
                       <div className="cat-brand-desc">{el.productUsage}</div>
                     </div>

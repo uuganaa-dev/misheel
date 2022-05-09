@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Grid, Modal } from "@mui/material";
@@ -52,6 +53,7 @@ function SamplePrevArrow(props) {
 }
 
 export default function ImageSlick({ txt }) {
+  const params = useParams();
   const [detail, setDetail] = useState([]);
   const [itemDetail, setItemDetail] = useState();
   const [openModal, setOpenModal] = useState(false);
@@ -96,27 +98,12 @@ export default function ImageSlick({ txt }) {
   useEffect(() => {
     API.getProduct()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  productBrandId: el[1].productBrandId,
-                  productImage: el[1].productImage,
-                  productOpenStyle: el[1].productOpenStyle,
-                  productStyle: el[1].productStyle,
-                  productUsage: el[1].productUsage,
-                  productMaterial: el[1].productMaterial,
-                  productColor: el[1].productColor,
-                };
-                result.push(pp);
-              });
-              setDetail(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            var find = res.data.data.filter(
+              (el) => el.productBrandId === params.id
+            );
+            setDetail(find);
           }
         }
       })
@@ -129,7 +116,7 @@ export default function ImageSlick({ txt }) {
           confirmButtonColor: "#0f56b3",
         });
       });
-  }, []);
+  }, [params.id]);
 
   return (
     <Grid
@@ -155,7 +142,7 @@ export default function ImageSlick({ txt }) {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("${item.productImage[0]}")`,
+                  backgroundImage: `url("http://167.172.76.26${item.productImage[0]}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["100px", "244px"],

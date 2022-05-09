@@ -29,22 +29,9 @@ export default function MShiidel() {
     setLoading(true);
     API.getSocial("mshiidel")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  img: el[1].img,
-                  images: el[1].images,
-                };
-                result.push(pp);
-              });
-              setData(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setData(res.data.data);
           }
         }
       })
@@ -145,7 +132,7 @@ export default function MShiidel() {
                 <Grid sx={{ position: "relative" }}>
                   <Grid
                     sx={{
-                      backgroundImage: `url("${item.img}")`,
+                      backgroundImage: `url("http://167.172.76.26/${item.img}")`,
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "cover",
                       width: ["200px", "262px", "370px"],

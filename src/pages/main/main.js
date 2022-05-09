@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Grid, Modal, useMediaQuery, LinearProgress } from "@mui/material";
+import { Grid, Modal, LinearProgress } from "@mui/material";
 import fileMain from "../../asset/backgroundImages/main/fileMain";
 import Appbar from "../../component/Appbar";
 import FeaturedBrand from "./featuredBrand";
 import Footer from "../../component/footerMain";
 import TheContext from "../../utils/context/userContext";
-import breakpoints from "../../utils/contants/breakpoints";
-import json2mq from "json2mq";
 import icons from "../../asset/icon/filePath";
 
 import { LoadingOutlined } from "@ant-design/icons";
@@ -17,8 +15,6 @@ const URL = "http://167.172.76.26";
 
 export default function Main() {
   const context = useContext(TheContext);
-  const { laptop } = breakpoints;
-  const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [open, setOpen] = useState(true);
   const [progress] = useState(0);
   const [mainImg, setMainImg] = useState();
@@ -149,7 +145,7 @@ export default function Main() {
 
   return (
     <Grid>
-      {isLaptop && <Appbar />}
+      <Appbar />
       <Grid sx={{ position: "relative", height: "calc(100vw * 0.49)" }}>
         {mainImg && (
           <Grid

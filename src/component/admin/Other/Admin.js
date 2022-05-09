@@ -129,9 +129,7 @@ const Admin = () => {
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setTimeout(() => {
-            setAdmin({ type: "REFRESH" });
-          }, 2000);
+          setAdmin({ type: "REFRESH" });
           Swal.fire({
             icon: "success",
             title: "Амжилттай хадгалагдлаа.",
@@ -157,9 +155,7 @@ const Admin = () => {
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setTimeout(() => {
-            setAdmin({ type: "REFRESH" });
-          }, 2000);
+          setAdmin({ type: "REFRESH" });
           Swal.fire({
             icon: "success",
             title: "Амжилттай шинэчлэгдлээ.",
@@ -184,9 +180,7 @@ const Admin = () => {
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "MODAL_CLOSE" });
-          setTimeout(() => {
-            setAdmin({ type: "REFRESH" });
-          }, 2000);
+          setAdmin({ type: "REFRESH" });
           Swal.fire({
             icon: "success",
             title: "Амжилттай устгагдлаа.",
@@ -254,7 +248,7 @@ const Admin = () => {
           res.data.data.map((el) => {
             var pp = {
               id: el.id,
-              imageUrl: URL + el.imageUrl,
+              imageUrl: el.imageUrl,
               imgName: el.imgName,
               imgType: el.imgType,
               ordern: el.ordern,
@@ -345,7 +339,12 @@ const Admin = () => {
                       >
                         {admin?.cover1 ? (
                           <img
-                            src={admin?.cover1?.imageUrl}
+                            src={
+                              admin?.cover1?.imageUrl.split("/")[1] ===
+                              "uploads"
+                                ? URL + admin?.cover1?.imageUrl
+                                : admin?.cover1?.imageUrl
+                            }
                             alt=""
                             className="upload-img"
                           />
@@ -384,9 +383,14 @@ const Admin = () => {
                           HandleChange(2, file);
                         }}
                       >
-                        {admin.cover2 ? (
+                        {admin?.cover2 ? (
                           <img
-                            src={admin.cover1.imageUrl}
+                            src={
+                              admin?.cover1?.imageUrl.split("/")[1] ===
+                              "uploads"
+                                ? URL + admin?.cover2?.imageUrl
+                                : admin?.cover2?.imageUrl
+                            }
                             alt=""
                             className="upload-img"
                           />
@@ -427,7 +431,12 @@ const Admin = () => {
                       >
                         {admin.cover3 ? (
                           <img
-                            src={admin.cover3.imageUrl}
+                            src={
+                              admin?.cover1?.imageUrl.split("/")[1] ===
+                              "uploads"
+                                ? URL + admin.cover3.imageUrl
+                                : admin.cover3.imageUrl
+                            }
                             alt=""
                             className="upload-img"
                           />
@@ -473,6 +482,8 @@ const Admin = () => {
                           src={
                             admin.image.imageBase
                               ? admin.image.imageBase
+                              : admin.image.imageUrl.split("/")[1] === "uploads"
+                              ? URL + admin.image.imageUrl
                               : admin.image.imageUrl
                           }
                           alt=""

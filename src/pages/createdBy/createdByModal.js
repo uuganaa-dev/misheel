@@ -125,7 +125,7 @@ export default function CreatedByModal({ CloseModal, itemDetail }) {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("${item.img}")`,
+                  backgroundImage: `url("http://167.172.76.26/${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["190px", "250px", "400px"],

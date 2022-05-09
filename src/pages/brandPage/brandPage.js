@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Grid, useMediaQuery, Typography, Radio } from "@mui/material";
+import { Grid, Typography, Radio } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import ReclamImage from "../../asset/backgroundImages/brandPage/reclam.png";
-
-import breakpoints from "../../utils/contants/breakpoints";
-import json2mq from "json2mq";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 import { ArrowBackIosNew } from "@mui/icons-material";
 
 export default function BrandPage() {
-  const { tablet } = breakpoints;
-  const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
   const navigate = useNavigate();
 
   const [show, setShow] = useState({
@@ -64,21 +59,9 @@ export default function BrandPage() {
     setLoading(true);
     API.getCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setCatList(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setCatList(res.data.data);
           }
         }
       })
@@ -96,22 +79,9 @@ export default function BrandPage() {
   useEffect(() => {
     API.getSubCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  parentId: el[1].parentId,
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setSubCatList(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setSubCatList(res.data.data);
           }
         }
       })
@@ -129,25 +99,10 @@ export default function BrandPage() {
   useEffect(() => {
     API.getBrand()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  categoryId: el[1].categoryId,
-                  subCategoryId: el[1].subCategoryId,
-                  brandName: el[1].brandName,
-                  brandLogo: el[1].brandLogo,
-                };
-                result.push(pp);
-              });
-              setBrandList(result);
-              setBrandListFiltered(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setBrandList(res.data.data);
+            setBrandListFiltered(res.data.data);
           }
         }
       })
@@ -174,7 +129,7 @@ export default function BrandPage() {
         backgroundColor: ["#F0F0F0", "#F0F0F0", "#F0F0F0"],
       }}
     >
-      {isTablet && <Appbar />}
+      <Appbar />
       <Grid
         sx={{
           pt: ["35px", "80px", "114px"],
@@ -332,7 +287,7 @@ export default function BrandPage() {
                       >
                         <Grid
                           sx={{
-                            backgroundImage: `url("${item.brandLogo}")`,
+                            backgroundImage: `url("http://167.172.76.26/${item.brandLogo}")`,
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                             width:

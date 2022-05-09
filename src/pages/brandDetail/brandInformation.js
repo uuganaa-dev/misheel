@@ -23,7 +23,7 @@ export default function BrandInformation({ sx, data, txt }) {
       >
         <Grid
           sx={{
-            backgroundImage: `url("${data?.brandLogo}")`,
+            backgroundImage: `url("http://167.172.76.26${data?.brandLogo}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["58px", "142px", "201px"],

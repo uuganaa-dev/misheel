@@ -30,18 +30,17 @@ const svg = (
 );
 
 const MShiidel = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
 
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
-  const [imagess, setImagess] = useState([]);
   const [img, setImg] = useState();
 
   useEffect(() => {
     if (admin.mShiidel) {
       setLoading(false);
       setImages([]);
-      setImagess([]);
       setImg();
     }
   }, [admin.mShiidel]);
@@ -64,10 +63,11 @@ const MShiidel = () => {
 
   const Save = () => {
     setLoading(true);
-    API.postSocial("mshiidel", {
-      img: img,
-      images: images,
-    })
+    formData.append("img", img.img);
+    if (images.length > 0) {
+      images.map((el) => formData.append("images", el.originFileObj));
+    }
+    API.postSocial("mshiidel", formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "M_SHIIDEL", data: false });
@@ -113,28 +113,29 @@ const MShiidel = () => {
                 accept=".jpg, .png, .jpeg"
                 maxCount={1}
                 onChange={({ file }) => {
-                  getBase64(file, (imageUrl) => {
-                    setImg(imageUrl);
+                  getBase64(file, (base) => {
+                    setImg({ img: file, imgBase: base });
                   });
                 }}
               >
-                {img ? <img src={img} alt="" className="upload-img" /> : svg}
+                {img ? (
+                  <img
+                    src={img.imgBase ? img.imgBase : img}
+                    alt=""
+                    className="upload-img"
+                  />
+                ) : (
+                  svg
+                )}
               </Upload>
               <div className="mt-2">Бусад зураг</div>
               <Upload
                 beforeUpload={() => false}
                 multiple
-                fileList={imagess}
+                fileList={images}
                 accept=".jpg, .png, .jpeg"
                 onChange={({ fileList }) => {
-                  var result = [];
-                  fileList.map((el) =>
-                    getBase64(el.originFileObj, (imageUrl) => {
-                      result.push({ img: imageUrl });
-                    })
-                  );
-                  setImagess(fileList);
-                  setImages(result);
+                  setImages(fileList);
                 }}
               >
                 <div className="my-file-upload">

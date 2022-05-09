@@ -31,11 +31,11 @@ const svg = (
 );
 
 const CreatedBy = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
 
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
-  const [imagess, setImagess] = useState([]);
   const [img, setImg] = useState();
   const [project, setProject] = useState("");
   const [title, setTitle] = useState("");
@@ -45,7 +45,6 @@ const CreatedBy = () => {
     if (admin.createdby) {
       setLoading(false);
       setImages([]);
-      setImagess([]);
       setImg();
       setProject("");
       setTitle("");
@@ -74,17 +73,19 @@ const CreatedBy = () => {
 
   const Save = () => {
     setLoading(true);
-    API.postSocial("createdby", {
-      project: project,
-      title: title,
-      txt: txt,
-      img: img,
-      images: images,
-    })
+    formData.append("project", project);
+    formData.append("title", title);
+    formData.append("txt", txt);
+    formData.append("img", img.img);
+    if (images.length > 0) {
+      images.map((el) => formData.append("images", el.originFileObj));
+    }
+    API.postSocial("createdby", formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({ type: "CREATED_BY", data: false });
           setAdmin({ type: "REFRESH" });
+          setLoading(false);
           Swal.fire({
             icon: "success",
             title: "Амжилттай хадгалагдлаа.",
@@ -100,8 +101,7 @@ const CreatedBy = () => {
           text: "Хадгалах үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => setLoading(false));
+      });
   };
 
   return (
@@ -127,27 +127,28 @@ const CreatedBy = () => {
                 maxCount={1}
                 onChange={({ file }) => {
                   getBase64(file, (imageUrl) => {
-                    setImg(imageUrl);
+                    setImg({ img: file, imgBase: imageUrl });
                   });
                 }}
               >
-                {img ? <img src={img} alt="" className="upload-img" /> : svg}
+                {img ? (
+                  <img
+                    src={img.imgBase ? img.imgBase : img}
+                    alt=""
+                    className="upload-img"
+                  />
+                ) : (
+                  svg
+                )}
               </Upload>
               <div className="mt-2">Бусад зураг</div>
               <Upload
                 beforeUpload={() => false}
                 multiple
-                fileList={imagess}
+                fileList={images}
                 accept=".jpg, .png, .jpeg"
                 onChange={({ fileList }) => {
-                  var result = [];
-                  fileList.map((el) =>
-                    getBase64(el.originFileObj, (imageUrl) => {
-                      result.push({ img: imageUrl });
-                    })
-                  );
-                  setImagess(fileList);
-                  setImages(result);
+                  setImages(fileList);
                 }}
               >
                 <div className="my-file-upload">

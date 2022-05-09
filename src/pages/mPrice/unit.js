@@ -3,6 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import logo from "./Ellipse 67.png";
+import moment from "moment";
+
 export default function Unit({ item, catfind }) {
   return (
     <Grid
@@ -18,7 +20,7 @@ export default function Unit({ item, catfind }) {
     >
       <Grid
         sx={{
-          backgroundImage: `url("${item.priceImage}")`,
+          backgroundImage: `url("http://167.172.76.26/${item.priceImage}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "370px",
@@ -42,7 +44,7 @@ export default function Unit({ item, catfind }) {
           <Typography
             sx={{ fontFamily: "Inter", fontSize: "14px", color: "#404040" }}
           >
-            {item.priceDate}
+            {moment(item.priceDate).format("YYYY.MM.DD")}
           </Typography>
         </Grid>
         <Typography

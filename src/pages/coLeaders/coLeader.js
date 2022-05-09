@@ -8,7 +8,14 @@ export default function CoLeader() {
   return (
     <Grid sx={{ backgroundColor: "#ECEBE7" }}>
       <Appbar />
-      <Grid sx={{ width: "100%", height: "calc(100vw * 0.29)", position: "relative", overflowY: "hidden" }}>
+      <Grid
+        sx={{
+          width: "100%",
+          height: "calc(100vw * 0.29)",
+          position: "relative",
+          overflowY: "hidden",
+        }}
+      >
         <Typography
           sx={{
             fontSize: ["10px", "12px"],
@@ -17,8 +24,9 @@ export default function CoLeader() {
             textTransform: "uppercase",
             textAlign: "center",
             color: "#707070",
-            pt: "140px"
-          }}>
+            pt: "140px",
+          }}
+        >
           Зочин хөтөлбөр
         </Typography>
         <Typography
@@ -31,18 +39,19 @@ export default function CoLeader() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)"
-          }}>
+            transform: "translate(-50%, -50%)",
+          }}
+        >
           Co-Leaders
         </Typography>
       </Grid>
       <Grid
         sx={{
-          backgroundImage: `url("${img}")`,
+          backgroundImage: `url("http://167.172.76.26/${img}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
-          height: "calc(100vw * 0.43)"
+          height: "calc(100vw * 0.43)",
         }}
       />
       <FooterMain />

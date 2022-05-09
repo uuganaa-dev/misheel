@@ -26,23 +26,9 @@ export default function Co() {
     setLoading(true);
     API.getSocial("coleader")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  img: el[1].img,
-                  name: el[1].name,
-                  txt: el[1].txt,
-                };
-                result.push(pp);
-              });
-              setData(result);
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setData(res.data.data);
           }
         }
       })
@@ -146,7 +132,7 @@ export default function Co() {
                 >
                   <Grid
                     sx={{
-                      backgroundImage: `url("${item.img}")`,
+                      backgroundImage: `url("http://167.172.76.26/${item.img}")`,
                       backgroundRepeat: "no-repeat",
                       backgroundSize: "cover",
                       width:

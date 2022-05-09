@@ -5,6 +5,9 @@ import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import moment from "moment";
+
+const URL = "http://167.172.76.26";
+
 const { Option } = Select;
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -13,6 +16,7 @@ function getBase64(img, callback) {
 }
 
 const Price = () => {
+  const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,14 +40,16 @@ const Price = () => {
 
   const PriceSave = () => {
     setAdmin({ type: "LOADING", data: true });
-    API.postPrice({
-      priceImage: admin.priceImage,
-      priceAllPriceImage: admin.priceAllPriceImage,
-      priceTitle: admin.priceTitle,
-      priceCategory: admin.priceCategory,
-      priceDate: moment(admin.priceDate).format("YYYY.MM.DD"),
-      priceText: admin.priceText,
-    })
+    formData.append("priceImage", admin.priceImage.priceImage);
+    formData.append(
+      "priceAllPriceImage",
+      admin.priceAllPriceImage.priceAllPriceImage
+    );
+    formData.append("priceTitle", admin.priceTitle);
+    formData.append("priceCategory", admin.priceCategory);
+    formData.append("priceDate", moment(admin.priceDate).format("YYYY.MM.DD"));
+    formData.append("priceText", admin.priceText);
+    API.postPrice(formData)
       .then((res) => {
         if (res.status === 200) {
           setAdmin({
@@ -111,27 +117,10 @@ const Price = () => {
     setLoading(true);
     API.getPrice()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  priceImage: el[1].priceImage,
-                  priceTitle: el[1].priceTitle,
-                  priceCategory: el[1].priceCategory,
-                  priceDate: el[1].priceDate,
-                  priceText: el[1].priceText,
-                  priceAllPriceImage: el[1].priceAllPriceImage,
-                  productColor: el[1].productColor,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "PRICE_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "PRICE_LIST", data: res.data.data });
+            setLoading(false);
           }
         }
       })
@@ -142,8 +131,6 @@ const Price = () => {
           title: "Алдаа гарлаа.",
           text: "Зах зээлийн үнийн лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
-        }).finally(() => {
-          setLoading(false);
         });
       });
   }, [setAdmin, admin.priceListRefresh]);
@@ -152,21 +139,10 @@ const Price = () => {
     setLoading(true);
     API.getCategory()
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  name: el[1].name,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "CATEGORY_LIST", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "CATEGORY_LIST", data: res.data.data });
+            setLoading(false);
           }
         }
       })
@@ -178,9 +154,6 @@ const Price = () => {
           text: "Категори унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, [setAdmin]);
 
@@ -213,13 +186,24 @@ const Price = () => {
                   accept=".jpg, .png, .jpeg"
                   maxCount={1}
                   onChange={({ file }) => {
-                    getBase64(file, (imageUrl) => {
-                      setAdmin({ type: "PRICE_IMAGE", data: imageUrl });
+                    getBase64(file, (base) => {
+                      setAdmin({
+                        type: "PRICE_IMAGE",
+                        data: { priceImage: file, priceImageBase: base },
+                      });
                     });
                   }}
                 >
                   {admin.priceImage ? (
-                    <img src={admin.priceImage} alt="" className="upload-img" />
+                    <img
+                      src={
+                        admin.priceImage.priceImageBase
+                          ? admin.priceImage.priceImageBase
+                          : admin.priceImage
+                      }
+                      alt=""
+                      className="upload-img"
+                    />
                   ) : (
                     <svg
                       width={73}
@@ -249,17 +233,24 @@ const Price = () => {
                   accept=".jpg, .png, .jpeg"
                   maxCount={1}
                   onChange={({ file }) => {
-                    getBase64(file, (imageUrl) => {
+                    getBase64(file, (base) => {
                       setAdmin({
                         type: "PRICE_ALL_PRICE_IMAGE",
-                        data: imageUrl,
+                        data: {
+                          priceAllPriceImage: file,
+                          priceAllPriceImageBase: base,
+                        },
                       });
                     });
                   }}
                 >
                   {admin.priceAllPriceImage ? (
                     <img
-                      src={admin.priceAllPriceImage}
+                      src={
+                        admin.priceAllPriceImage.priceAllPriceImageBase
+                          ? admin.priceAllPriceImage.priceAllPriceImageBase
+                          : admin.priceAllPriceImage
+                      }
                       alt=""
                       className="upload-img"
                     />
@@ -373,13 +364,19 @@ const Price = () => {
                   <div className="cat-card-div">
                     <div className="cat-brand-img">
                       <img
-                        src={el.priceImage}
+                        src={
+                          el.priceImage.split("/")[1] === "uploads"
+                            ? URL + el.priceImage
+                            : el.priceImage
+                        }
                         alt=""
                         className="cat-brand-logo"
                       />
                     </div>
                     <div className="cat-brand-title">
-                      <div className="cat-brand-title-name">{el.priceDate}</div>
+                      <div className="cat-brand-title-name">
+                        {moment(el.priceDate).format("YYYY-MM-DD")}
+                      </div>
                       <div className="cat-brand-desc">{el.priceTitle}</div>
                     </div>
                   </div>

@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Modal, useMediaQuery } from "@mui/material";
-import json2mq from "json2mq";
+import { Grid, Modal } from "@mui/material";
 import fileBD from "../../asset/backgroundImages/brandDetail/file";
-import breakpoints from "../../utils/contants/breakpoints";
 import TheContext from "../../utils/context/userContext";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
@@ -17,15 +15,10 @@ import Swal from "sweetalert2";
 
 export default function BrandDetail() {
   const params = useParams();
-  const { tablet } = breakpoints;
-  const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
   const context = useContext(TheContext);
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState();
   const [brandList, setBrandList] = useState([]);
-  // const redBttnClick = () => {
-  //   setOpenModal(true);
-  // };
 
   const handleClose = () => {
     setOpenModal(false);
@@ -33,10 +26,17 @@ export default function BrandDetail() {
 
   useEffect(() => {
     if (params.id) {
-      API.getOneBrand(params.id)
+      API.getBrand()
         .then((res) => {
-          if (res.status === 200) {
-            setData(res.data);
+          if (res.data.success) {
+            if (res.data.data.length > 0) {
+              var onedata = res.data.data.find((el) => el.id === params.id);
+              var relatedbrands = res.data.data.filter(
+                (el) => el.id !== onedata.id
+              );
+              setData(onedata);
+              setBrandList(relatedbrands);
+            }
           }
         })
         .catch((err) => {
@@ -51,50 +51,12 @@ export default function BrandDetail() {
     }
   }, [params.id]);
 
-  useEffect(() => {
-    if (data?.categoryId && params.id) {
-      API.getBrand()
-        .then((res) => {
-          if (res.status === 200) {
-            if (res.data !== null) {
-              var result = [];
-              var aa = Object.entries(res.data);
-              if (aa.length > 0) {
-                // eslint-disable-next-line array-callback-return
-                aa.map((el) => {
-                  var pp = {
-                    id: el[0],
-                    categoryId: el[1].categoryId,
-                    subCategoryId: el[1].subCategoryId,
-                    brandName: el[1].brandName,
-                    brandLogo: el[1].brandLogo,
-                  };
-                  result.push(pp);
-                });
-                var aaasd = result.filter((el) => el.id !== params.id);
-                setBrandList(aaasd);
-              }
-            }
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire({
-            icon: "error",
-            title: "Алдаа гарлаа.",
-            text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
-            confirmButtonColor: "#0f56b3",
-          });
-        });
-    }
-  }, [data?.categoryId, params.id]);
-
   return (
     <Grid sx={{ backgroundColor: ["white", "white", "#E5E5E5"] }}>
-      {isTablet && <Appbar />}
+      <Appbar />
       <Grid
         sx={{
-          backgroundImage: `url("${data?.brandDetailCoverImg}")`,
+          backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",

@@ -7,9 +7,10 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import { useAdminState } from "../../../contexts/AdminContext";
 
+const URL = "http://167.172.76.26/";
+
 const Social = () => {
   const { admin, setAdmin } = useAdminState();
-  console.log("admin: ", admin);
 
   const Delete = (name, id) => {
     Swal.fire({
@@ -26,7 +27,9 @@ const Social = () => {
         API.deleteSocial(name, id)
           .then((res) => {
             if (res.status === 200) {
-              setAdmin({ type: "REFRESH" });
+              setTimeout(() => {
+                setAdmin({ type: "REFRESH" });
+              }, 1000);
               Swal.fire({
                 icon: "success",
                 title: "Амжилттай устгагдлаа.",
@@ -51,25 +54,15 @@ const Social = () => {
     setAdmin({ type: "LOADING", data: true });
     API.getSocial("mshiidel")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  img: el[1].img,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "M_SHIIDEL_DATA", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "M_SHIIDEL_DATA", data: res.data.data });
+            setAdmin({ type: "LOADING", data: false });
           }
         }
       })
       .catch((err) => {
+        setAdmin({ type: "LOADING", data: false });
         console.log(err);
         Swal.fire({
           icon: "error",
@@ -77,34 +70,18 @@ const Social = () => {
           text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setAdmin({ type: "LOADING", data: false });
       });
     API.getSocial("createdby")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  img: el[1].img,
-                  project: el[1].project,
-                  title: el[1].title,
-                  txt: el[1].txt,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "CREATED_BY_DATA", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "CREATED_BY_DATA", data: res.data.data });
+            setAdmin({ type: "LOADING", data: false });
           }
         }
       })
       .catch((err) => {
+        setAdmin({ type: "LOADING", data: false });
         console.log(err);
         Swal.fire({
           icon: "error",
@@ -112,33 +89,18 @@ const Social = () => {
           text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setAdmin({ type: "LOADING", data: false });
       });
     API.getSocial("mrmisheel")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  icon: el[1].icon,
-                  url: el[1].url,
-                  txt: el[1].txt,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "MR_MISHEEL_DATA", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "LOADING", data: false });
+            setAdmin({ type: "MR_MISHEEL_DATA", data: res.data.data });
           }
         }
       })
       .catch((err) => {
+        setAdmin({ type: "LOADING", data: false });
         console.log(err);
         Swal.fire({
           icon: "error",
@@ -146,34 +108,18 @@ const Social = () => {
           text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setAdmin({ type: "LOADING", data: false });
       });
     API.getSocial("coleader")
       .then((res) => {
-        if (res.status === 200) {
-          if (res.data !== null) {
-            var result = [];
-            var aa = Object.entries(res.data);
-            if (aa.length > 0) {
-              // eslint-disable-next-line array-callback-return
-              aa.map((el) => {
-                var pp = {
-                  id: el[0],
-                  episode: el[1].episode,
-                  img: el[1].img,
-                  name: el[1].name,
-                  txt: el[1].txt,
-                };
-                result.push(pp);
-              });
-              setAdmin({ type: "CO_LEADER_DATA", data: result });
-            }
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "CO_LEADER_DATA", data: res.data.data });
+            setAdmin({ type: "LOADING", data: false });
           }
         }
       })
       .catch((err) => {
+        setAdmin({ type: "LOADING", data: false });
         console.log(err);
         Swal.fire({
           icon: "error",
@@ -181,9 +127,6 @@ const Social = () => {
           text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      })
-      .finally(() => {
-        setAdmin({ type: "LOADING", data: false });
       });
   }, [admin.refresh, setAdmin]);
 
@@ -231,54 +174,72 @@ const Social = () => {
         <div className="social-item-container" id="style-1">
           <h5>М-Шийдэл</h5>
           {admin.mShiidelData.length > 0 &&
-            admin.mShiidelData.map((el, index) => (
-              <div className="social-item-container-item" key={index}>
-                <img
-                  src={el.img}
-                  alt=""
-                  className="social-item-container-item-img"
-                />
-                <div className="social-item-container-item-div1"></div>
-                <div className="social-item-container-item-div2"></div>
-                <div className="social-item-container-item-div3"></div>
-                <i
-                  className="fa fa-trash p-1 text-danger cursor-pointer"
-                  onClick={() => {
-                    Delete("mshiidel", el.id);
-                  }}
-                ></i>
-              </div>
-            ))}
+            admin.mShiidelData.map((el, index) => {
+              return (
+                <div className="social-item-container-item" key={index}>
+                  <img
+                    src={
+                      el.img.split("/")[1] === "uploads" ? URL + el.img : el.img
+                    }
+                    alt="Зураггүй"
+                    className="social-item-container-item-img"
+                  />
+                  <div className="social-item-container-item-div1">
+                    {el.txt}
+                  </div>
+                  <div className="social-item-container-item-div2"></div>
+                  <div className="social-item-container-item-div3"></div>
+                  <i
+                    className="fa fa-trash p-1 text-danger cursor-pointer"
+                    onClick={() => {
+                      Delete("mshiidel", el._id);
+                    }}
+                  ></i>
+                </div>
+              );
+            })}
           <h5>Created By</h5>
           {admin.createdbyData.length > 0 &&
-            admin.createdbyData.map((el, index) => (
-              <div className="social-item-container-item" key={index}>
-                <img
-                  src={el.img}
-                  alt=""
-                  className="social-item-container-item-img"
-                />
-                <div className="social-item-container-item-div1">
-                  {el.project}
+            admin.createdbyData.map((el, index) => {
+              return (
+                <div className="social-item-container-item" key={index}>
+                  <img
+                    src={
+                      el.img.split("/")[1] === "uploads" ? URL + el.img : el.img
+                    }
+                    alt="Зураггүй"
+                    className="social-item-container-item-img"
+                  />
+                  <div className="social-item-container-item-div1">
+                    {el.project}
+                  </div>
+                  <div className="social-item-container-item-div2">
+                    {el.title}
+                  </div>
+                  <div className="social-item-container-item-div3">
+                    {el.txt}
+                  </div>
+                  <i
+                    className="fa fa-trash p-1 text-danger cursor-pointer"
+                    onClick={() => {
+                      Delete("createdby", el._id);
+                    }}
+                  ></i>
                 </div>
-                <div className="social-item-container-item-div2">
-                  {el.title}
-                </div>
-                <div className="social-item-container-item-div3">{el.txt}</div>
-                <i
-                  className="fa fa-trash p-1 text-danger cursor-pointer"
-                  onClick={() => {
-                    Delete("createdby", el.id);
-                  }}
-                ></i>
-              </div>
-            ))}
+              );
+            })}
           <h5>Mr.Misheel</h5>
           {admin.mrMisheelData.length > 0 &&
             admin.mrMisheelData.map((el, index) => (
               <div className="social-item-container-item" key={index}>
                 <img
-                  src={el.icon ? el.icon : ""}
+                  src={
+                    el.icon
+                      ? el.icon.split("/")[0] === "uploads"
+                        ? URL + el.icon
+                        : el.icon
+                      : ""
+                  }
                   alt="Зураггүй"
                   className="social-item-container-item-img"
                 />
@@ -288,7 +249,7 @@ const Social = () => {
                 <i
                   className="fa fa-trash p-1 text-danger cursor-pointer"
                   onClick={() => {
-                    Delete("mrmisheel", el.id);
+                    Delete("mrmisheel", el._id);
                   }}
                 ></i>
               </div>
@@ -298,7 +259,13 @@ const Social = () => {
             admin.coLeaderData.map((el, index) => (
               <div className="social-item-container-item" key={index}>
                 <img
-                  src={el.img ? el.img : ""}
+                  src={
+                    el.img
+                      ? el.img.split("/")[1] === "uploads"
+                        ? URL + el.img
+                        : el.img
+                      : ""
+                  }
                   alt="Зураггүй"
                   className="social-item-container-item-img"
                 />
@@ -310,7 +277,7 @@ const Social = () => {
                 <i
                   className="fa fa-trash p-1 text-danger cursor-pointer"
                   onClick={() => {
-                    Delete("coleader", el.id);
+                    Delete("coleader", el._id);
                   }}
                 ></i>
               </div>
