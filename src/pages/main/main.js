@@ -123,6 +123,25 @@ export default function Main() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainImg]);
 
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+
+  useEffect(() => {
+    API.getCategory()
+      .then((res) => {
+        setCategory(res.data.data.slice(0, 5));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    API.getSubCategory()
+      .then((res) => {
+        setSubCategory(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   if (loading) {
     return (
       <div
@@ -145,7 +164,7 @@ export default function Main() {
 
   return (
     <Grid>
-      <Appbar />
+      <Appbar category={category} subCategory={subCategory} />
       <Grid sx={{ position: "relative", height: "calc(100vw * 0.49)" }}>
         {mainImg && (
           <Grid
