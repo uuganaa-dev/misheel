@@ -55,7 +55,7 @@ function SamplePrevArrow(props) {
 export default function ImageSlick({ txt }) {
   const params = useParams();
   const [detail, setDetail] = useState([]);
-  console.log("detail: ", detail);
+
   const [itemDetail, setItemDetail] = useState();
   const [openModal, setOpenModal] = useState(false);
 

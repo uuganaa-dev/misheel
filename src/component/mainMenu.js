@@ -5,7 +5,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 export default function MainMenu(props) {
   const [choose, setChoose] = useState();
   const [subCat, setSubCat] = useState([]);
-  console.log("subCat: ", subCat);
 
   useEffect(() => {
     if (choose) {
