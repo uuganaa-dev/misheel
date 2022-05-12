@@ -66,7 +66,7 @@ export default function Co() {
               textTransform: "uppercase",
               textAlign: "center",
               color: "#707070",
-              pt: ["44px", "85px", "140px"],
+              pt: ["34px", "85px", "140px"],
             }}
           >
             Зочин хөтөлбөр
