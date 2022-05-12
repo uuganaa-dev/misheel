@@ -52,19 +52,25 @@ export default function BrandDetail() {
   }, [params.id]);
 
   return (
-    <Grid sx={{ backgroundColor: ["white", "white", "#E5E5E5"] }}>
+    <>
       <Appbar />
       <Grid
         sx={{
-          backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          width: "100%",
-          height: "calc(100vw * 0.37)",
-          position: "relative",
+          backgroundColor: ["white", "white", "#E5E5E5"],
+          paddingTop: "58px",
         }}
       >
-        {/* <RedMenuIcon
+        <Grid
+          sx={{
+            backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: "100%",
+            height: "calc(100vw * 0.37)",
+            position: "relative",
+          }}
+        >
+          {/* <RedMenuIcon
           sx={{ top: "24%", left: "12%", transform: "translate(-24%, -12%)" }}
           click={redBttnClick}
         />
@@ -80,34 +86,35 @@ export default function BrandDetail() {
           sx={{ top: "59%", left: "62%", transform: "translate(-59%, -62%)" }}
           click={redBttnClick}
         /> */}
-      </Grid>
-      <ImageSlick txt={context.txt.brandDetail} />
-      {/* <SwipeToSlide /> */}
-      <Grid sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <BrandInformation
-          sx={{
-            mt: ["2px", "0", "21px"],
-            mb: ["44px", "0", "54px"],
-            pt: ["23px", "55px", "74px"],
-            pb: ["0", "64px", "86px"],
-          }}
-          data={data}
-          txt={context.txt.contact}
-        />
-      </Grid>
-      <SimilarBrands txt={context.txt.brandDetail} brandList={brandList} />
-
-      <FooterMain />
-      <Modal open={openModal} onClose={handleClose}>
-        <div>
-          <BrandDetailModal
-            handleClose={handleClose}
-            detail={detail}
-            txt={context.txt.brandDetail}
+        </Grid>
+        <ImageSlick txt={context.txt.brandDetail} />
+        {/* <SwipeToSlide /> */}
+        <Grid sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <BrandInformation
+            sx={{
+              mt: ["2px", "0", "21px"],
+              mb: ["44px", "0", "54px"],
+              pt: ["23px", "55px", "74px"],
+              pb: ["0", "64px", "86px"],
+            }}
+            data={data}
+            txt={context.txt.contact}
           />
-        </div>
-      </Modal>
-    </Grid>
+        </Grid>
+        <SimilarBrands txt={context.txt.brandDetail} brandList={brandList} />
+
+        <FooterMain />
+        <Modal open={openModal} onClose={handleClose}>
+          <div>
+            <BrandDetailModal
+              handleClose={handleClose}
+              detail={detail}
+              txt={context.txt.brandDetail}
+            />
+          </div>
+        </Modal>
+      </Grid>
+    </>
   );
 }
 
