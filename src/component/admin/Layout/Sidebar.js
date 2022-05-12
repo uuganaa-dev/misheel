@@ -134,6 +134,18 @@ const Sidebar = (props) => {
                 <span>Зах зээлийн үнэ</span>
               </Link>
             </li>
+            <li
+              className={
+                location.pathname === "/about"
+                  ? "has-sub nav-item active"
+                  : "has-sub nav-item"
+              }
+            >
+              <Link to="/about" id="gadotMenuHide">
+                <i className="ft-trending-up" />
+                <span>Бидний тухай</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

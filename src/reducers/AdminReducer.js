@@ -452,6 +452,23 @@ const AdminReducer = (state, action) => {
         coLeaderData: action.data,
       };
     //SOCIAL END
+    //ABOUT START
+    case "ABOUT_ISSHOW":
+      return {
+        ...state,
+        aboutIsShow: action.data,
+      };
+    case "ABOUT_COVER_IMG":
+      return {
+        ...state,
+        aboutCoverImg: action.data,
+      };
+    case "ABOUT_CONTENT":
+      return {
+        ...state,
+        aboutContent: action.data,
+      };
+    //ABOUT END
 
     default:
       return state;

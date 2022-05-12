@@ -76,7 +76,23 @@
   border-left: 1px solid #a7a7a7;
   width: 60%;
 }
+.about-title {
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: Inter;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.jodit-wysiwyg {
+  background-color: white;
+}
 @media only screen and (max-width: 600px) {
+  .about-mobile-gap {
+    gap: 20px;
+  }
+  .about-mobile-width {
+    width: 90%;
+  }
   .social-item-container-item-img {
     width: 30%;
   }

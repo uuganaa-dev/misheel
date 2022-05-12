@@ -1,12 +1,15 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// const URL =
-//   "https://newmisheel-default-rtdb.asia-southeast1.firebasedatabase.app/";
+const URL1 =
+  "https://misheel-e1d54-default-rtdb.asia-southeast1.firebasedatabase.app/";
 const URL = "http://167.172.76.26/api";
 
 export function MISHEEL() {
   return createInstance(URL);
+}
+export function MISHEEL1() {
+  return createInstance(URL1);
 }
 
 const createInstance = (baseURL) => {
@@ -168,3 +171,17 @@ export async function deleteSocial(name, id) {
   return response;
 }
 // Social
+// About
+export async function postAbout(formData) {
+  const response = await MISHEEL1().post("/about", formData);
+  return response;
+}
+export async function getAbout() {
+  const response = await MISHEEL1().get("/about");
+  return response;
+}
+export async function deleteAbout(id) {
+  const response = await MISHEEL1().delete("/about" + id);
+  return response;
+}
+// About

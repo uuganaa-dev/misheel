@@ -84,10 +84,12 @@ const initialState = {
   mShiidelData: [],
   mrMisheelData: [],
   coLeaderData: [],
-  // CREATEDBY
-
-  // CREATEDBY
   // SOCIAL
+  // ABOUT
+  aboutIsShow: false,
+  aboutCoverImg: undefined,
+  aboutContent: "",
+  // ABOUT
 };
 
 export const useAdminState = () => {

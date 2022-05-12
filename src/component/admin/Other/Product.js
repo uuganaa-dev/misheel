@@ -6,11 +6,6 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 const { Option } = Select;
 const { TextArea } = Input;
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 
 const URL = "http://167.172.76.26";
 

@@ -18,8 +18,19 @@ import Brand from "./admin/Brand";
 import Product from "./admin/Product";
 import Social from "./admin/Social";
 import Price from "./admin/Price";
+import About from "./admin/About";
+
 const Router = () => {
   const { user } = useUserState();
+
+  // const routes = [
+  //   "/admin",
+  //   "/brand",
+  //   "/product",
+  //   "/social",
+  //   "/price",
+  //   "/about",
+  // ];
 
   return (
     <>
@@ -43,6 +54,7 @@ const Router = () => {
           <Route path="/product" element={<Product />} />
           <Route path="/social" element={<Social />} />
           <Route path="/price" element={<Price />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       )}
     </>

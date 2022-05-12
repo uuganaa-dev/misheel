@@ -17,9 +17,10 @@ function SampleNextArrow(props) {
         boxShadow: 3,
         borderRadius: "30px",
         width: ["16px", "40px", "50px"],
-        height: ["16px", "40px", "50px"]
+        height: ["16px", "40px", "50px"],
       }}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       <NavigateNextIcon sx={{ fontSize: [16, 40, 50] }} />
     </Grid>
   );
@@ -38,10 +39,13 @@ function SamplePrevArrow(props) {
         boxShadow: 3,
         borderRadius: "30px",
         width: ["16px", "40px", "50px"],
-        height: ["16px", "40px", "50px"]
+        height: ["16px", "40px", "50px"],
       }}
-      onClick={onClick}>
-      <NavigateNextIcon sx={{ transform: "rotate(180deg)", fontSize: [16, 40, 50] }} />
+      onClick={onClick}
+    >
+      <NavigateNextIcon
+        sx={{ transform: "rotate(180deg)", fontSize: [16, 40, 50] }}
+      />
     </Grid>
   );
 }
@@ -50,13 +54,12 @@ export default function ActivityRelated() {
   const settings = {
     className: "center",
     infinite: true,
-    // centerMode: true,
     centerPadding: "60px",
     slidesToShow: 1,
     slidesToScroll: 1,
     afterChange: function (index) {},
     nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
+    prevArrow: <SamplePrevArrow />,
   };
   return (
     <Grid
@@ -65,13 +68,23 @@ export default function ActivityRelated() {
         bgcolor: "white",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
-      }}>
+        alignItems: "center",
+      }}
+    >
       <Grid sx={{ width: "80%" }}>
-        <Typography sx={{ fontSize: ["12px", "12px", "18px"], fontFamily: "Inter", textTransform: "uppercase", fontWeight: 600 }}>
+        <Typography
+          sx={{
+            fontSize: ["12px", "12px", "18px"],
+            fontFamily: "Inter",
+            textTransform: "uppercase",
+            fontWeight: 600,
+          }}
+        >
           Үйл ажиллагаатай холбоотой зурагнууд
         </Typography>
-        <Grid sx={{ width: "100%", position: "relative", pt: "50px", pb: "80px" }}>
+        <Grid
+          sx={{ width: "100%", position: "relative", pt: "50px", pb: "80px" }}
+        >
           <Slider {...settings}>
             {data.map((item, index) => (
               <Grid
@@ -79,16 +92,17 @@ export default function ActivityRelated() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
-                key={index}>
+                key={index}
+              >
                 <Grid
                   sx={{
                     backgroundImage: `url("${item.img}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     width: "97%",
-                    height: "calc(97vw * 0.36)"
+                    height: "calc(97vw * 0.36)",
                   }}
                 />
               </Grid>
