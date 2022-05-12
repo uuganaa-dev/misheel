@@ -1,15 +1,10 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const URL1 =
-  "https://misheel-e1d54-default-rtdb.asia-southeast1.firebasedatabase.app/";
 const URL = "http://167.172.76.26/api";
 
 export function MISHEEL() {
   return createInstance(URL);
-}
-export function MISHEEL1() {
-  return createInstance(URL1);
 }
 
 const createInstance = (baseURL) => {
@@ -173,15 +168,31 @@ export async function deleteSocial(name, id) {
 // Social
 // About
 export async function postAbout(formData) {
-  const response = await MISHEEL1().post("/about", formData);
+  const response = await MISHEEL().post("/about", formData);
+  return response;
+}
+export async function putAbout(id, formData) {
+  const response = await MISHEEL().put("/about/" + id, formData);
   return response;
 }
 export async function getAbout() {
-  const response = await MISHEEL1().get("/about");
+  const response = await MISHEEL().get("/about");
   return response;
 }
-export async function deleteAbout(id) {
-  const response = await MISHEEL1().delete("/about" + id);
+export async function deleteAboutRelated(id) {
+  const response = await MISHEEL().delete("/about/related" + id);
+  return response;
+}
+export async function getTimeline() {
+  const response = await MISHEEL().get("/timeline");
+  return response;
+}
+export async function postTimeline(formData) {
+  const response = await MISHEEL().post("/timeline", formData);
+  return response;
+}
+export async function deleteTimeline(id) {
+  const response = await MISHEEL().delete("/timeline/" + id);
   return response;
 }
 // About

@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import Slider from "react-slick/lib/slider";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import img from "../../asset/backgroundImages/aboutUs/Rectangle 1420.png";
 
 function SampleNextArrow(props) {
   const { style, onClick } = props;
@@ -50,7 +49,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function ActivityRelated() {
+export default function ActivityRelated({ list }) {
   const settings = {
     className: "center",
     infinite: true,
@@ -86,7 +85,7 @@ export default function ActivityRelated() {
           sx={{ width: "100%", position: "relative", pt: "50px", pb: "80px" }}
         >
           <Slider {...settings}>
-            {data.map((item, index) => (
+            {list?.related?.map((item, index) => (
               <Grid
                 sx={{
                   display: "flex",
@@ -98,7 +97,7 @@ export default function ActivityRelated() {
               >
                 <Grid
                   sx={{
-                    backgroundImage: `url("${item.img}")`,
+                    backgroundImage: `url("http://167.172.76.26${item.img}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     width: "97%",
@@ -113,5 +112,3 @@ export default function ActivityRelated() {
     </Grid>
   );
 }
-
-const data = [{ img: img }, { img: img }, { img: img }, { img: img }];

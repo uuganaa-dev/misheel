@@ -86,9 +86,13 @@ const initialState = {
   coLeaderData: [],
   // SOCIAL
   // ABOUT
-  aboutIsShow: false,
+  aboutId: undefined,
   aboutCoverImg: undefined,
   aboutContent: "",
+  aboutRelatedImg: [],
+  aboutYear: undefined,
+  aboutImg: undefined,
+  aboutText: "",
   // ABOUT
 };
 

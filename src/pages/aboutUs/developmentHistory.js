@@ -1,16 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import HorizontalTimeline from "react-horizontal-timeline";
-import img from "../../asset/backgroundImages/aboutUs/Rectangle 1479.png";
-import img2 from "../../asset/backgroundImages/aboutUs/Rectangle 1420.png";
+import * as API from "../../api/request";
+import Swal from "sweetalert2";
 
 export default function DevelopmentHistory() {
+  const [list, setlist] = useState([]);
   const [state, setState] = useState({
     curIdx: 0,
     prevIdx: -1,
-    values: Timeline[0] ? Timeline[0].text : "",
-    img: Timeline[0] ? Timeline[0].img : "",
+    values: list[0]?.text,
+    img: list[0]?.img,
   });
+
+  useEffect(() => {
+    API.getTimeline()
+      .then((res) => {
+        if (res.data.data.length > 0) {
+          setState({
+            curIdx: 0,
+            prevIdx: -1,
+            values: res.data.data[0].text,
+            img: res.data.data[0]?.img,
+          });
+          setlist(res.data.data);
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Алдаа гарлаа.",
+          text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
+          confirmButtonColor: "#0f56b3",
+        });
+      });
+  }, []);
 
   return (
     <Grid>
@@ -28,11 +52,11 @@ export default function DevelopmentHistory() {
               ...state,
               curIdx: index,
               prevIdx: curIdx,
-              values: Timeline[index].text,
-              img: Timeline[index].img,
+              values: list[index].text,
+              img: list[index].img,
             });
           }}
-          values={Timeline.map((x) => x.year)}
+          values={list.map((x) => x.year)}
         />
       </Grid>
       <Grid
@@ -47,7 +71,7 @@ export default function DevelopmentHistory() {
       >
         <Grid
           sx={{
-            backgroundImage: `url("${state.img}")`,
+            backgroundImage: `url("http://167.172.76.26${state.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["71%", "419px"],
@@ -71,36 +95,3 @@ export default function DevelopmentHistory() {
     </Grid>
   );
 }
-
-const Timeline = [
-  {
-    year: "2021",
-    img: img,
-    text: "2021 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-  {
-    year: "2020",
-    img: img2,
-    text: "2020 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-  {
-    year: "2019",
-    img: img,
-    text: "2019 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-  {
-    year: "2018",
-    img: img,
-    text: "2018 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-  {
-    year: "2017",
-    img: img,
-    text: "2017 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-  {
-    year: "2016",
-    img: img,
-    text: "2016 Дэлхийн 1000 гаруй барилгын материалын тэргүүлэх брэндийг нэгтгэсэн 100 гаруй загварын шоурүүмтэй, өдөрт тогтмол 1800 гаруй хүн ирж үйлчлүүлдэг эрэлт хэрэгцээтэй худалдаа, үйлчилгээний төв болж чадлаа. ",
-  },
-];

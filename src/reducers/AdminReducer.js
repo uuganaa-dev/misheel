@@ -453,10 +453,22 @@ const AdminReducer = (state, action) => {
       };
     //SOCIAL END
     //ABOUT START
-    case "ABOUT_ISSHOW":
+    case "ABOUT_SET":
+      var result = [];
+      if (action.data.related.length > 0) {
+        // eslint-disable-next-line array-callback-return
+        action.data.related.map((el) => {
+          result.push({ ...el, name: el.img.split("/")[3] });
+        });
+      }
       return {
         ...state,
-        aboutIsShow: action.data,
+        aboutId: action.data._id,
+        aboutCoverImg: {
+          aboutImage: action.data.cover,
+        },
+        aboutContent: action.data.text,
+        aboutRelatedImg: result,
       };
     case "ABOUT_COVER_IMG":
       return {
@@ -467,6 +479,26 @@ const AdminReducer = (state, action) => {
       return {
         ...state,
         aboutContent: action.data,
+      };
+    case "ABOUT_RELATED_IMG":
+      return {
+        ...state,
+        aboutRelatedImg: action.data,
+      };
+    case "ABOUT_YEAR":
+      return {
+        ...state,
+        aboutYear: action.data,
+      };
+    case "ABOUT_IMG":
+      return {
+        ...state,
+        aboutImg: action.data,
+      };
+    case "ABOUT_TEXT":
+      return {
+        ...state,
+        aboutText: action.data,
       };
     //ABOUT END
 
