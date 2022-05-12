@@ -11,9 +11,9 @@ export default function Unit({ item, catfind }) {
       sx={{
         display: "flex",
         width: "100%",
-        height: "314px",
+        height: ["0", "314px"],
         borderBottom: "0.5px solid #404040",
-        gap: "44px",
+        gap: ["20px", "44px"],
         alignItems: "center",
         cursor: "pointer",
       }}
@@ -23,8 +23,8 @@ export default function Unit({ item, catfind }) {
           backgroundImage: `url("http://167.172.76.26/${item.priceImage}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          width: "370px",
-          height: "314px",
+          width: ["100px", "370px"],
+          height: ["100px", "314px"],
         }}
       />
       <Grid>
@@ -48,7 +48,12 @@ export default function Unit({ item, catfind }) {
           </Typography>
         </Grid>
         <Typography
-          sx={{ fontFamily: "Inter", fontSize: "18px", mt: "26px", mb: "51px" }}
+          sx={{
+            fontFamily: "Inter",
+            fontSize: "18px",
+            mt: ["5px", "26px"],
+            mb: ["5px", "51px"],
+          }}
         >
           {item.priceTitle}
         </Typography>
@@ -58,8 +63,8 @@ export default function Unit({ item, catfind }) {
               backgroundImage: `url("${logo}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
-              width: "50px",
-              height: "50px",
+              width: ["32px", "50px"],
+              height: ["26px", "50px"],
             }}
           />
           <Typography
