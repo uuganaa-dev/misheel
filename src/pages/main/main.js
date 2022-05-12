@@ -163,92 +163,94 @@ export default function Main() {
   }
 
   return (
-    <Grid>
+    <>
       <Appbar category={category} subCategory={subCategory} />
-      <Grid sx={{ position: "relative", height: "calc(100vw * 0.49)" }}>
-        {mainImg && (
-          <Grid
-            sx={{
-              backgroundImage: `url("${mainImg.imageUrl}")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: ["cover", "fill", "cover", "cover"],
-              width: "100%",
-              height: "100%",
-            }}
-            className="animate fadeIn"
-          />
-        )}
-
-        <Grid
-          sx={{
-            width: ["22px", "67px", "86px"],
-            position: "absolute",
-            bottom: ["21px", "60px", "77px"],
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <LinearProgress
-            value={progress}
-            sx={{
-              transform: "rotate(90deg)",
-              backgroundColor: "rgba(255,255,255,1)",
-              "& .MuiLinearProgress-barColorPrimary": {
-                backgroundColor: "black",
-              },
-            }}
-          />
-        </Grid>
-      </Grid>
-
-      <Grid
-        sx={{
-          width: "100%",
-          bgcolor: "#ECEBE7",
-          zIndex: "modal",
-        }}
-      >
-        <FeaturedBrand txt={context.txt.brand} list={list} />
-      </Grid>
-      <Footer />
-      <Modal open={open} onClose={handleClose}>
-        <Grid
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: ["80%", "51%"],
-            height: ["calc(80vw * 0.49)", "calc(51vw * 0.49)"],
-          }}
-        >
-          <Grid sx={{ width: "100%", height: "100%", position: "relative" }}>
+      <Grid sx={{ paddingTop: "58px" }}>
+        <Grid sx={{ position: "relative", height: "calc(100vw * 0.49)" }}>
+          {mainImg && (
             <Grid
               sx={{
-                backgroundImage: `url("${fileMain.reclam}")`,
+                backgroundImage: `url("${mainImg.imageUrl}")`,
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
+                backgroundSize: ["cover", "fill", "cover", "cover"],
                 width: "100%",
                 height: "100%",
               }}
+              className="animate fadeIn"
             />
-            <Grid
+          )}
+
+          <Grid
+            sx={{
+              width: ["22px", "67px", "86px"],
+              position: "absolute",
+              bottom: ["21px", "60px", "77px"],
+              left: "50%",
+              transform: "translateX(-50%)",
+            }}
+          >
+            <LinearProgress
+              value={progress}
               sx={{
-                backgroundImage: `url("${icons.cancel}")`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                width: "20px",
-                height: "20px",
-                position: "absolute",
-                top: "-44px",
-                right: "-38px",
-                cursor: "pointer",
+                transform: "rotate(90deg)",
+                backgroundColor: "rgba(255,255,255,1)",
+                "& .MuiLinearProgress-barColorPrimary": {
+                  backgroundColor: "black",
+                },
               }}
-              onClick={handleClose}
             />
           </Grid>
         </Grid>
-      </Modal>
-    </Grid>
+
+        <Grid
+          sx={{
+            width: "100%",
+            bgcolor: "#ECEBE7",
+            zIndex: "modal",
+          }}
+        >
+          <FeaturedBrand txt={context.txt.brand} list={list} />
+        </Grid>
+        <Footer />
+        <Modal open={open} onClose={handleClose}>
+          <Grid
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: ["80%", "51%"],
+              height: ["calc(80vw * 0.49)", "calc(51vw * 0.49)"],
+            }}
+          >
+            <Grid sx={{ width: "100%", height: "100%", position: "relative" }}>
+              <Grid
+                sx={{
+                  backgroundImage: `url("${fileMain.reclam}")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+              <Grid
+                sx={{
+                  backgroundImage: `url("${icons.cancel}")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  width: "20px",
+                  height: "20px",
+                  position: "absolute",
+                  top: "-44px",
+                  right: "-38px",
+                  cursor: "pointer",
+                }}
+                onClick={handleClose}
+              />
+            </Grid>
+          </Grid>
+        </Modal>
+      </Grid>
+    </>
   );
 }

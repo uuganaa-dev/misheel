@@ -1,21 +1,21 @@
 import React, { useContext, useState } from "react";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LogoYellow from "./logoYellow";
 import TheContext from "../utils/context/userContext";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import breakpoints from "../utils/contants/breakpoints";
-import json2mq from "json2mq";
+// import breakpoints from "../utils/contants/breakpoints";
+// import json2mq from "json2mq";
 import MainMenu from "./mainMenu";
 
 export default function Appbar(props) {
   const context = useContext(TheContext);
   const txt = context.txt.Bar;
   const navigate = useNavigate();
-  const { laptop } = breakpoints;
-  const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
+  // const { laptop } = breakpoints;
+  // const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [select, setSelect] = useState();
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -31,16 +31,15 @@ export default function Appbar(props) {
     >
       <Grid
         sx={{
-          backgroundColor: ["#F9FAFB", "#F9FAFB", "black"],
+          backgroundColor: ["black", "black", "black"],
           opacity: [1, 1, 0.7],
           display: "flex",
           width: "100%",
           height: "58px",
-          color: ["#6B7280", "#6B7280", "white"],
+          color: ["white", "white", "white"],
           alignItems: "center",
           justifyContent: "space-between",
-          px: ["", "150px", "200px"],
-          ...(!isLaptop && { boxShadow: "0px 1px #989da6" }),
+          px: ["10px", "10px", "200px"],
         }}
       >
         <MenuIcon
@@ -53,9 +52,10 @@ export default function Appbar(props) {
             ...style.fourHundred,
             ...style.pointer,
             ...(select === txt.home && {
-              color: ["#1C6DD0", "#1C6DD0", "white"],
+              color: ["white", "white", "white"],
             }),
           }}
+          className="my-font-size"
           onClick={() => {
             setSelect(txt.home);
             navigate("/");
@@ -69,9 +69,10 @@ export default function Appbar(props) {
             ...style.fourHundred,
             ...style.pointer,
             ...(select === txt.price && {
-              color: ["#1C6DD0", "#1C6DD0", "white"],
+              color: ["white", "white", "white"],
             }),
           }}
+          className="my-font-size"
           onClick={() => {
             setSelect(txt.price);
             navigate("/mprice");
@@ -104,9 +105,10 @@ export default function Appbar(props) {
             ...style.fourHundred,
             ...style.pointer,
             ...(select === txt.brand && {
-              color: ["#1C6DD0", "#1C6DD0", "white"],
+              color: ["white", "white", "white"],
             }),
           }}
+          className="my-font-size"
           onClick={() => {
             setSelect(txt.brand);
             navigate("/brandPage");
@@ -120,9 +122,10 @@ export default function Appbar(props) {
             ...style.fourHundred,
             ...style.pointer,
             ...(select === txt.ours && {
-              color: ["#1C6DD0", "#1C6DD0", "white"],
+              color: ["white", "white", "white"],
             }),
           }}
+          className="my-font-size"
           onClick={() => {
             setSelect(txt.ours);
             navigate("/aboutUs");
@@ -131,12 +134,12 @@ export default function Appbar(props) {
           {txt.ours}
         </Typography>
         <Grid sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <SearchIcon sx={{ ...style.pointer }} />
+          {/* <SearchIcon sx={{ ...style.pointer }} /> */}
           <LocationOnIcon
             sx={{
               ...style.pointer,
               ...(select === "map" && {
-                color: ["#1C6DD0", "#1C6DD0", "white"],
+                color: ["white", "white", "white"],
               }),
             }}
             onClick={() => {
@@ -150,9 +153,10 @@ export default function Appbar(props) {
               ...style.sixHundred,
               ...style.pointer,
               ...(select === txt.lan && {
-                color: ["#1C6DD0", "#1C6DD0", "white"],
+                color: ["white", "white", "white"],
               }),
             }}
+            className="my-font-size"
             onClick={() => {
               setSelect(txt.lan);
               context.index === 0 ? context.ChangeTxt(1) : context.ChangeTxt(0);

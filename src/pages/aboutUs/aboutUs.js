@@ -28,92 +28,99 @@ export default function AboutUs() {
   }, []);
 
   return (
-    <Grid sx={{ backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"] }}>
+    <>
       <Appbar />
       <Grid
         sx={{
-          width: "100%",
-          height: "calc(100vw * 0.26)",
-          position: "relative",
-          overflowY: "hidden",
+          backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"],
+          paddingTop: "58px",
         }}
       >
-        <Typography
-          sx={{
-            fontSize: ["10px", "12px"],
-            fontFamily: "Inter",
-            letterSpacing: "0.25px",
-            textTransform: "uppercase",
-            textAlign: "center",
-            color: "#707070",
-            pt: ["40px", "80px", "140px"],
-          }}
-        >
-          ЗӨВЛӨЖ БАЙНА
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: ["10px", "31px"],
-            fontFamily: "Inter",
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-            fontWeight: 200,
-            position: "absolute",
-            top: ["72%", "72%", "60%"],
-            left: "50%",
-            transform: [
-              "translate(-50%, -72%)",
-              "translate(-50%, -72%)",
-              "translate(-50%, -60%)",
-            ],
-          }}
-        >
-          #MR МИШЭЭЛ
-        </Typography>
-      </Grid>
-      <Grid sx={{ position: "relative" }}>
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26${list?.cover}")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
             width: "100%",
-            height: [
-              "calc(100vw * 0.34)",
-              "calc(100vw * 0.34)",
-              "calc(100vw * 0.34)",
-            ],
+            height: "calc(100vw * 0.26)",
+            position: "relative",
+            overflowY: "hidden",
           }}
-        />
-      </Grid>
-      <Grid
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "40px",
-          alignItems: "center",
-          backgroundColor: "white",
-          pt: "49px",
-          pb: "100px",
-        }}
-      >
+        >
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              textAlign: "center",
+              color: "#707070",
+              pt: ["20px", "40px", "80px"],
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "31px"],
+              fontFamily: "Inter",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              fontWeight: 200,
+              position: "absolute",
+              top: ["72%", "72%", "60%"],
+              left: "50%",
+              transform: [
+                "translate(-50%, -72%)",
+                "translate(-50%, -72%)",
+                "translate(-50%, -60%)",
+              ],
+            }}
+          >
+            #MR МИШЭЭЛ
+          </Typography>
+        </Grid>
+        <Grid sx={{ position: "relative" }}>
+          <Grid
+            sx={{
+              backgroundImage: `url("http://167.172.76.26${list?.cover}")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              width: "100%",
+              height: [
+                "calc(100vw * 0.34)",
+                "calc(100vw * 0.34)",
+                "calc(100vw * 0.34)",
+              ],
+            }}
+          />
+        </Grid>
         <Grid
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "36px",
-            width: "71%",
+            gap: "40px",
+            alignItems: "center",
+            backgroundColor: "white",
+            pt: "49px",
+            pb: "100px",
           }}
-          className="about-mobile-gap about-mobile-width"
         >
-          <div dangerouslySetInnerHTML={{ __html: list?.text }} />
-          <DevelopmentHistory />
+          <Grid
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "36px",
+              width: "71%",
+            }}
+            className="about-mobile-gap about-mobile-width"
+          >
+            <div dangerouslySetInnerHTML={{ __html: list?.text }} />
+            <DevelopmentHistory />
+          </Grid>
         </Grid>
+        <Grid>
+          <ActivityRelated list={list} />
+        </Grid>
+        <FooterMain />
       </Grid>
-      <Grid>
-        <ActivityRelated list={list} />
-      </Grid>
-      <FooterMain />
-    </Grid>
+    </>
   );
 }

@@ -69,154 +69,161 @@ export default function MPrice() {
   }, []);
 
   return (
-    <Grid sx={{ backgroundColor: ["#ECEBE7", "#ECEBE7", "#ECEBE7"] }}>
+    <>
       <Appbar />
-      <Grid sx={{ position: "relative" }}>
-        <Grid
-          sx={{
-            backgroundImage: `url("${img}")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            width: "100%",
-            height: "calc(100vw * 0.34)",
-          }}
-        />
-        <Typography
-          sx={{
-            fontSize: ["10px", "34px"],
-            fontFamily: "Inter",
-            letterSpacing: "3.25px",
-            textTransform: "uppercase",
-            fontWeight: 700,
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            color: "white",
-            textAlign: "center",
-          }}
-        >
-          100 айлын барилгын материалын үнийн дэлгэрэнгүй татах
-        </Typography>
-      </Grid>
       <Grid
         sx={{
-          width: "100%",
-          height: "calc(100vw * 0.26)",
-          position: "relative",
-          overflowY: "hidden",
+          backgroundColor: ["#ECEBE7", "#ECEBE7", "#ECEBE7"],
+          paddingTop: "58px",
         }}
       >
-        <Typography
-          sx={{
-            fontSize: ["10px", "12px"],
-            fontFamily: "Inter",
-            letterSpacing: "0.25px",
-            textTransform: "uppercase",
-            textAlign: "center",
-            color: "#707070",
-            pt: ["40px", "80px", "140px"],
-          }}
-        >
-          ЗӨВЛӨЖ БАЙНА
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: ["10px", "31px"],
-            fontFamily: "Inter",
-            letterSpacing: "2px",
-            textTransform: "uppercase",
-            fontWeight: 200,
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          #Зах зээлийн үнэ
-        </Typography>
-      </Grid>
-      <Grid
-        sx={{
-          backgroundColor: "white",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          position: "relative",
-        }}
-      >
-        <Grid sx={{ pt: "69px", width: "75%", mb: "158px" }}>
-          <Typography
-            sx={{
-              fontSize: ["12px", "12px", "18px"],
-              fontFamily: "Inter",
-              textTransform: "uppercase",
-              fontWeight: 600,
-            }}
-          >
-            Зах зээлийн үнэ
-          </Typography>
-          {loading ? (
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "15px",
-                fontWeight: "600",
-                fontSize: "16px",
-              }}
-            >
-              Уншиж байна...
-            </div>
-          ) : (
-            <Grid
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100%",
-                gap: "31px",
-                mt: "30px",
-              }}
-            >
-              {data.length > 0 &&
-                data.map((item, index) => {
-                  var catfind = catList.find(
-                    (el) => el.id === item.priceCategory
-                  );
-                  return (
-                    <Grid
-                      key={index}
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => HandleClick(item.id)}
-                    >
-                      <Unit item={item} catfind={catfind} />
-                    </Grid>
-                  );
-                })}
-            </Grid>
-          )}
-        </Grid>
-        {onedata !== undefined && (
+        <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://167.172.76.26/${onedata?.priceAllPriceImage}")`,
+              backgroundImage: `url("${img}")`,
               backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
+              backgroundSize: "cover",
               width: "100%",
-              height: "calc(100vw * 0.86)",
-              position: "absolute",
-              top: "136px",
-              opacity: show ? 1 : 0,
+              height: "calc(100vw * 0.34)",
             }}
-            onClick={() => HandleClick(0)}
           />
-        )}
-      </Grid>
+          <Typography
+            sx={{
+              fontSize: ["10px", "34px"],
+              fontFamily: "Inter",
+              letterSpacing: "3.25px",
+              textTransform: "uppercase",
+              fontWeight: 700,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            100 айлын барилгын материалын үнийн дэлгэрэнгүй татах
+          </Typography>
+        </Grid>
+        <Grid
+          sx={{
+            width: "100%",
+            height: "calc(100vw * 0.26)",
+            position: "relative",
+            overflowY: "hidden",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              textAlign: "center",
+              color: "#707070",
+              pt: ["20px", "40px", "80px"],
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "31px"],
+              fontFamily: "Inter",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              fontWeight: 200,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            #Зах зээлийн үнэ
+          </Typography>
+        </Grid>
+        <Grid
+          sx={{
+            backgroundColor: "white",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            position: "relative",
+          }}
+        >
+          <Grid sx={{ pt: "69px", width: "75%", mb: "158px" }}>
+            <Typography
+              sx={{
+                fontSize: ["12px", "12px", "18px"],
+                fontFamily: "Inter",
+                textTransform: "uppercase",
+                fontWeight: 600,
+              }}
+            >
+              Зах зээлийн үнэ
+            </Typography>
+            {loading ? (
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "15px",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                }}
+              >
+                Уншиж байна...
+              </div>
+            ) : (
+              <Grid
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "100%",
+                  gap: "31px",
+                  mt: "30px",
+                }}
+              >
+                {data.length > 0 &&
+                  data.map((item, index) => {
+                    var catfind = catList.find(
+                      (el) => el.id === item.priceCategory
+                    );
+                    return (
+                      <Grid
+                        key={index}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => HandleClick(item.id)}
+                      >
+                        <Unit item={item} catfind={catfind} />
+                      </Grid>
+                    );
+                  })}
+              </Grid>
+            )}
+          </Grid>
+          {onedata !== undefined && (
+            <Grid
+              sx={{
+                backgroundImage: `url("http://167.172.76.26/${onedata?.priceAllPriceImage}")`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                width: "100%",
+                height: "calc(100vw * 0.86)",
+                position: "absolute",
+                top: "136px",
+                opacity: show ? 1 : 0,
+              }}
+              onClick={() => HandleClick(0)}
+            />
+          )}
+        </Grid>
 
-      <FooterMain />
-    </Grid>
+        <FooterMain />
+      </Grid>
+    </>
   );
 }
