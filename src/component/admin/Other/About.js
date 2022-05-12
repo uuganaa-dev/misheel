@@ -439,8 +439,8 @@ const About = () => {
               <table className="table table-bordered">
                 <tbody>
                   {timelineList.length > 0 &&
-                    timelineList.map((el) => (
-                      <tr>
+                    timelineList.map((el, index) => (
+                      <tr key={index}>
                         <td className="vertical-center p-1">
                           <img
                             src={"http://167.172.76.26" + el.img}
