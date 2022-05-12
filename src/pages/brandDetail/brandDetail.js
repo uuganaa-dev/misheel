@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Modal, useMediaQuery } from "@mui/material";
-import json2mq from "json2mq";
+import { Grid, Modal } from "@mui/material";
 import fileBD from "../../asset/backgroundImages/brandDetail/file";
-import breakpoints from "../../utils/contants/breakpoints";
 import TheContext from "../../utils/context/userContext";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
@@ -17,8 +15,6 @@ import Swal from "sweetalert2";
 
 export default function BrandDetail() {
   const params = useParams();
-  const { tablet } = breakpoints;
-  const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
   const context = useContext(TheContext);
   const [openModal, setOpenModal] = useState(false);
   const [data, setData] = useState();
@@ -57,7 +53,7 @@ export default function BrandDetail() {
 
   return (
     <Grid sx={{ backgroundColor: ["white", "white", "#E5E5E5"] }}>
-      {isTablet && <Appbar />}
+      <Appbar />
       <Grid
         sx={{
           backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,

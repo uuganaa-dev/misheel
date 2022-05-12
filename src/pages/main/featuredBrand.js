@@ -61,7 +61,6 @@ export default function FeaturedBrand({ txt, list }) {
         >
           {brand12 &&
             brand12.map((i, index) => {
-              console.log(i);
               return (
                 <Grid key={index} onClick={() => click()}>
                   <HoverImage

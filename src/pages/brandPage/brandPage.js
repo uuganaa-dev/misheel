@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Grid, useMediaQuery, Typography, Radio } from "@mui/material";
+import { Grid, Typography, Radio } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import ReclamImage from "../../asset/backgroundImages/brandPage/reclam.png";
-
-import breakpoints from "../../utils/contants/breakpoints";
-import json2mq from "json2mq";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 import { ArrowBackIosNew } from "@mui/icons-material";
 
 export default function BrandPage() {
-  const { tablet } = breakpoints;
-  const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
   const navigate = useNavigate();
 
   const [show, setShow] = useState({
@@ -134,7 +129,7 @@ export default function BrandPage() {
         backgroundColor: ["#F0F0F0", "#F0F0F0", "#F0F0F0"],
       }}
     >
-      {isTablet && <Appbar />}
+      <Appbar />
       <Grid
         sx={{
           pt: ["35px", "80px", "114px"],

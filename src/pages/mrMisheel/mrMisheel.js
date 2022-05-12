@@ -1,15 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import background from "../../asset/backgroundImages/mrMishee/Rectangle 1392.png";
 import breakpoints from "../../utils/contants/breakpoints";
 import json2mq from "json2mq";
-import icons from "../../asset/icon/filePath";
+
+import Swal from "sweetalert2";
+import * as API from "../../api/request";
 
 export default function MrMisheel() {
   const { laptop } = breakpoints;
   const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    API.getSocial("mrmisheel")
+      .then((res) => {
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setData(res.data.data);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Алдаа гарлаа.",
+          text: "Зах зээлийн үнийн лист унших үед алдаа гарлаа дахин оролдоно уу.",
+          confirmButtonColor: "#0f56b3",
+        });
+      });
+  }, []);
+
   return (
     <Grid sx={{ backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"] }}>
       <Appbar />
@@ -80,7 +104,7 @@ export default function MrMisheel() {
               left: ["10px", "54px"],
             }}
           >
-            {text.map((item, index) => (
+            {data.map((item, index) => (
               <Grid
                 key={index}
                 sx={{ display: "flex", alignItems: "center", gap: "49px" }}
@@ -98,12 +122,15 @@ export default function MrMisheel() {
                     },
                   }}
                   onClick={() => {
-                    window.open(item.url, "_blank");
+                    window.open("http://167.172.76.26/" + item.url, "_blank");
                   }}
                 >
                   {index + 1}. {item.txt}
                 </Typography>
-                <img src={item.icon} alt={item.icon} />
+                <img
+                  src={"http://167.172.76.26/" + item.icon}
+                  alt={item.icon}
+                />
               </Grid>
             ))}
           </Grid>
@@ -115,45 +142,45 @@ export default function MrMisheel() {
   );
 }
 
-const text = [
-  {
-    txt: "Хүүхдийн өрөөний интерьер",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: icons.child,
-  },
-  {
-    txt: "Мод стресс бууруулдаг",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: icons.tree,
-  },
-  {
-    txt: "Скандинов орчин",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-  {
-    txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-  {
-    txt: "Хүүхдийн өрөөний интерьер",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-  {
-    txt: "Мод стресс бууруулдаг",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-  {
-    txt: "Скандинов орчин",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-  {
-    txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
-    url: "https://www.facebook.com/misheelexpocenter/",
-    icon: "",
-  },
-];
+// const text = [
+//   {
+//     txt: "Хүүхдийн өрөөний интерьер",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: icons.child,
+//   },
+//   {
+//     txt: "Мод стресс бууруулдаг",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: icons.tree,
+//   },
+//   {
+//     txt: "Скандинов орчин",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+//   {
+//     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+//   {
+//     txt: "Хүүхдийн өрөөний интерьер",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+//   {
+//     txt: "Мод стресс бууруулдаг",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+//   {
+//     txt: "Скандинов орчин",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+//   {
+//     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
+//     url: "https://www.facebook.com/misheelexpocenter/",
+//     icon: "",
+//   },
+// ];
