@@ -463,7 +463,6 @@ const AdminReducer = (state, action) => {
       }
       return {
         ...state,
-        aboutId: action.data._id,
         aboutCoverImg: {
           aboutImage: action.data.cover,
         },

@@ -13,9 +13,7 @@ export default function AboutUs() {
   useEffect(() => {
     API.getAbout()
       .then((res) => {
-        if (res.data.data.length > 0) {
-          setlist(res?.data?.data[0]);
-        }
+        setlist(res.data.data);
       })
       .catch(() => {
         Swal.fire({

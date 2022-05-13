@@ -103,7 +103,6 @@ const About = () => {
 
   const Validation = () => {
     let validation = "";
-    admin.aboutId || (validation += "ID олдсонгүй!<br/>");
     admin.aboutCoverImg || (validation += "Нүүр зураг оруулна уу!<br/>");
     admin.aboutContent || (validation += "Агуулга бичнэ үү!<br/>");
     admin.aboutRelatedImg.length > 0 ||
@@ -127,12 +126,12 @@ const About = () => {
           }
         });
       }
-      Update(admin.aboutId, formData);
+      Update(formData);
     }
   };
 
-  const Update = (id, formData) => {
-    API.putAbout(id, formData)
+  const Update = (formData) => {
+    API.postAbout(formData)
       .then((res) => {
         if (res.data.success) {
           Swal.fire({
@@ -225,9 +224,7 @@ const About = () => {
   useEffect(() => {
     API.getAbout()
       .then((res) => {
-        if (res.data.data.length > 0) {
-          setAdmin({ type: "ABOUT_SET", data: res?.data?.data[0] });
-        }
+        setAdmin({ type: "ABOUT_SET", data: res.data.data });
       })
       .catch(() => {
         Swal.fire({
