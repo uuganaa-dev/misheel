@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useUserState } from "../../../contexts/UserContext";
 
 const Sidebar = (props) => {
+  const { user } = useUserState();
   const location = useLocation();
   const navigate = useNavigate();
   const [mode, setMode] = useState(localStorage.getItem("srs-theme"));
@@ -58,18 +60,35 @@ const Sidebar = (props) => {
             id="main-menu-navigation"
             data-menu="menu-navigation"
           >
-            <li
-              className={
-                location.pathname === "/admin"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/admin" id="gadotMenuHide">
-                <i className="ft-home" />
-                <span>Нүүр хуудас</span>
-              </Link>
-            </li>
+            {user.userInfo.role === "1" && (
+              <>
+                <li
+                  className={
+                    location.pathname === "/users"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/users" id="gadotMenuHide">
+                    <i className="ft-home" />
+                    <span>Хэрэглэгч</span>
+                  </Link>
+                </li>
+                <li
+                  className={
+                    location.pathname === "/admin"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/admin" id="gadotMenuHide">
+                    <i className="ft-home" />
+                    <span>Нүүр хуудас</span>
+                  </Link>
+                </li>
+              </>
+            )}
+
             <li
               className={
                 location.pathname === "/brand"

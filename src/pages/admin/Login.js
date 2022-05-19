@@ -52,7 +52,11 @@ const Login = () => {
           if (res.data.success) {
             localStorage.setItem("data", JSON.stringify(res.data));
             setUser({ type: "LOGIN", data: res.data });
-            navigate("/admin", { replace: true });
+            if (res.data.role === "1") {
+              navigate("/users", { replace: true });
+            } else {
+              navigate("/brand", { replace: true });
+            }
           } else {
             Swal.fire({
               icon: "warning",

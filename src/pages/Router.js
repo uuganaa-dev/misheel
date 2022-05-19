@@ -13,6 +13,7 @@ import MPrice from "./mPrice/mPrice";
 import Map from "./map/map";
 // Admin
 import Login from "./admin/Login";
+import Users from "./admin/Users";
 import Admin from "./admin/Admin";
 import Brand from "./admin/Brand";
 import Product from "./admin/Product";
@@ -49,6 +50,7 @@ const Router = () => {
       </Routes>
       {user.loggedIn && (
         <Routes>
+          <Route path="/users" element={<Users />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/product" element={<Product />} />

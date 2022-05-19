@@ -195,4 +195,24 @@ export async function deleteTimeline(id) {
   const response = await MISHEEL().delete("/timeline/" + id);
   return response;
 }
+export async function postUser(params) {
+  const response = await MISHEEL().post("/auth/user", {
+    ...params,
+  });
+  return response;
+}
+export async function putUser(id, params) {
+  const response = await MISHEEL().put("/auth/user/" + id, {
+    ...params,
+  });
+  return response;
+}
+export async function deleteUser(id) {
+  const response = await MISHEEL().delete("/auth/user/" + id);
+  return response;
+}
+export async function getUser() {
+  const response = await MISHEEL().get("/auth/user");
+  return response;
+}
 // About
