@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Modal } from "antd";
 import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
@@ -8,19 +9,18 @@ import Swal from "sweetalert2";
 import * as API from "../../api/request";
 
 export default function MPrice() {
-  const [show, setShow] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [onedata, setOnedata] = useState();
   const [data, setData] = useState([]);
   const [catList, setCatList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const HandleClick = (id) => {
+    setIsModalVisible(true);
     if (id === 0) {
       setOnedata();
-      setShow(0);
     } else {
       setOnedata(data.find((el) => el.id === id));
-      setShow(1);
     }
   };
 
@@ -205,20 +205,29 @@ export default function MPrice() {
               </Grid>
             )}
           </Grid>
+
           {onedata !== undefined && (
-            <Grid
-              sx={{
-                backgroundImage: `url("http://167.172.76.26/${onedata?.priceAllPriceImage}")`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                width: "100%",
-                height: "calc(100vw * 0.86)",
-                position: "absolute",
-                top: "136px",
-                opacity: show ? 1 : 0,
-              }}
-              onClick={() => HandleClick(0)}
-            />
+            <Modal
+              title=""
+              visible={isModalVisible}
+              onCancel={() => setIsModalVisible(false)}
+              footer={false}
+              width={1000}
+            >
+              <div className="gadot-primary-modal-body">
+                <div className="gadot-uploadType2">
+                  <div onClick={() => HandleClick(0)}>
+                    <img
+                      src={
+                        "http://167.172.76.26/" + onedata?.priceAllPriceImage
+                      }
+                      alt=""
+                      width={"100%"}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Modal>
           )}
         </Grid>
 
