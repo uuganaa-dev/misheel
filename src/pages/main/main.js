@@ -43,6 +43,7 @@ export default function Main() {
                 imgName: el.imgName,
                 imgType: el.imgType,
                 ordern: el.ordern,
+                brandId: el.brandId,
               };
               result.push(pp);
             });

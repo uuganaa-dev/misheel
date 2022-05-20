@@ -18,8 +18,10 @@ export default function FeaturedBrand({ txt, list }) {
     show: 0,
   });
   const navigate = useNavigate();
-  const click = () => {
-    navigate("/brandPage");
+  const click = (i) => {
+    if (i.brandId) {
+      navigate("/brandDetail/" + i.brandId);
+    }
   };
 
   const brand12 = list.filter(
@@ -62,7 +64,7 @@ export default function FeaturedBrand({ txt, list }) {
           {brand12 &&
             brand12.map((i, index) => {
               return (
-                <Grid key={index} onClick={() => click()}>
+                <Grid key={index} onClick={() => click(i)}>
                   <HoverImage
                     i={i}
                     show={show}

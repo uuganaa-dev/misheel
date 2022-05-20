@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Input, Select } from "antd";
 import Swal from "sweetalert2";
 import * as API from "../../../api/request";
+import { useUserState } from "../../../contexts/UserContext";
 const { Option } = Select;
 
 const Users = () => {
+  const { user } = useUserState();
   const [isShow, setIsShow] = useState(false);
   const [id, setId] = useState("new");
   const [username, setUsername] = useState("");
@@ -23,7 +25,7 @@ const Users = () => {
   const Edit = (el) => {
     setId(el._id);
     setUsername(el.username);
-    setPassword(el.password);
+    setPassword("");
     setRole(parseInt(el.role));
     setIsShow(true);
   };
@@ -145,7 +147,9 @@ const Users = () => {
       .then((res) => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
-            setUserList(res.data.data);
+            setUserList(
+              res.data.data.filter((el) => el._id !== user.userInfo.user_id)
+            );
           }
         }
       })
@@ -158,7 +162,7 @@ const Users = () => {
           confirmButtonColor: "#0f56b3",
         });
       });
-  }, [refresh]);
+  }, [refresh, user.userInfo.user_id]);
 
   return (
     <div style={{ fontFamily: "roboto" }}>

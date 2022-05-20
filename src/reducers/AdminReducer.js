@@ -45,6 +45,7 @@ const AdminReducer = (state, action) => {
       return {
         ...state,
         imgName: action.data,
+        productBrandId: action.productBrandId,
       };
     case "SHOW_MODAL_CHANGE":
       return {

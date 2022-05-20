@@ -129,42 +129,46 @@ const Sidebar = (props) => {
                 <span>Бүтээгдэхүүн</span>
               </Link>
             </li>
-            <li
-              className={
-                location.pathname === "/social"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/social" id="gadotMenuHide">
-                <i className="ft-star" />
-                <span>Сошиал хөтөлбөр</span>
-              </Link>
-            </li>
-            <li
-              className={
-                location.pathname === "/price"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/price" id="gadotMenuHide">
-                <i className="ft-trending-up" />
-                <span>Зах зээлийн үнэ</span>
-              </Link>
-            </li>
-            <li
-              className={
-                location.pathname === "/about"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/about" id="gadotMenuHide">
-                <i className="ft-trending-up" />
-                <span>Бидний тухай</span>
-              </Link>
-            </li>
+            {user.userInfo.role === "1" && (
+              <>
+                <li
+                  className={
+                    location.pathname === "/social"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/social" id="gadotMenuHide">
+                    <i className="ft-star" />
+                    <span>Сошиал хөтөлбөр</span>
+                  </Link>
+                </li>
+                <li
+                  className={
+                    location.pathname === "/price"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/price" id="gadotMenuHide">
+                    <i className="ft-trending-up" />
+                    <span>Зах зээлийн үнэ</span>
+                  </Link>
+                </li>
+                <li
+                  className={
+                    location.pathname === "/about"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/about" id="gadotMenuHide">
+                    <i className="ft-trending-up" />
+                    <span>Бидний тухай</span>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

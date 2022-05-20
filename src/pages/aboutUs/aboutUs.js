@@ -37,7 +37,7 @@ export default function AboutUs() {
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.26)",
+            height: "calc(100vw * 0.10)",
             position: "relative",
             overflowY: "hidden",
           }}
@@ -50,7 +50,7 @@ export default function AboutUs() {
               textTransform: "uppercase",
               textAlign: "center",
               color: "#707070",
-              pt: ["20px", "40px", "80px"],
+              pt: ["3px", "10px", "50px"],
             }}
           >
             ЗӨВЛӨЖ БАЙНА

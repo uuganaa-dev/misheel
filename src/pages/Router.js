@@ -50,13 +50,17 @@ const Router = () => {
       </Routes>
       {user.loggedIn && (
         <Routes>
-          <Route path="/users" element={<Users />} />
-          <Route path="/admin" element={<Admin />} />
+          {user.userInfo.role === "1" && (
+            <>
+              <Route path="/users" element={<Users />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/social" element={<Social />} />
+              <Route path="/price" element={<Price />} />
+              <Route path="/about" element={<About />} />
+            </>
+          )}
           <Route path="/brand" element={<Brand />} />
           <Route path="/product" element={<Product />} />
-          <Route path="/social" element={<Social />} />
-          <Route path="/price" element={<Price />} />
-          <Route path="/about" element={<About />} />
         </Routes>
       )}
     </>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Upload, Modal } from "antd";
+import { Upload, Modal, Select } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
@@ -10,7 +10,7 @@ function getBase64(img, callback) {
   reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
 }
-
+const { Option } = Select;
 const URL = "http://167.172.76.26";
 
 const Admin = () => {
@@ -99,6 +99,9 @@ const Admin = () => {
     let validation = "";
     admin.imgName || (validation += "Нэр оруулна уу!<br/>");
     admin.image || (validation += "Зураг оруулна уу!<br/>");
+    if (admin.uploadType === 2) {
+      admin.productBrandId || (validation += "Брэнд сонгоно уу!<br/>");
+    }
     if (validation !== "") {
       Swal.fire({
         icon: "warning",
@@ -110,12 +113,14 @@ const Admin = () => {
       if (admin.image.id === undefined || admin.image.id === 0) {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
+        formData.append("brandId", admin.productBrandId);
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Save(formData);
       } else {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
+        formData.append("brandId", admin.productBrandId);
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Update(formData, admin.image.id);
@@ -199,6 +204,26 @@ const Admin = () => {
   };
 
   useEffect(() => {
+    API.getBrand()
+      .then((res) => {
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "BRAND_LIST", data: res.data.data });
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Алдаа гарлаа.",
+          text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
+          confirmButtonColor: "#0f56b3",
+        });
+      });
+  }, [setAdmin]);
+
+  useEffect(() => {
     if (admin.isShow === true) {
       if (admin.uploadType === 1) {
         var filterList = admin.list.filter(
@@ -220,6 +245,7 @@ const Admin = () => {
         var filterList1 = admin.list.find(
           (el) => el.imgType === admin.imgType && el.ordern === admin.imgOrdern
         );
+        console.log("filterList1", filterList1);
         if (filterList1) {
           setAdmin({
             type: "IMAGE",
@@ -232,6 +258,7 @@ const Admin = () => {
           setAdmin({
             type: "IMG_NAME",
             data: filterList1.imgName,
+            productBrandId: filterList1.brandId,
           });
         }
       }
@@ -252,6 +279,7 @@ const Admin = () => {
               imgName: el.imgName,
               imgType: el.imgType,
               ordern: el.ordern,
+              brandId: el.brandId,
             };
             result.push(pp);
           });
@@ -317,6 +345,32 @@ const Admin = () => {
                       setAdmin({ type: "IMG_NAME", data: e.target.value })
                     }
                   />
+                )}
+                <div>Брэнд</div>
+                {admin.uploadType === 2 && (
+                  <Select
+                    showSearch
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                    size="large"
+                    style={{ width: "100%" }}
+                    placeholder="Брэнд сонгох..."
+                    value={admin.productBrandId}
+                    onChange={(value) =>
+                      setAdmin({
+                        type: "PRODUCT_BRAND_ID",
+                        data: value,
+                      })
+                    }
+                  >
+                    {admin.brandList.map((el) => (
+                      <Option key={el.id}>{el.brandName}</Option>
+                    ))}
+                  </Select>
                 )}
               </div>
             </div>
