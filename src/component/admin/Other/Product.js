@@ -139,8 +139,12 @@ const Product = () => {
       .then((res) => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
-            setAdmin({ type: "PRODUCT_LIST", data: res.data.data });
-            setLoading(false);
+            var filter = res.data.data.filter(
+              (el) => el.user_id === user.userInfo.user_id
+            );
+            if (filter.length > 0) {
+              setAdmin({ type: "PRODUCT_LIST", data: res.data.data });
+            }
           }
         }
       })
@@ -152,7 +156,9 @@ const Product = () => {
           text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      });
+      })
+      .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setAdmin, admin.productListRefresh]);
 
   return (
