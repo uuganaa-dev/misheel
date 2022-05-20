@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Select, Divider, Input, Upload } from "antd";
 import { useAdminState } from "../../../contexts/AdminContext";
+import { useUserState } from "../../../contexts/UserContext";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -19,6 +20,7 @@ const URL = "http://167.172.76.26";
 const Brand = () => {
   const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
+  const { user } = useUserState();
   const [isDelete, setIsDelete] = useState(false);
 
   const CategorySave = () => {
@@ -142,6 +144,7 @@ const Brand = () => {
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);
     formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    formData.append("user_id", user.userInfo.user_id);
     API.postBrand(formData)
       .then((res) => {
         if (res.status === 200) {
@@ -186,6 +189,7 @@ const Brand = () => {
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);
     formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    formData.append("user_id", user.userInfo.user_id);
     API.putBrand(formData, admin.brandId)
       .then((res) => {
         if (res.status === 200) {
@@ -303,8 +307,12 @@ const Brand = () => {
                 brandLogo: el.brandLogo,
               });
             });
-            setAdmin({ type: "BRAND_LIST", data: result });
-            setAdmin({ type: "BRAND_LIST_LOADING", data: false });
+            var filter = result.filter(
+              (el) => el.user_id === user.userInfo.user_id
+            );
+            if (filter.length > 0) {
+              setAdmin({ type: "BRAND_LIST", data: filter });
+            }
           }
         }
       })
@@ -316,7 +324,9 @@ const Brand = () => {
           text: "Брэнд лист унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      });
+      })
+      .finally(() => setAdmin({ type: "BRAND_LIST_LOADING", data: false }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [admin.brandListReload, setAdmin]);
 
   return (

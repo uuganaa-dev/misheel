@@ -138,6 +138,7 @@ export default function Appbar(props) {
         </Typography>
         <Grid sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
           {/* <SearchIcon sx={{ ...style.pointer }} /> */}
+
           <LocationOnIcon
             sx={{
               ...style.pointer,
@@ -148,6 +149,16 @@ export default function Appbar(props) {
             onClick={() => {
               setSelect("map");
               navigate("/map");
+            }}
+          />
+          <i
+            className="fa fa-sign-in cursor-pointer"
+            onClick={() => {
+              user.loggedIn
+                ? user.userInfo.role === 1
+                  ? navigate("/admin")
+                  : navigate("/brand")
+                : navigate("/login");
             }}
           />
           <Typography
@@ -167,16 +178,6 @@ export default function Appbar(props) {
           >
             {txt.lan}
           </Typography>
-          <i
-            className="fa fa-sign-in cursor-pointer"
-            onClick={() => {
-              user.loggedIn
-                ? user.userInfo.role === 1
-                  ? navigate("/admin")
-                  : navigate("/brand")
-                : navigate("/login");
-            }}
-          />
         </Grid>
       </Grid>
       {openMenu && <MainMenu props={props} />}

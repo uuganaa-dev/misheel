@@ -86,7 +86,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function FeaturedBrandSlide({ images, click }) {
+export default function FeaturedBrandSlide({ images, ClickNavigate }) {
   const settings = {
     className: "center",
     infinite: false,
@@ -123,7 +123,7 @@ export default function FeaturedBrandSlide({ images, click }) {
                     : ["228px", "666px", "666px"],
                 cursor: "pointer",
               }}
-              onClick={click}
+              onClick={() => ClickNavigate(item)}
             />
           </Grid>
         ))}

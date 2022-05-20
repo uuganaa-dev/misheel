@@ -245,7 +245,6 @@ const Admin = () => {
         var filterList1 = admin.list.find(
           (el) => el.imgType === admin.imgType && el.ordern === admin.imgOrdern
         );
-        console.log("filterList1", filterList1);
         if (filterList1) {
           setAdmin({
             type: "IMAGE",

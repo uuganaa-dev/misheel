@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Select, Input, Upload } from "antd";
 import { useAdminState } from "../../../contexts/AdminContext";
+import { useUserState } from "../../../contexts/UserContext";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
@@ -12,6 +13,7 @@ const URL = "http://167.172.76.26";
 const Product = () => {
   const formData = new FormData();
   const { admin, setAdmin } = useAdminState();
+  const { user } = useUserState();
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -47,6 +49,7 @@ const Product = () => {
     formData.append("productUsage", admin.productUsage);
     formData.append("productMaterial", admin.productMaterial);
     formData.append("productColor", admin.productColor);
+    formData.append("user_id", user.userInfo.user_id);
     API.postProduct(formData)
       .then((res) => {
         if (res.status === 200) {

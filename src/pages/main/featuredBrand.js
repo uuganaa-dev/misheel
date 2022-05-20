@@ -18,8 +18,8 @@ export default function FeaturedBrand({ txt, list }) {
     show: 0,
   });
   const navigate = useNavigate();
-  const click = (i) => {
-    if (i.brandId) {
+  const ClickNavigate = (i) => {
+    if (i?.brandId) {
       navigate("/brandDetail/" + i.brandId);
     }
   };
@@ -64,7 +64,7 @@ export default function FeaturedBrand({ txt, list }) {
           {brand12 &&
             brand12.map((i, index) => {
               return (
-                <Grid key={index} onClick={() => click(i)}>
+                <Grid key={index} onClick={() => ClickNavigate(i)}>
                   <HoverImage
                     i={i}
                     show={show}
@@ -95,7 +95,7 @@ export default function FeaturedBrand({ txt, list }) {
         >
           {brand3 &&
             brand3.map((i, index) => (
-              <Grid key={index} onClick={click}>
+              <Grid key={index} onClick={() => ClickNavigate(i)}>
                 <HoverImage
                   i={i}
                   show={show}
@@ -123,7 +123,7 @@ export default function FeaturedBrand({ txt, list }) {
           >
             {brand45 &&
               brand45.map((i, index) => (
-                <Grid key={index} onClick={click}>
+                <Grid key={index} onClick={() => ClickNavigate(i)}>
                   <HoverImage
                     i={i}
                     show={show}
@@ -162,7 +162,10 @@ export default function FeaturedBrand({ txt, list }) {
           mb: ["18px", 0, "14px"],
         }}
       >
-        <FeaturedBrandSlide images={brand6789 && brand6789} click={click} />
+        <FeaturedBrandSlide
+          images={brand6789 && brand6789}
+          ClickNavigate={ClickNavigate}
+        />
       </Grid>
       {(isLaptop || !isTablet) && (
         <ShowAll
