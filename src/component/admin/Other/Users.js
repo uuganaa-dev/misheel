@@ -173,7 +173,7 @@ const Users = () => {
             setIsShow(true);
           }}
         >
-          <span className="mr-2">Брэнд нэмэх</span>
+          <span className="mr-2">Хэрэглэгч нэмэх</span>
           <svg
             width={22}
             height={22}

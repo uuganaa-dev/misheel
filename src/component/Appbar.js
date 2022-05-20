@@ -9,8 +9,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 // import breakpoints from "../utils/contants/breakpoints";
 // import json2mq from "json2mq";
 import MainMenu from "./mainMenu";
+import { useUserState } from "../contexts/UserContext";
 
 export default function Appbar(props) {
+  const { user } = useUserState();
+
   const context = useContext(TheContext);
   const txt = context.txt.Bar;
   const navigate = useNavigate();
@@ -164,6 +167,16 @@ export default function Appbar(props) {
           >
             {txt.lan}
           </Typography>
+          <i
+            className="fa fa-sign-in cursor-pointer"
+            onClick={() => {
+              user.loggedIn
+                ? user.userInfo.role === 1
+                  ? navigate("/admin")
+                  : navigate("/brand")
+                : navigate("/login");
+            }}
+          />
         </Grid>
       </Grid>
       {openMenu && <MainMenu props={props} />}

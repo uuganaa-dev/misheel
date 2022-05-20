@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -8,11 +8,8 @@ import LogoYellow from "./logoYellow";
 import icons from "../asset/icon/filePath";
 import breakpoints from "../utils/contants/breakpoints";
 import TheContext from "../utils/context/userContext";
-import { useUserState } from "../contexts/UserContext";
 
 export default function FooterMain() {
-  const navigate = useNavigate();
-  const { user } = useUserState();
   const context = useContext(TheContext);
   const txt = context.txt.mainFooter;
   const { tablet, laptop } = breakpoints;
@@ -221,25 +218,6 @@ export default function FooterMain() {
               ))}
               {!isTablet && <LinkedInIcon />}
             </Grid>
-            <Typography
-              sx={{
-                fontSize: ["9px", "14px"],
-                padding: ["10px"],
-                marginTop: "20px",
-                fontFamily: ["Roboto", "Inter"],
-                fontWeight: [700, 600],
-                cursor: "pointer",
-                backgroundColor: "#80808078",
-                borderRadius: "8px",
-                textAlign: "center",
-              }}
-              className="login-btn"
-              onClick={() => {
-                user.loggedIn ? navigate("/admin") : navigate("/login");
-              }}
-            >
-              {user.loggedIn ? "ADMIN" : txt.loginButton}
-            </Typography>
           </Grid>
         </Grid>
         <Grid

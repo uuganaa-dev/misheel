@@ -60,10 +60,10 @@ const Header = (props) => {
                 >
                   <div className="user d-md-flex d-none mr-2">
                     <span className="text-right">
-                      {user.userInfo.user_name}
+                      {user.userInfo.role === "1" ? "Админ" : "Хэрэглэгч"}
                     </span>
                     <span className="text-right text-muted font-small-1">
-                      Админ
+                      Hello
                     </span>
                   </div>
                   <img
