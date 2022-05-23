@@ -4,22 +4,21 @@ import { useNavigate } from "react-router-dom";
 import LogoYellow from "./logoYellow";
 import TheContext from "../utils/context/userContext";
 import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-// import breakpoints from "../utils/contants/breakpoints";
-// import json2mq from "json2mq";
 import MainMenu from "./mainMenu";
 import { useUserState } from "../contexts/UserContext";
 import * as API from "../api/request";
+import { Input } from "antd";
 
-export default function Appbar(props) {
+export default function Appbar() {
   const { user } = useUserState();
+  const [searchValue, setSearchValue] = useState("");
+  const [isShow, setIsShow] = useState(false);
 
   const context = useContext(TheContext);
   const txt = context.txt.Bar;
   const navigate = useNavigate();
-  // const { laptop } = breakpoints;
-  // const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [select, setSelect] = useState();
   const [openMenu, setOpenMenu] = useState(false);
   const [category, setCategory] = useState([]);
@@ -64,100 +63,117 @@ export default function Appbar(props) {
           px: ["10px", "10px", "200px"],
         }}
       >
-        <MenuIcon
-          sx={{ ...style.pointer }}
-          onClick={() => setOpenMenu(!openMenu)}
-        />
-        <Typography
-          sx={{
-            ...style.txt,
-            ...style.fourHundred,
-            ...style.pointer,
-            ...(select === txt.home && {
-              color: ["white", "white", "white"],
-            }),
-          }}
-          className="my-font-size"
-          onClick={() => {
-            setSelect(txt.home);
-            navigate("/");
-          }}
-        >
-          {txt.home}
-        </Typography>
-        <Typography
-          sx={{
-            ...style.txt,
-            ...style.fourHundred,
-            ...style.pointer,
-            ...(select === txt.price && {
-              color: ["white", "white", "white"],
-            }),
-          }}
-          className="my-font-size"
-          onClick={() => {
-            setSelect(txt.price);
-            navigate("/mprice");
-          }}
-        >
-          {txt.price}
-        </Typography>
-        <Grid
-          onClick={() => {
-            setSelect(txt.home);
-            navigate("/");
-          }}
-          className="header-logo"
-        >
-          <LogoYellow
-            ysx={{
-              width: ["50px", "42px", "58px"],
-              height: ["50px", "42px", "58px"],
-              cursor: "pointer",
+        {isShow ? (
+          <Input
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
+            placeholder="хайх үгээ бичээд Enter дарна уу"
+            onPressEnter={() => {
+              navigate("/search/" + searchValue);
             }}
-            sx={{
-              width: ["50px", "42px", "45px"],
-              height: ["50px", "42px", "45px"],
-            }}
-            backgroundColor={["white", "white", "#FFD662"]}
           />
-        </Grid>
-        <Typography
-          sx={{
-            ...style.txt,
-            ...style.fourHundred,
-            ...style.pointer,
-            ...(select === txt.brand && {
-              color: ["white", "white", "white"],
-            }),
-          }}
-          className="my-font-size"
-          onClick={() => {
-            setSelect(txt.brand);
-            navigate("/brandPage");
-          }}
-        >
-          {txt.brand}
-        </Typography>
-        <Typography
-          sx={{
-            ...style.txt,
-            ...style.fourHundred,
-            ...style.pointer,
-            ...(select === txt.ours && {
-              color: ["white", "white", "white"],
-            }),
-          }}
-          className="my-font-size"
-          onClick={() => {
-            setSelect(txt.ours);
-            navigate("/aboutUs");
-          }}
-        >
-          {txt.ours}
-        </Typography>
+        ) : (
+          <>
+            <MenuIcon
+              sx={{ ...style.pointer }}
+              onClick={() => setOpenMenu(!openMenu)}
+            />
+            <Typography
+              sx={{
+                ...style.txt,
+                ...style.fourHundred,
+                ...style.pointer,
+                ...(select === txt.home && {
+                  color: ["white", "white", "white"],
+                }),
+              }}
+              className="my-font-size"
+              onClick={() => {
+                setSelect(txt.home);
+                navigate("/");
+              }}
+            >
+              {txt.home}
+            </Typography>
+            <Typography
+              sx={{
+                ...style.txt,
+                ...style.fourHundred,
+                ...style.pointer,
+                ...(select === txt.price && {
+                  color: ["white", "white", "white"],
+                }),
+              }}
+              className="my-font-size"
+              onClick={() => {
+                setSelect(txt.price);
+                navigate("/mprice");
+              }}
+            >
+              {txt.price}
+            </Typography>
+            <Grid
+              onClick={() => {
+                setSelect(txt.home);
+                navigate("/");
+              }}
+              className="header-logo"
+            >
+              <LogoYellow
+                ysx={{
+                  width: ["50px", "42px", "58px"],
+                  height: ["50px", "42px", "58px"],
+                  cursor: "pointer",
+                }}
+                sx={{
+                  width: ["50px", "42px", "45px"],
+                  height: ["50px", "42px", "45px"],
+                }}
+                backgroundColor={["white", "white", "#FFD662"]}
+              />
+            </Grid>
+            <Typography
+              sx={{
+                ...style.txt,
+                ...style.fourHundred,
+                ...style.pointer,
+                ...(select === txt.brand && {
+                  color: ["white", "white", "white"],
+                }),
+              }}
+              className="my-font-size"
+              onClick={() => {
+                setSelect(txt.brand);
+                navigate("/brandPage");
+              }}
+            >
+              {txt.brand}
+            </Typography>
+            <Typography
+              sx={{
+                ...style.txt,
+                ...style.fourHundred,
+                ...style.pointer,
+                ...(select === txt.ours && {
+                  color: ["white", "white", "white"],
+                }),
+              }}
+              className="my-font-size"
+              onClick={() => {
+                setSelect(txt.ours);
+                navigate("/aboutUs");
+              }}
+            >
+              {txt.ours}
+            </Typography>
+          </>
+        )}
+
         <Grid sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          {/* <SearchIcon sx={{ ...style.pointer }} /> */}
+          <SearchIcon
+            sx={{ ...style.pointer }}
+            onClick={() => setIsShow(!isShow)}
+          />
 
           <LocationOnIcon
             sx={{

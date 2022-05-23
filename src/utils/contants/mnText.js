@@ -48,7 +48,7 @@ const mnText = {
   },
   brandDetail: {
     similarBrands: "Ижил төстэй брэндүүд",
-    openStyle: "Open style",
+    openStyle: "Нэр",
     style: "Style",
     usage: "Usage",
     material: "Material",

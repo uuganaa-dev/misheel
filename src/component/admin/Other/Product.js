@@ -239,10 +239,10 @@ const Product = () => {
                     <span>Олон зураг зэрэг оруулах боломжтой.</span>
                   </div>
                 </Upload>
-                <div>openStyle</div>
+                <div>Нэр</div>
                 <Input
                   size="large"
-                  placeholder="openStyle..."
+                  placeholder="Бүтээгдэхүүн нэр бичих..."
                   value={admin.productOpenStyle}
                   onChange={(e) =>
                     setAdmin({

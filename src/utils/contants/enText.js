@@ -48,7 +48,7 @@ const enText = {
   },
   brandDetail: {
     similarBrands: "Similar brands",
-    openStyle: "Open style",
+    openStyle: "Name",
     style: "Style",
     usage: "Usage",
     material: "Material",

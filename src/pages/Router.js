@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useUserState } from "../contexts/UserContext";
 import Main from "./main/main";
+import Search from "./main/Search";
 import BrandPage from "./brandPage/brandPage";
 import BrandDetail from "./brandDetail/brandDetail";
 import CreatedBy from "./createdBy/createdBy";
@@ -37,6 +38,7 @@ const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/search/:value" element={<Search />} />
         <Route path="/brandPage" element={<BrandPage />} />
         <Route path="/brandDetail/:id" element={<BrandDetail />} />
         <Route path="/createdBy" element={<CreatedBy />} />
