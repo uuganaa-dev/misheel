@@ -76,7 +76,6 @@ export default function HoverImage({ i, show, setShow, sx, logo, fontSize }) {
       >
         <Grid
           sx={{
-            // ...logo,
             backgroundImage: `url("${i.logo}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",

@@ -56,14 +56,18 @@ export default function CreatedBy() {
         <Grid
           sx={{
             width: "100%",
-            height: ["20vh", "57vh", "72vh"],
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
           <Typography
             sx={{
-              fontSize: ["80px", "210px"],
+              fontSize: ["10px", "31px"],
               fontFamily: "Inter",
               fontStyle: "italic",
               letterSpacing: "0.25px",
@@ -71,8 +75,7 @@ export default function CreatedBy() {
               textAlign: "center",
               fontWeight: 200,
               color: "#B1AC96",
-              opacity: 0.15,
-              pt: "94px",
+              opacity: 0.5,
               overflowWrap: "break-word",
             }}
           >
@@ -80,15 +83,11 @@ export default function CreatedBy() {
           </Typography>
           <Typography
             sx={{
-              fontSize: ["10px", "31px"],
+              fontSize: ["10px", "12px"],
               fontFamily: "Inter",
-              letterSpacing: "2px",
+              letterSpacing: "0.25px",
               textTransform: "uppercase",
-              fontWeight: 200,
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              color: "#707070",
             }}
           >
             Харилцагч

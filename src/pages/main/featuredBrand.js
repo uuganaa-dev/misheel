@@ -6,7 +6,7 @@ import TextUnderline from "./textUnderline";
 import ShowAll from "./showAll";
 import HoverImage from "./hoverImage";
 import breakpoints from "../../utils/contants/breakpoints";
-import hoverFooterImage from "../../asset/backgroundImages/main/footerHoverImage.png";
+// import hoverFooterImage from "../../asset/backgroundImages/main/footerHoverImage.png";
 import FeaturedBrandSlide from "./featuredBrandSlide";
 
 export default function FeaturedBrand({ txt, list }) {
@@ -229,7 +229,17 @@ export default function FeaturedBrand({ txt, list }) {
           project.map((i, index) => (
             <Grid
               key={index}
-              sx={{ width: "25%", height: "calc(width * 1.53)" }}
+              sx={{
+                width: "25%",
+                height: "calc(width * 1.53)",
+                cursor: "pointer",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.01)",
+                },
+              }}
             >
               <Grid
                 sx={{ position: "relative" }}
@@ -254,38 +264,51 @@ export default function FeaturedBrand({ txt, list }) {
               >
                 <img
                   src={i.imageUrl}
-                  alt={"hover"}
+                  alt=""
                   style={{
                     width: "100%",
                     height: "calc(width * 1.53)",
                     objectFit: "cover",
                   }}
                 />
-                <Grid
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    opacity: 0,
-                    transition: "1s ease",
-                    "&:hover": {
-                      position: "absolute",
-                      top: 0,
-                      opacity: 1,
-                      cursor: "pointer",
-                      width: "100%",
-                    },
-                  }}
-                >
-                  <img
-                    src={hoverFooterImage}
-                    alt="hover"
-                    style={{
-                      width: "100%",
-                      height: "calc(width * 1.53)",
-                      objectFit: "cover",
-                    }}
-                  />
-                </Grid>
+                {index === 0 ? (
+                  <div className="m-shiidel-hover"></div>
+                ) : index === 1 ? (
+                  <div className="m-shiidel-hover"></div>
+                ) : index === 2 ? (
+                  <div className="m-shiidel-hover"></div>
+                ) : index === 3 ? (
+                  <div className="m-shiidel-hover"></div>
+                ) : (
+                  ""
+                )}
+                {index === 0 ? (
+                  <div className="m-shiidel-hover1">
+                    <div className="text-center m-shiidel-text">М-Шийдэл</div>
+                    <div className="text-center m-shiidel-text2">
+                      Интерьер шийдэл
+                    </div>
+                  </div>
+                ) : index === 1 ? (
+                  <div className="m-shiidel-hover1">
+                    <div className="text-center m-shiidel-text">Created By</div>
+                    <div className="text-center m-shiidel-text2">
+                      Ажлын гүйцэтгэл
+                    </div>
+                  </div>
+                ) : index === 2 ? (
+                  <div className="m-shiidel-hover1">
+                    <div className="text-center m-shiidel-text">Mr.Misheel</div>
+                    <div className="text-center m-shiidel-text2">Зөвлөгөө</div>
+                  </div>
+                ) : index === 3 ? (
+                  <div className="m-shiidel-hover1">
+                    <div className="text-center m-shiidel-text">Co Leader</div>
+                    <div className="text-center m-shiidel-text2">хөтөлбөр</div>
+                  </div>
+                ) : (
+                  ""
+                )}
               </Grid>
             </Grid>
           ))}

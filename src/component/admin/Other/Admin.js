@@ -113,14 +113,20 @@ const Admin = () => {
       if (admin.image.id === undefined || admin.image.id === 0) {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
-        formData.append("brandId", admin.productBrandId);
+        formData.append(
+          "brandId",
+          admin.productBrandId ? admin.productBrandId : "1"
+        );
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Save(formData);
       } else {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
-        formData.append("brandId", admin.productBrandId);
+        formData.append(
+          "brandId",
+          admin.productBrandId ? admin.productBrandId : "1"
+        );
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Update(formData, admin.image.id);

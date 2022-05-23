@@ -56,24 +56,15 @@ export default function MShiidel() {
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.33)",
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#707070",
-              pt: ["70px", "80px", "140px"],
-            }}
-          >
-            Санал болгож буй
-          </Typography>
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
@@ -81,17 +72,20 @@ export default function MShiidel() {
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
-              position: "absolute",
-              top: ["72%", "72%", "50%"],
-              left: "50%",
-              transform: [
-                "translate(-50%, -72%)",
-                "translate(-50%, -72%)",
-                "translate(-50%, -50%)",
-              ],
             }}
           >
             #МШийдэл
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            Санал болгож буй
           </Typography>
         </Grid>
         {loading ? (

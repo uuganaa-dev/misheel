@@ -46,24 +46,15 @@ export default function MrMisheel() {
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.26)",
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#707070",
-              pt: ["40px", "80px", "140px"],
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
-          </Typography>
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
@@ -71,17 +62,20 @@ export default function MrMisheel() {
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
-              position: "absolute",
-              top: ["72%", "72%", "60%"],
-              left: "50%",
-              transform: [
-                "translate(-50%, -72%)",
-                "translate(-50%, -72%)",
-                "translate(-50%, -60%)",
-              ],
             }}
           >
             #MR МИШЭЭЛ
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid sx={{ position: "relative", pb: ["0", "290px", "0"] }}>
