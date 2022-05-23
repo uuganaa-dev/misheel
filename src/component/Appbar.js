@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LogoYellow from "./logoYellow";
@@ -10,6 +10,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 // import json2mq from "json2mq";
 import MainMenu from "./mainMenu";
 import { useUserState } from "../contexts/UserContext";
+import * as API from "../api/request";
 
 export default function Appbar(props) {
   const { user } = useUserState();
@@ -21,6 +22,24 @@ export default function Appbar(props) {
   // const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [select, setSelect] = useState();
   const [openMenu, setOpenMenu] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+
+  useEffect(() => {
+    API.getCategory()
+      .then((res) => {
+        setCategory(res.data.data.slice(0, 5));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    API.getSubCategory()
+      .then((res) => {
+        setSubCategory(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Grid
@@ -181,7 +200,7 @@ export default function Appbar(props) {
           </Typography>
         </Grid>
       </Grid>
-      {openMenu && <MainMenu props={props} />}
+      {openMenu && <MainMenu category={category} subCategory={subCategory} />}
     </Grid>
   );
 }

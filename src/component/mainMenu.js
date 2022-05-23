@@ -8,9 +8,7 @@ export default function MainMenu(props) {
 
   useEffect(() => {
     if (choose) {
-      setSubCat(
-        props.props.subCategory.filter((el) => el.parentId === choose.id)
-      );
+      setSubCat(props.subCategory.filter((el) => el.parentId === choose.id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choose]);
@@ -37,7 +35,7 @@ export default function MainMenu(props) {
           gap: "14px",
         }}
       >
-        {props.props.category.map((item, index) => (
+        {props.category.map((item, index) => (
           <Grid
             key={index}
             sx={{
