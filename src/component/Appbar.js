@@ -88,6 +88,7 @@ export default function Appbar(props) {
             setSelect(txt.home);
             navigate("/");
           }}
+          className="header-logo"
         >
           <LogoYellow
             ysx={{

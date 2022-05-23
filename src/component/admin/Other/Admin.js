@@ -115,7 +115,9 @@ const Admin = () => {
         formData.append("imgName", admin.imgName);
         formData.append(
           "brandId",
-          admin.productBrandId ? admin.productBrandId : "1"
+          admin.productBrandId
+            ? admin.productBrandId
+            : "6271cb97f76906c043f6cb25"
         );
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
@@ -125,7 +127,9 @@ const Admin = () => {
         formData.append("imgName", admin.imgName);
         formData.append(
           "brandId",
-          admin.productBrandId ? admin.productBrandId : "1"
+          admin.productBrandId
+            ? admin.productBrandId
+            : "6271cb97f76906c043f6cb25"
         );
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);

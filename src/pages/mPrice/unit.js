@@ -12,7 +12,6 @@ export default function Unit({ item, catfind }) {
         display: "flex",
         width: "100%",
         height: ["0", "314px"],
-        borderBottom: "0.5px solid #404040",
         gap: ["20px", "44px"],
         alignItems: "center",
         cursor: "pointer",
