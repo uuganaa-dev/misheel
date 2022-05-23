@@ -3,7 +3,6 @@ import { Modal } from "antd";
 import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
-import img from "../../asset/backgroundImages/aboutUs/Rectangle 1479.png";
 import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
@@ -14,6 +13,7 @@ export default function MPrice() {
   const [data, setData] = useState([]);
   const [catList, setCatList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [lastItem, setLastItem] = useState();
 
   const HandleClick = (id) => {
     setIsModalVisible(true);
@@ -51,6 +51,7 @@ export default function MPrice() {
         if (res.data.success) {
           if (res.data.data.length > 0) {
             setData(res.data.data);
+            setLastItem(res.data.data.reverse()[0]);
           }
         }
       })
@@ -80,7 +81,7 @@ export default function MPrice() {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("${img}")`,
+              backgroundImage: `url("http://167.172.76.26${lastItem?.priceImage}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
@@ -100,32 +101,44 @@ export default function MPrice() {
               transform: "translate(-50%, -50%)",
               color: "white",
               textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
             }}
           >
-            100 айлын барилгын материалын үнийн дэлгэрэнгүй татах
+            {lastItem?.priceTitle}
+            <span
+              style={{
+                fontSize: "15px",
+                backgroundColor: "white",
+                color: "black",
+                width: "160px",
+                textAlign: "center",
+                cursor: "pointer",
+                padding: "6px",
+                borderRadius: "5px",
+              }}
+              onClick={() => HandleClick(lastItem?.id)}
+            >
+              Дэлгэрэнгүй
+            </span>
           </Typography>
         </Grid>
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.10)",
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#707070",
-              pt: ["3px", "10px", "50px"],
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
-          </Typography>
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
@@ -133,13 +146,20 @@ export default function MPrice() {
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
             }}
           >
             #Зах зээлийн үнэ
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid
@@ -151,7 +171,7 @@ export default function MPrice() {
             position: "relative",
           }}
         >
-          <Grid sx={{ pt: "69px", width: "75%", mb: "158px" }}>
+          <Grid sx={{ pt: "10px", width: "75%", mb: "158px" }}>
             <Typography
               sx={{
                 fontSize: ["12px", "12px", "18px"],

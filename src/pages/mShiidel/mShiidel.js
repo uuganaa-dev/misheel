@@ -63,6 +63,8 @@ export default function MShiidel() {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
           <Typography

@@ -53,24 +53,17 @@ export default function Co() {
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.29)",
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#707070",
-              pt: ["34px", "85px", "140px"],
-            }}
-          >
-            Зочин хөтөлбөр
-          </Typography>
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
@@ -78,13 +71,20 @@ export default function Co() {
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
             }}
           >
-            Co-Leaders
+            #Co-Leaders
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            Зочин хөтөлбөр
           </Typography>
         </Grid>
         {loading ? (
@@ -175,7 +175,7 @@ export default function Co() {
                   </Grid>
                   <Grid
                     sx={{
-                      width: "514px",
+                      width: "100%",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",

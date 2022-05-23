@@ -8,8 +8,11 @@ import json2mq from "json2mq";
 
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
+import { Modal } from "antd";
 
 export default function MrMisheel() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [url, setUrl] = useState();
   const { laptop } = breakpoints;
   const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [data, setData] = useState([]);
@@ -37,6 +40,21 @@ export default function MrMisheel() {
   return (
     <>
       <Appbar />
+      <Modal
+        title=""
+        visible={isModalVisible}
+        footer={false}
+        onCancel={() => setIsModalVisible(false)}
+        width={1500}
+      >
+        <div className="gadot-primary-modal-body">
+          <div className="gadot-text-body">
+            <div className="gadot-uploadType2">
+              <div dangerouslySetInnerHTML={{ __html: url && url }} />
+            </div>
+          </div>
+        </div>
+      </Modal>
       <Grid
         sx={{
           backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"],
@@ -53,6 +71,8 @@ export default function MrMisheel() {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
           <Typography
@@ -78,14 +98,14 @@ export default function MrMisheel() {
             ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
-        <Grid sx={{ position: "relative", pb: ["0", "290px", "0"] }}>
+        <Grid sx={{ position: "relative", pb: ["0", "0", "0"] }}>
           <Grid
             sx={{
               backgroundImage: `url("${background}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
-              height: "calc(100vw * 0.63)",
+              height: "calc(100vw * 0.50)",
               opacity: isLaptop ? 0.5 : 1,
             }}
           />
@@ -93,21 +113,21 @@ export default function MrMisheel() {
             <Grid
               sx={{
                 backgroundColor: "white",
-                width: "57%",
-                height: "calc(57vw *0.92)",
+                width: "60%",
+                height: "calc(60vw *0.80)",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-evenly",
                 pl: "49px",
                 position: "absolute",
-                top: ["10px", "75px"],
-                left: ["10px", "54px"],
+                top: ["0px", "0px"],
+                left: ["4%"],
               }}
             >
               {data.map((item, index) => (
                 <Grid
                   key={index}
-                  sx={{ display: "flex", alignItems: "center", gap: "49px" }}
+                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
                 >
                   <Typography
                     sx={{
@@ -122,15 +142,12 @@ export default function MrMisheel() {
                       },
                     }}
                     onClick={() => {
-                      window.open("http://167.172.76.26/" + item.url, "_blank");
+                      setIsModalVisible(true);
+                      setUrl(item.url);
                     }}
                   >
                     {index + 1}. {item.txt}
                   </Typography>
-                  <img
-                    src={"http://167.172.76.26/" + item.icon}
-                    alt={item.icon}
-                  />
                 </Grid>
               ))}
             </Grid>
@@ -142,46 +159,3 @@ export default function MrMisheel() {
     </>
   );
 }
-
-// const text = [
-//   {
-//     txt: "Хүүхдийн өрөөний интерьер",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: icons.child,
-//   },
-//   {
-//     txt: "Мод стресс бууруулдаг",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: icons.tree,
-//   },
-//   {
-//     txt: "Скандинов орчин",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-//   {
-//     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-//   {
-//     txt: "Хүүхдийн өрөөний интерьер",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-//   {
-//     txt: "Мод стресс бууруулдаг",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-//   {
-//     txt: "Скандинов орчин",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-//   {
-//     txt: "Дэлхийн хамгийн өвөрмөц интерьертэй ресторан",
-//     url: "https://www.facebook.com/misheelexpocenter/",
-//     icon: "",
-//   },
-// ];

@@ -37,24 +37,17 @@ export default function AboutUs() {
         <Grid
           sx={{
             width: "100%",
-            height: "calc(100vw * 0.10)",
+            height: "calc(100vw * 0.07)",
             position: "relative",
             overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#707070",
-              pt: ["3px", "10px", "50px"],
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
-          </Typography>
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
@@ -62,17 +55,20 @@ export default function AboutUs() {
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
-              position: "absolute",
-              top: ["72%", "72%", "60%"],
-              left: "50%",
-              transform: [
-                "translate(-50%, -72%)",
-                "translate(-50%, -72%)",
-                "translate(-50%, -60%)",
-              ],
             }}
           >
-            #MR МИШЭЭЛ
+            #БИДНИЙ ТУХАЙ
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid sx={{ position: "relative" }}>

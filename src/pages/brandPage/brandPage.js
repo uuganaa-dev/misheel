@@ -134,6 +134,43 @@ export default function BrandPage() {
       >
         <Grid
           sx={{
+            width: "100%",
+            height: "calc(100vw * 0.07)",
+            position: "relative",
+            overflowY: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            marginTop: "5px",
+            marginBottom: "5px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: ["10px", "31px"],
+              fontFamily: "Inter",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              fontWeight: 200,
+            }}
+          >
+            #БРЭНД
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: ["10px", "12px"],
+              fontFamily: "Inter",
+              letterSpacing: "0.25px",
+              textTransform: "uppercase",
+              color: "#707070",
+            }}
+          >
+            ЗӨВЛӨЖ БАЙНА
+          </Typography>
+        </Grid>
+        <Grid
+          sx={{
             pt: ["20px"],
             width: ["95%", "71%", "72%"],
             pb: ["64px", "50px", "72px"],
@@ -280,10 +317,6 @@ export default function BrandPage() {
                             gap: ["10px", "8px"],
                             transition: "transform 10s",
                             cursor: "pointer",
-                            "&:hover": {
-                              boxShadow:
-                                "0.5px 1px 0.5px 1px rgba(0, 0, 0, 0.3)",
-                            },
                           }}
                           onMouseEnter={() =>
                             setShow({ ...show, index: index, show: 1 })

@@ -806,8 +806,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>295x332px</div>
             </div>
             <div
               className="item5-2 item5hover"
@@ -820,8 +822,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>295x332px</div>
             </div>
             <div
               className="item5-3 item5hover"
@@ -834,8 +838,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>258x332px</div>
             </div>
             <div
               className="item5-4 item5hover"
@@ -848,8 +854,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>295x332px</div>
             </div>
             <div
               className="item5-5 item5hover"
@@ -862,8 +870,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>295x332px</div>
             </div>
           </div>
         </div>
@@ -903,8 +913,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>360x546px</div>
             </div>
             <div
               className="admin-main-item item6 mr-2"
@@ -917,8 +929,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>360x546px</div>
             </div>
             <div
               className="admin-main-item item6 mr-2"
@@ -931,8 +945,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>360x546px</div>
             </div>
             <div
               className="admin-main-item item6"
@@ -945,8 +961,10 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>360x546px</div>
             </div>
           </div>
         </div>
