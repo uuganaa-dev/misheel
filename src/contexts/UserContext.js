@@ -24,7 +24,7 @@ const UserContextProvider = ({ children }) => {
   const logOut = () => {
     localStorage.removeItem("data");
     setUser({ type: "LOGOUT" });
-    window.location = "http://localhost:3000";
+    window.location = "/";
   };
 
   useEffect(() => {
