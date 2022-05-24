@@ -109,16 +109,7 @@ export default function MPrice() {
           >
             {lastItem?.priceTitle}
             <span
-              style={{
-                fontSize: "15px",
-                backgroundColor: "white",
-                color: "black",
-                width: "160px",
-                textAlign: "center",
-                cursor: "pointer",
-                padding: "6px",
-                borderRadius: "5px",
-              }}
+              className="detail-btn"
               onClick={() => HandleClick(lastItem?.id)}
             >
               Дэлгэрэнгүй

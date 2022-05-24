@@ -8,6 +8,7 @@ import HoverImage from "./hoverImage";
 import breakpoints from "../../utils/contants/breakpoints";
 // import hoverFooterImage from "../../asset/backgroundImages/main/footerHoverImage.png";
 import FeaturedBrandSlide from "./featuredBrandSlide";
+import _ from "lodash";
 
 export default function FeaturedBrand({ txt, list }) {
   const { tablet, laptop } = breakpoints;
@@ -40,7 +41,11 @@ export default function FeaturedBrand({ txt, list }) {
   );
 
   const showroomList = list.filter((el) => el.imgType === "showroom");
-  const project = list.filter((el) => el.imgType === "project");
+
+  const project = _.sortBy(
+    list.filter((el) => el.imgType === "project"),
+    ["ordern"]
+  );
 
   return (
     <Grid

@@ -70,7 +70,7 @@ const Sidebar = (props) => {
                   }
                 >
                   <Link to="/users" id="gadotMenuHide">
-                    <i className="ft-home" />
+                    <i className="ft-user" />
                     <span>Хэрэглэгч</span>
                   </Link>
                 </li>
@@ -163,7 +163,7 @@ const Sidebar = (props) => {
                   }
                 >
                   <Link to="/about" id="gadotMenuHide">
-                    <i className="ft-trending-up" />
+                    <i className="ft-info" />
                     <span>Бидний тухай</span>
                   </Link>
                 </li>

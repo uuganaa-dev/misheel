@@ -118,7 +118,22 @@ const Product = () => {
       .then((res) => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
-            setAdmin({ type: "BRAND_LIST", data: res.data.data });
+            var filterbrand = res.data.data
+              .reverse()
+              .filter((el) => el.user_id === user.userInfo.user_id);
+            if (user.userInfo.role === "1") {
+              setAdmin({
+                type: "BRAND_LIST",
+                data: res.data.data,
+              });
+            } else {
+              if (filterbrand.length > 0)
+                setAdmin({
+                  type: "BRAND_LIST",
+                  data: filterbrand,
+                });
+            }
+
             setLoading(false);
           }
         }
@@ -132,6 +147,7 @@ const Product = () => {
           confirmButtonColor: "#0f56b3",
         });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setAdmin]);
 
   useEffect(() => {
@@ -142,8 +158,12 @@ const Product = () => {
             var filter = res.data.data.filter(
               (el) => el.user_id === user.userInfo.user_id
             );
-            if (filter.length > 0) {
+            if (user.userInfo.role === "1") {
               setAdmin({ type: "PRODUCT_LIST", data: res.data.data });
+            } else {
+              if (filter.length > 0) {
+                setAdmin({ type: "PRODUCT_LIST", data: filter });
+              }
             }
           }
         }

@@ -113,24 +113,19 @@ const Admin = () => {
       if (admin.image.id === undefined || admin.image.id === 0) {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
-        formData.append(
-          "brandId",
-          admin.productBrandId
-            ? admin.productBrandId
-            : "6271cb97f76906c043f6cb25"
-        );
+        if (admin.uploadType === 2) {
+          formData.append("brandId", admin.productBrandId);
+        }
+
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Save(formData);
       } else {
         formData.append("imgType", admin.imgType);
         formData.append("imgName", admin.imgName);
-        formData.append(
-          "brandId",
-          admin.productBrandId
-            ? admin.productBrandId
-            : "6271cb97f76906c043f6cb25"
-        );
+        if (admin.uploadType === 2) {
+          formData.append("brandId", admin.productBrandId);
+        }
         formData.append("ordern", admin.image.ordern);
         formData.append("imageUrl", admin.image.imageUrl);
         Update(formData, admin.image.id);
@@ -355,31 +350,34 @@ const Admin = () => {
                     }
                   />
                 )}
-                <div>Брэнд</div>
+
                 {admin.uploadType === 2 && (
-                  <Select
-                    showSearch
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                    size="large"
-                    style={{ width: "100%" }}
-                    placeholder="Брэнд сонгох..."
-                    value={admin.productBrandId}
-                    onChange={(value) =>
-                      setAdmin({
-                        type: "PRODUCT_BRAND_ID",
-                        data: value,
-                      })
-                    }
-                  >
-                    {admin.brandList.map((el) => (
-                      <Option key={el.id}>{el.brandName}</Option>
-                    ))}
-                  </Select>
+                  <>
+                    <div>Брэнд</div>
+                    <Select
+                      showSearch
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                      size="large"
+                      style={{ width: "100%" }}
+                      placeholder="Брэнд сонгох..."
+                      value={admin.productBrandId}
+                      onChange={(value) =>
+                        setAdmin({
+                          type: "PRODUCT_BRAND_ID",
+                          data: value,
+                        })
+                      }
+                    >
+                      {admin.brandList.map((el) => (
+                        <Option key={el.id}>{el.brandName}</Option>
+                      ))}
+                    </Select>
+                  </>
                 )}
               </div>
             </div>

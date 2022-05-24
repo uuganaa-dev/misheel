@@ -310,8 +310,18 @@ const Brand = () => {
             var filter = result.filter(
               (el) => el.user_id === user.userInfo.user_id
             );
-            if (filter.length > 0) {
-              setAdmin({ type: "BRAND_LIST", data: filter });
+            if (user.userInfo.role === "1") {
+              setAdmin({
+                type: "BRAND_LIST",
+                data: result,
+              });
+            } else {
+              if (filter.length > 0) {
+                setAdmin({
+                  type: "BRAND_LIST",
+                  data: filter,
+                });
+              }
             }
           }
         }

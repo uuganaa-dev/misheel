@@ -198,7 +198,16 @@
   border-radius: 0.25rem;
   cursor: pointer;
 }
-
+.detail-btn {
+  font-size: 15px;
+  background-color: white;
+  color: black;
+  width: 160px;
+  text-align: center;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 5px;
+}
 @media only screen and (max-width: 900px) {
   .m-shiidel-text {
     font-size: 20px;

@@ -9,6 +9,7 @@ const Users = () => {
   const { user } = useUserState();
   const [isShow, setIsShow] = useState(false);
   const [id, setId] = useState("new");
+  const [company, setCompany] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState();
@@ -17,6 +18,7 @@ const Users = () => {
 
   const Clear = () => {
     setId("new");
+    setCompany("");
     setUsername("");
     setPassword("");
     setRole();
@@ -24,6 +26,7 @@ const Users = () => {
 
   const Edit = (el) => {
     setId(el._id);
+    setCompany(el.company);
     setUsername(el.username);
     setPassword("");
     setRole(parseInt(el.role));
@@ -32,6 +35,7 @@ const Users = () => {
 
   const Validate = () => {
     let validation = "";
+    company || (validation += "Компанийн нэр бичнэ үү!<br/>");
     username || (validation += "Нэр бичнэ үү!<br/>");
     password || (validation += "Нууц үг бичнэ үү!<br/>");
     role || (validation += "Эрх сонгоно уу!<br/>");
@@ -52,12 +56,13 @@ const Users = () => {
 
   const Save = () => {
     API.postUser({
+      company: company,
       username: username,
       password: password,
       role: role.toString(),
     })
       .then((res) => {
-        if (res.data.success === 1) {
+        if (res.data.success) {
           Swal.fire({
             icon: "success",
             title: "Амжилттай хадгалагдлаа.",
@@ -80,12 +85,13 @@ const Users = () => {
   };
   const Update = () => {
     API.putUser(id, {
+      company: company,
       username: username,
       password: password,
       role: role.toString(),
     })
       .then((res) => {
-        if (res.data.success === 1) {
+        if (res.data.success) {
           Swal.fire({
             icon: "success",
             title: "Амжилттай хадгалагдлаа.",
@@ -120,7 +126,7 @@ const Users = () => {
       if (result.isConfirmed) {
         API.deleteUser(id)
           .then((res) => {
-            if (res.status === 200) {
+            if (res.data.success) {
               setRefresh(refresh + 1);
               Swal.fire({
                 icon: "success",
@@ -209,9 +215,15 @@ const Users = () => {
         <div className="card">
           <div className="card-body">
             <Input
+              placeholder="Компанийн нэр"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+            <Input
               placeholder="Нэр"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="mt-3"
             />
             <Input.Password
               placeholder="Нууц үг"
@@ -219,7 +231,6 @@ const Users = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="mt-3"
             />
-
             <Select
               showSearch
               optionFilterProp="children"
