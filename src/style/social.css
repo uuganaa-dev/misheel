@@ -143,6 +143,62 @@
   opacity: 1;
   font-weight: 500;
 }
+.search-filter {
+  width: 20%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.search-pruduct {
+  width: 80%;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.search-pruduct-item {
+  width: 230px;
+  height: 150px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.search-pruduct-item:hover {
+  transform: scale(1.02);
+  transition: all 0.3s;
+}
+.search-contaner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn {
+  margin-top: 100px;
+  position: absolute;
+  display: flex;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff5722;
+  width: 150px;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 900px) {
   .m-shiidel-text {
     font-size: 20px;
@@ -153,6 +209,18 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .search-filter {
+    display: none;
+  }
+  .search-pruduct {
+    width: 100%;
+    justify-content: center;
+    gap: 35px;
+  }
+  .search-pruduct-item {
+    width: 150px;
+    height: 100px;
+  }
   .header-logo {
     display: none;
   }

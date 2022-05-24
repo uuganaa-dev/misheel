@@ -8,6 +8,7 @@ import FooterMain from "../../component/footerMain";
 const Search = () => {
   const params = useParams();
   const [products, setProducts] = useState([]);
+  const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
     API.getProduct()
@@ -24,7 +25,7 @@ const Search = () => {
   }, [params.value]);
 
   return (
-    <div>
+    <div style={{ fontFamily: "roboto" }}>
       <Appbar />
       <Grid
         sx={{
@@ -69,7 +70,52 @@ const Search = () => {
             ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
-        {params.value}
+        <div className="search-contaner">
+          <div className="search-filter">
+            <div style={{ fontSize: "20px", fontWeight: 500 }}>Матерал</div>
+            <div>Арьсан</div>
+            <div>Даавуун</div>
+            <div>Пластик</div>
+          </div>
+          <div className="search-pruduct">
+            <div
+              className="search-pruduct-item"
+              onMouseEnter={() => {
+                return <div className="search-btn">Дэлгэрэнгүй</div>;
+              }}
+              onMouseLeave={() => setIsShow(false)}
+            >
+              <img
+                src="/img/01.jpg"
+                alt=""
+                height={"100%"}
+                width={"100%"}
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div
+              className="search-pruduct-item"
+              onMouseEnter={() => {
+                setIsShow(true);
+              }}
+              onMouseLeave={() => setIsShow(false)}
+            >
+              <img
+                src="/img/01.jpg"
+                alt=""
+                height={"100%"}
+                width={"100%"}
+                style={{ objectFit: "cover" }}
+              />
+              <div
+                className="search-btn"
+                style={isShow ? { display: "flex" } : { display: "none" }}
+              >
+                Дэлгэрэнгүй
+              </div>
+            </div>
+          </div>
+        </div>
         <FooterMain />
       </Grid>
     </div>
