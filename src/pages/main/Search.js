@@ -4,28 +4,114 @@ import { useParams } from "react-router-dom";
 import * as API from "../../api/request";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
+import { Modal, Carousel } from "antd";
 
 const Search = () => {
   const params = useParams();
-  const [products, setProducts] = useState([]);
   const [isShow, setIsShow] = useState(false);
+  const [oneData, setOneData] = useState();
+  const [allproducts, setAllproducts] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const HandleClick = (el) => {
+    var onebrand = brand.find((item) => item.id === el.productBrandId);
+    setIsShow(true);
+    setOneData({ ...el, brandDetail: onebrand });
+  };
+
+  useEffect(() => {
+    API.getBrand()
+      .then((res) => {
+        setBrand(res.data.data);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     API.getProduct()
-      .then((res) =>
-        setProducts(
-          res.data.data.filter((el) =>
-            el.productOpenStyle
-              .toLowerCase()
-              .includes(params.value.toLocaleLowerCase())
-          )
-        )
-      )
+      .then((res) => {
+        setAllproducts(res.data.data);
+      })
       .catch(() => {});
-  }, [params.value]);
+  }, []);
 
+  useEffect(() => {
+    if (allproducts.length > 0) {
+      setProducts(
+        allproducts.filter((el) =>
+          el.productOpenStyle
+            .toLowerCase()
+            .includes(params.value.toLocaleLowerCase())
+        )
+      );
+    }
+  }, [allproducts, params.value]);
+  const onChange = (currentSlide) => {
+    console.log(currentSlide);
+  };
   return (
     <div style={{ fontFamily: "roboto" }}>
+      <Modal
+        title=""
+        visible={isShow}
+        footer={false}
+        onCancel={() => {
+          setIsShow(false);
+          setOneData();
+        }}
+        width={1000}
+      >
+        <div className="gadot-primary-modal-body">
+          <div className="gadot-text-body">
+            <div className="gadot-uploadType2">
+              <Carousel afterChange={onChange}>
+                <div>
+                  {oneData && (
+                    <img
+                      src={"http://167.172.76.26" + oneData?.productImage[0]}
+                      alt=""
+                      width={200}
+                      height={200}
+                      style={{ objectFit: "cover" }}
+                    />
+                  )}
+                </div>
+                <div>sdasdasd</div>
+              </Carousel>
+
+              {oneData && (
+                <div className="text-center">
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Брэнд нэр: </span>
+                    {oneData.brandDetail.brandName}
+                  </div>
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Бүтээгдэхүүн нэр: </span>
+                    {oneData.productOpenStyle}
+                  </div>
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Загвар: </span>
+                    {oneData.productStyle}
+                  </div>
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Хэрэглээ: </span>
+                    {oneData.productUsage}
+                  </div>
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Өнгө: </span>
+                    {oneData.productColor}
+                  </div>
+                  <div className="text-left">
+                    <span style={{ fontWeight: 600 }}>Матерал: </span>
+                    {oneData.productMaterial}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </Modal>
       <Appbar />
       <Grid
         sx={{
@@ -56,7 +142,7 @@ const Search = () => {
               fontWeight: 200,
             }}
           >
-            #SEARCH
+            #{params.value.toUpperCase()}
           </Typography>
           <Typography
             sx={{
@@ -70,54 +156,43 @@ const Search = () => {
             ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
-        <div className="search-contaner">
-          <div className="search-filter">
-            <div style={{ fontSize: "20px", fontWeight: 500 }}>Матерал</div>
-            <div>Арьсан</div>
-            <div>Даавуун</div>
-            <div>Пластик</div>
-          </div>
-          <div className="search-pruduct">
-            <div
-              className="search-pruduct-item"
-              onMouseEnter={() => {
-                return <div className="search-btn">Дэлгэрэнгүй</div>;
-              }}
-              onMouseLeave={() => setIsShow(false)}
-            >
-              <img
-                src="/img/01.jpg"
-                alt=""
-                height={"100%"}
-                width={"100%"}
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-            <div
-              className="search-pruduct-item"
-              onMouseEnter={() => {
-                setIsShow(true);
-              }}
-              onMouseLeave={() => setIsShow(false)}
-            >
-              <img
-                src="/img/01.jpg"
-                alt=""
-                height={"100%"}
-                width={"100%"}
-                style={{ objectFit: "cover" }}
-              />
-              <div
-                className="search-btn"
-                style={isShow ? { display: "flex" } : { display: "none" }}
-              >
-                Дэлгэрэнгүй
-              </div>
-            </div>
-          </div>
-        </div>
-        <FooterMain />
       </Grid>
+      <div className="search-contaner">
+        <div className="search-filter">
+          <div style={{ fontSize: "20px", fontWeight: 500 }}>Матерал</div>
+          <div>Арьсан</div>
+          <div>Даавуун</div>
+          <div>Пластик</div>
+        </div>
+        <div className="search-pruduct">
+          {products.length > 0 ? (
+            products.map((el, index) => {
+              return (
+                <div className="search-pruduct-item" key={index}>
+                  <img
+                    src={"http://167.172.76.26" + el.productImage[0]}
+                    alt=""
+                    height={"100%"}
+                    width={"100%"}
+                    style={{ objectFit: "cover" }}
+                  />
+                  <div
+                    className="search-btn"
+                    onClick={() => {
+                      HandleClick(el);
+                    }}
+                  >
+                    Дэлгэрэнгүй
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p>Хайлт илэрцгүй...</p>
+          )}
+        </div>
+      </div>
+      <FooterMain />
     </div>
   );
 };

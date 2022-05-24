@@ -24,6 +24,7 @@ export default function FooterMain() {
           width: "100%",
           height: ["245px", "417px", "417px"],
           position: "relative",
+          bottom: "0",
         }}
       >
         <Grid
