@@ -215,10 +215,10 @@ export default function BrandPage() {
                             item.id === catValue ? "#0F56B3" : "white",
                           display: "flex",
                           border: "1px solid rgba(0,0,0,0.25)",
-                          borderRadius: "8px",
-                          padding: "6.5px 8px",
+                          borderRadius: ["4px", "8px", "8px"],
+                          padding: ["0.5px 8px", "3.5px 8px", "6.5px 8px"],
                           alignItems: "center",
-                          gap: "12px",
+                          gap: ["10px", "12px", "12px"],
                           cursor: "pointer",
                           "&:hover": {
                             backgroundColor: "#0F56B3",
@@ -274,7 +274,7 @@ export default function BrandPage() {
                         />
                         <Typography
                           sx={{
-                            fontSize: "14px",
+                            fontSize: ["10px", "14px", "14px"],
                             fontFamily: "Inter",
                             fontWeight: 500,
                             color: "rgba(32, 32, 32, 0.65)",
