@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import * as API from "../../api/request";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
-import { Modal, Carousel } from "antd";
-
+import { Modal } from "antd";
 const Search = () => {
   const params = useParams();
   const [isShow, setIsShow] = useState(false);
@@ -47,9 +46,7 @@ const Search = () => {
       );
     }
   }, [allproducts, params.value]);
-  const onChange = (currentSlide) => {
-    console.log(currentSlide);
-  };
+
   return (
     <div style={{ fontFamily: "roboto" }}>
       <Modal
@@ -60,28 +57,19 @@ const Search = () => {
           setIsShow(false);
           setOneData();
         }}
-        width={1000}
       >
         <div className="gadot-primary-modal-body">
           <div className="gadot-text-body">
             <div className="gadot-uploadType2">
-              <Carousel afterChange={onChange}>
-                <div>
-                  {oneData && (
-                    <img
-                      src={"http://167.172.76.26" + oneData?.productImage[0]}
-                      alt=""
-                      width={200}
-                      height={200}
-                      style={{ objectFit: "cover" }}
-                    />
-                  )}
-                </div>
-                <div>sdasdasd</div>
-              </Carousel>
-
               {oneData && (
                 <div className="text-center">
+                  <img
+                    src={"http://167.172.76.26/" + oneData.productImage[0]}
+                    alt=""
+                    width={"100%"}
+                    height="200px"
+                    style={{ objectFit: "cover" }}
+                  />
                   <div className="text-left">
                     <span style={{ fontWeight: 600 }}>Брэнд нэр: </span>
                     {oneData.brandDetail.brandName}
