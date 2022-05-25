@@ -81,7 +81,7 @@ export default function MPrice() {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://167.172.76.26${lastItem?.priceImage}")`,
+              backgroundImage: `url("http://misheel.tk${lastItem?.priceImage}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
@@ -91,7 +91,7 @@ export default function MPrice() {
           <Typography
             sx={{
               fontSize: ["10px", "34px"],
-              fontFamily: "Inter",
+
               letterSpacing: "3.25px",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -133,24 +133,13 @@ export default function MPrice() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
             }}
           >
             #Зах зээлийн үнэ
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              color: "#707070",
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid
@@ -166,7 +155,7 @@ export default function MPrice() {
             <Typography
               sx={{
                 fontSize: ["12px", "12px", "18px"],
-                fontFamily: "Inter",
+
                 textTransform: "uppercase",
                 fontWeight: 600,
               }}
@@ -229,9 +218,7 @@ export default function MPrice() {
                 <div className="gadot-uploadType2">
                   <div onClick={() => HandleClick(0)}>
                     <img
-                      src={
-                        "http://167.172.76.26/" + onedata?.priceAllPriceImage
-                      }
+                      src={"http://misheel.tk" + onedata?.priceAllPriceImage}
                       alt=""
                       width={"100%"}
                     />

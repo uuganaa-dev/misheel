@@ -11,7 +11,7 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 const { Option } = Select;
-const URL = "http://167.172.76.26";
+const URL = "http://misheel.tk";
 
 const Admin = () => {
   const { admin, setAdmin } = useAdminState();
@@ -606,6 +606,7 @@ const Admin = () => {
         >
           <div className="admin-main-item">
             <img src="/file.png" alt="" className="admin-main-item-img" />
+            <div>1440x718px</div>
           </div>
         </div>
         <div
@@ -624,7 +625,6 @@ const Admin = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "roboto",
           }}
         >
           <p>Cover</p>
@@ -644,8 +644,15 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>505x364px</div>
             </div>
             <div
               className="admin-main-item item-2-2"
@@ -658,8 +665,15 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>505x364px</div>
             </div>
           </div>
           <div className="admin-main2">
@@ -674,10 +688,15 @@ const Admin = () => {
                   isShow: true,
                 });
               }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              <div>
-                <img src="/file.png" alt="" className="admin-main-item-img" />
-              </div>
+              <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>710x490px</div>
             </div>
             <div className="item-2-2-2">
               <div
@@ -691,8 +710,15 @@ const Admin = () => {
                     isShow: true,
                   });
                 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
                 <img src="/file.png" alt="" className="admin-main-item-img" />
+                <div>300x230px</div>
               </div>
               <div
                 className="admin-main-item item-2-2-2-2"
@@ -705,8 +731,15 @@ const Admin = () => {
                     isShow: true,
                   });
                 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
                 <img src="/file.png" alt="" className="admin-main-item-img" />
+                <div>300x230px</div>
               </div>
             </div>
           </div>
@@ -724,6 +757,7 @@ const Admin = () => {
               }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>555x555px</div>
             </div>
             <div
               className="item1"
@@ -739,6 +773,7 @@ const Admin = () => {
               }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>555x555px</div>
             </div>
             <div
               className="item1"
@@ -753,6 +788,7 @@ const Admin = () => {
               }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>555x555px</div>
             </div>
             <div
               className="item2"
@@ -768,6 +804,7 @@ const Admin = () => {
               }}
             >
               <img src="/file.png" alt="" className="admin-main-item-img" />
+              <div>555x555px</div>
             </div>
           </div>
         </div>
@@ -788,7 +825,6 @@ const Admin = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "roboto",
           }}
         >
           <p>Brands</p>
@@ -895,7 +931,6 @@ const Admin = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "roboto",
           }}
         >
           <p>Showrooms</p>
@@ -986,7 +1021,6 @@ const Admin = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "roboto",
           }}
         >
           <p>Projects</p>

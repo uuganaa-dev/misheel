@@ -25,7 +25,7 @@ export default function CategoryArrow({ txt, chooseCategory = false }) {
       <Typography
         sx={{
           fontSize: "14px",
-          fontFamily: "Inter",
+
           fontWeight: 500,
           textTransform: "capitalize",
         }}

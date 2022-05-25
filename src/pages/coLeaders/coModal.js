@@ -110,7 +110,7 @@ export default function CoModal({ CloseModal, data }) {
             <Grid sx={{ display: "flex", gap: "30px" }}>
               <Grid
                 sx={{
-                  backgroundImage: `url("http://167.172.76.26/${item.img}")`,
+                  backgroundImage: `url("http://misheel.tk${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   width: "50%",
@@ -118,12 +118,8 @@ export default function CoModal({ CloseModal, data }) {
                 }}
               />
               <Grid sx={{ width: "40%" }}>
-                <Typography sx={{ fontSize: "50px", fontFamily: "Inter" }}>
-                  {item.name}
-                </Typography>
-                <Typography sx={{ fontSize: "40px", fontFamily: "Inter" }}>
-                  {item.txt}
-                </Typography>
+                <Typography sx={{ fontSize: "50px" }}>{item.name}</Typography>
+                <Typography sx={{ fontSize: "40px" }}>{item.txt}</Typography>
               </Grid>
             </Grid>
           </Grid>

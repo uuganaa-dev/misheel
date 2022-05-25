@@ -7,7 +7,7 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import { useAdminState } from "../../../contexts/AdminContext";
 
-const URL = "http://167.172.76.26/";
+const URL = "http://misheel.tk";
 
 const Social = () => {
   const { admin, setAdmin } = useAdminState();

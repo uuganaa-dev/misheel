@@ -62,7 +62,7 @@ export default function BrandDetail() {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26${data?.brandDetailCoverImg}")`,
+            backgroundImage: `url("http://misheel.tk${data?.brandDetailCoverImg}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: "100%",

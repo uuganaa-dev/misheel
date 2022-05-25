@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
-import img from "./Group.png";
-import img2 from "./Group (1).png";
+import img from "./1.png";
+import img2 from "./2.png";
 import { Select } from "antd";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 const { Option } = Select;
 
 export default function Map() {
@@ -31,7 +33,7 @@ export default function Map() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "0.25px",
               textTransform: "uppercase",
               textAlign: "center",
@@ -39,17 +41,6 @@ export default function Map() {
             }}
           >
             #MAP
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              color: "#707070",
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
 
@@ -69,7 +60,6 @@ export default function Map() {
               alignItems: "center",
               justifyContent: "center",
               paddingBottom: "10px",
-              fontFamily: "roboto",
             }}
           >
             <Select
@@ -85,27 +75,17 @@ export default function Map() {
               <Option value={2}>Хоёрдугаар давхар</Option>
             </Select>
           </div>
-          {value === 1 ? (
-            <Grid
-              sx={{
-                backgroundImage: `url("${img}")`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                width: "80%",
-                height: "calc(80vw * 0.61)",
-              }}
-            />
-          ) : (
-            <Grid
-              sx={{
-                backgroundImage: `url("${img2}")`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                width: "80%",
-                height: "calc(80vw * 0.62)",
-              }}
-            />
-          )}
+          <div style={{ width: "90%" }}>
+            {value === 1 ? (
+              <Zoom>
+                <img src={img} alt="" width={"100%"} height={"100%"} />
+              </Zoom>
+            ) : (
+              <Zoom>
+                <img src={img2} alt="" width={"100%"} height={"100%"} />
+              </Zoom>
+            )}
+          </div>
         </Grid>
         <FooterMain />
       </Grid>

@@ -142,7 +142,7 @@ export default function ImageSlick({ txt }) {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("http://167.172.76.26${item.productImage[0]}")`,
+                  backgroundImage: `url("http://misheel.tk${item.productImage[0]}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["100px", "244px"],

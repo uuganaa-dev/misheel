@@ -71,6 +71,7 @@ export default function Appbar() {
             onPressEnter={() => {
               navigate("/search/" + searchValue);
             }}
+            size="small"
           />
         ) : (
           <>
@@ -169,9 +170,16 @@ export default function Appbar() {
           </>
         )}
 
-        <Grid sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: ["10px", "24px", "24px"],
+            alignItems: "center",
+            fontSize: ["10px", "16px", "16px"],
+          }}
+        >
           <SearchIcon
-            sx={{ ...style.pointer }}
+            sx={{ ...style.pointer, fontSize: ["10px", "16px", "16px"] }}
             onClick={() => setIsShow(!isShow)}
           />
 
@@ -181,6 +189,7 @@ export default function Appbar() {
               ...(select === "map" && {
                 color: ["white", "white", "white"],
               }),
+              fontSize: ["10px", "16px", "16px"],
             }}
             onClick={() => {
               setSelect("map");
@@ -222,7 +231,7 @@ export default function Appbar() {
 }
 
 const style = {
-  txt: { fontFamily: "Inter", fontSize: "14px", textTransform: "uppercase" },
+  txt: { fontSize: "14px", textTransform: "uppercase" },
   pointer: { cursor: "pointer", "&:hover": { opacity: 0.7 } },
   fourHundred: { fontWeight: 400 },
   sixHundred: { fontWeight: 600 },

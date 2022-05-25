@@ -71,7 +71,7 @@ export default function DevelopmentHistory() {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26${state.img}")`,
+            backgroundImage: `url("http://misheel.tk${state.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["71%", "419px"],
@@ -81,7 +81,6 @@ export default function DevelopmentHistory() {
         />
         <Typography
           sx={{
-            fontFamily: "Inter",
             fontSize: "16px",
             fontWeight: 300,
             width: ["71%", "467px"],

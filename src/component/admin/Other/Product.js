@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Select, Input, Upload } from "antd";
+import { Modal, Select, Input, Upload, Divider } from "antd";
 import { useAdminState } from "../../../contexts/AdminContext";
 import { useUserState } from "../../../contexts/UserContext";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const { Option } = Select;
 const { TextArea } = Input;
 
-const URL = "http://167.172.76.26";
+const URL = "http://misheel.tk";
 
 const Product = () => {
   const formData = new FormData();
@@ -20,6 +20,7 @@ const Product = () => {
   const Validate = () => {
     let validation = "";
     admin.productBrandId || (validation += "Брэнд сонгоно уу!<br/>");
+    admin.categoryValue || (validation += "Ангилал сонгоно уу!<br/>");
     admin.productImage.length > 0 ||
       (validation += "Бүтээгдэхүүний зураг оруулна уу!<br/>");
     if (validation !== "") {
@@ -50,6 +51,9 @@ const Product = () => {
     formData.append("productMaterial", admin.productMaterial);
     formData.append("productColor", admin.productColor);
     formData.append("user_id", user.userInfo.user_id);
+    if (admin.categoryValue) {
+      formData.append("catId", admin.categoryValue);
+    }
     API.postProduct(formData)
       .then((res) => {
         if (res.status === 200) {
@@ -92,7 +96,6 @@ const Product = () => {
         API.deleteProduct(id)
           .then((res) => {
             if (res.status === 200) {
-              setAdmin({ type: "PRODUCT_REFRESH" });
               Swal.fire({
                 icon: "success",
                 title: "Амжилттай устгагдлаа.",
@@ -108,10 +111,71 @@ const Product = () => {
               text: "Устгах үед алдаа гарлаа дахин оролдоно уу.",
               confirmButtonColor: "#0f56b3",
             });
+          })
+          .finally(() => {
+            setAdmin({ type: "PRODUCT_REFRESH" });
+            setAdmin({ type: "BRAND_LIST_LOADING", data: true });
           });
       }
     });
   };
+
+  const CategorySave = () => {
+    if (admin.categoryAddValue) {
+      setAdmin({ type: "LOADING", data: true });
+      API.postCategory({ name: admin.categoryAddValue })
+        .then((res) => {
+          if (res.status === 200) {
+            setAdmin({ type: "CATEGORY_ADD_VALUE", data: "" });
+            setAdmin({
+              type: "BRAND_LIST_RELOAD",
+            });
+            Swal.fire({
+              icon: "success",
+              title: "Амжилттай хадгалагдлаа.",
+              confirmButtonColor: "#0f56b3",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Алдаа гарлаа.",
+            text: "Хадгалах үед алдаа гарлаа дахин оролдоно уу.",
+            confirmButtonColor: "#0f56b3",
+          });
+        })
+        .finally(() => setAdmin({ type: "LOADING", data: false }));
+    } else {
+      Swal.fire({
+        icon: "warning",
+        text: "Нэр оруулна уу.",
+        confirmButtonColor: "#0f56b3",
+      });
+    }
+  };
+
+  useEffect(() => {
+    API.getCategory()
+      .then((res) => {
+        if (res.data.success) {
+          if (res.data.data.length > 0) {
+            setAdmin({ type: "CATEGORY_LIST", data: res.data.data });
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Алдаа гарлаа.",
+          text: "Категори унших үед алдаа гарлаа дахин оролдоно уу.",
+          confirmButtonColor: "#0f56b3",
+        });
+      });
+  }, [admin.brandListReload, setAdmin]);
+
   useEffect(() => {
     setLoading(true);
     API.getBrand()
@@ -201,34 +265,102 @@ const Product = () => {
             <div className="gadot-uploadType2">
               <div className="gadot-uploadType2-2">
                 <div>Брэнд</div>
-                {admin.brandListLoading ? (
-                  <p>loading...</p>
-                ) : (
-                  <Select
-                    showSearch
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                    size="large"
-                    style={{ width: "100%" }}
-                    placeholder="Брэнд сонгох..."
-                    value={admin.productBrandId}
-                    onChange={(value) =>
-                      setAdmin({
-                        type: "PRODUCT_BRAND_ID",
-                        data: value,
-                      })
-                    }
-                  >
-                    {admin.brandList.map((el) => (
+                <Select
+                  showSearch
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  size="large"
+                  style={{ width: "100%" }}
+                  placeholder="Брэнд сонгох..."
+                  value={admin.productBrandId}
+                  onChange={(value) =>
+                    setAdmin({
+                      type: "PRODUCT_BRAND_ID",
+                      data: value,
+                    })
+                  }
+                >
+                  {admin.brandList.length > 0 &&
+                    admin.brandList.map((el) => (
                       <Option key={el.id}>{el.brandName}</Option>
                     ))}
-                  </Select>
-                )}
-
+                </Select>
+                <div>Ангилал</div>
+                <Select
+                  showSearch
+                  allowClear
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  size="large"
+                  style={{ width: "100%" }}
+                  placeholder="Ангилал сонгох..."
+                  value={admin.categoryValue}
+                  onChange={(value) =>
+                    setAdmin({
+                      type: "CATEGORY_VALUE",
+                      data: value,
+                    })
+                  }
+                  dropdownRender={(menu) => (
+                    <>
+                      {menu}
+                      <Divider style={{ margin: "8px 0" }} />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "100%",
+                          paddingLeft: "10px",
+                          paddingRight: "10px",
+                          paddingBottom: "6px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "80%",
+                          }}
+                        >
+                          <Input
+                            style={{ width: "80%" }}
+                            placeholder="Ангилал нэмэх..."
+                            value={admin.categoryAddValue}
+                            onChange={(e) =>
+                              setAdmin({
+                                type: "CATEGORY_ADD_VALUE",
+                                data: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                        <div
+                          style={{
+                            width: "20%",
+                          }}
+                        >
+                          <div
+                            className="modal-add-btn"
+                            onClick={() => CategorySave()}
+                          >
+                            {admin.loading ? <LoadingOutlined /> : "Нэмэх"}
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                >
+                  {admin.categoryList.map((el) => (
+                    <Option key={el.id}>{el.name}</Option>
+                  ))}
+                </Select>
                 <div style={{ marginTop: "10px" }}>Бүтээгдэхүүн</div>
                 <Upload
                   beforeUpload={() => false}
@@ -368,10 +500,10 @@ const Product = () => {
                     </div>
                     <div className="cat-brand-title">
                       <div className="cat-brand-title-name">
-                        {aa?.brandName}
+                        {el.productOpenStyle}
                       </div>
+                      <div className="cat-brand-desc">{aa?.brandName}</div>
                       <div className="cat-brand-desc">{el.productMaterial}</div>
-                      <div className="cat-brand-desc">{el.productUsage}</div>
                     </div>
                   </div>
                   <div

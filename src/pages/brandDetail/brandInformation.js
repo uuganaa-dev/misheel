@@ -18,31 +18,31 @@ export default function BrandInformation({ sx, data, txt }) {
         sx={{
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
           gap: ["21px", "52px", "73px"],
         }}
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26${data?.brandLogo}")`,
+            backgroundImage: `url("http://misheel.tk${data?.brandLogo}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["58px", "142px", "201px"],
             height: ["61px", "149px", "200px"],
-            border: "1px solid rgba(80,80,80,0.8)",
             borderRadius: "10px",
           }}
         />
         <Grid sx={{ width: ["178px", "435px", "717px"] }}>
-          <Typography sx={{ fontSize: ["10px", "14px"], fontFamily: "Inter" }}>
+          <Typography sx={{ fontSize: ["10px", "14px"] }}>
             {data?.brandDetailDesc}
           </Typography>
-          <Typography sx={{ fontSize: ["10px", "14px"], fontFamily: "Inter" }}>
+          <Typography sx={{ fontSize: ["10px", "14px"] }}>
             {txt.phone} : {data?.brandDetailNumber}
           </Typography>
-          <Typography sx={{ fontSize: ["10px", "14px"], fontFamily: "Inter" }}>
+          <Typography sx={{ fontSize: ["10px", "14px"] }}>
             {txt.email} : {data?.brandDetailEmail}
           </Typography>
-          <Typography sx={{ fontSize: ["10px", "14px"], fontFamily: "Inter" }}>
+          <Typography sx={{ fontSize: ["10px", "14px"] }}>
             {txt.fb} : {data?.brandDetailFacebook}
           </Typography>
         </Grid>

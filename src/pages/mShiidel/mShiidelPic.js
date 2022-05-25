@@ -15,7 +15,7 @@ export default function MShiidelPic({ data, show, setShow, index, click }) {
       <Grid sx={{ position: "relative" }} onClick={click}>
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26/${data.img}")`,
+            backgroundImage: `url("http://misheel.tk${data.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["200px", "262px", "370px"],

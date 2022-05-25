@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, Radio } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import ReclamImage from "../../asset/backgroundImages/brandPage/reclam.png";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
-import { ArrowBackIosNew } from "@mui/icons-material";
 
 export default function BrandPage() {
   const navigate = useNavigate();
 
-  const [show, setShow] = useState({
-    index: "",
-    show: 0,
-  });
   const [loading, setLoading] = useState(false);
   const [catValue, setCatValue] = useState();
   const [catrefresh, setCatrefresh] = useState(1);
   const [catList, setCatList] = useState([]);
-  const [subCatList, setSubCatList] = useState([]);
-  const [subCatFilteredList, setSubCatFilteredList] = useState([]);
-  const [subCatValue, setSubCatValue] = useState();
   const [brandList, setBrandList] = useState([]);
   const [brandListFiltered, setBrandListFiltered] = useState([]);
 
   useEffect(() => {
     if (catValue !== undefined) {
-      if (subCatList.length > 0) {
-        setSubCatFilteredList(
-          subCatList.filter((el) => el.parentId === catValue)
-        );
-      }
       if (brandList.length > 0) {
         setBrandListFiltered(
           brandList.filter((el) => el.categoryId === catValue)
@@ -40,20 +27,6 @@ export default function BrandPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catValue, catrefresh]);
-
-  useEffect(() => {
-    if (subCatValue !== undefined) {
-      if (brandList.length > 0 && catValue !== undefined) {
-        setBrandListFiltered(
-          brandList.filter(
-            (el) =>
-              el.categoryId === catValue && el.subCategoryId === subCatValue
-          )
-        );
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subCatValue]);
 
   useEffect(() => {
     setLoading(true);
@@ -73,26 +46,9 @@ export default function BrandPage() {
           text: "Категори унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
-      });
-  }, []);
-
-  useEffect(() => {
-    API.getSubCategory()
-      .then((res) => {
-        if (res.data.success) {
-          if (res.data.data.length > 0) {
-            setSubCatList(res.data.data);
-          }
-        }
       })
-      .catch((err) => {
-        console.log(err);
-        Swal.fire({
-          icon: "error",
-          title: "Алдаа гарлаа.",
-          text: "Дэд категори унших үед алдаа гарлаа дахин оролдоно уу.",
-          confirmButtonColor: "#0f56b3",
-        });
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -121,7 +77,7 @@ export default function BrandPage() {
   }, []);
 
   return (
-    <>
+    <div style={{ fontFamily: "roboto" }}>
       <Appbar />
       <Grid
         sx={{
@@ -149,24 +105,12 @@ export default function BrandPage() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
             }}
           >
             #БРЭНД
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              color: "#707070",
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid
@@ -205,7 +149,6 @@ export default function BrandPage() {
                       onClick={() => {
                         setCatValue(item.id);
                         setCatrefresh(catrefresh + 1);
-                        setSubCatValue();
                       }}
                     >
                       <Grid
@@ -216,7 +159,7 @@ export default function BrandPage() {
                           display: "flex",
                           border: "1px solid rgba(0,0,0,0.25)",
                           borderRadius: ["4px", "8px", "8px"],
-                          padding: ["0.5px 8px", "3.5px 8px", "6.5px 8px"],
+                          padding: ["0.5px 4px", "3.5px 8px", "6.5px 8px"],
                           alignItems: "center",
                           gap: ["10px", "12px", "12px"],
                           cursor: "pointer",
@@ -226,11 +169,10 @@ export default function BrandPage() {
                           },
                         }}
                       >
-                        <ArrowBackIosNew sx={{ transform: "rotate(-90deg)" }} />
                         <Typography
                           sx={{
-                            fontSize: "14px",
-                            fontFamily: "Inter",
+                            fontSize: ["10px", "12px", "14px"],
+
                             fontWeight: 500,
                             textTransform: "capitalize",
                           }}
@@ -241,52 +183,7 @@ export default function BrandPage() {
                     </Grid>
                   ))}
               </Grid>
-              <Grid
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: [
-                    "repeat(2, 1fr)",
-                    "repeat(3, 1fr)",
-                    "repeat(4, 1fr)",
-                  ],
-                  rowGap: ["14px", "24px"],
-                }}
-              >
-                {subCatFilteredList.length > 0 &&
-                  subCatFilteredList.map((item, index) => (
-                    <Grid key={index}>
-                      <Grid
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                        }}
-                      >
-                        <Radio
-                          sx={{
-                            width: "16px",
-                            height: "16px",
-                            color: "rgba(156, 163, 175, 1)",
-                          }}
-                          value={item.id}
-                          checked={item.id === subCatValue}
-                          onChange={(e) => setSubCatValue(e.target.value)}
-                        />
-                        <Typography
-                          sx={{
-                            fontSize: ["10px", "14px", "14px"],
-                            fontFamily: "Inter",
-                            fontWeight: 500,
-                            color: "rgba(32, 32, 32, 0.65)",
-                            "&:hover": { color: "rgba(32, 32, 32, 1)" },
-                          }}
-                        >
-                          {item.name}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  ))}
-              </Grid>
+
               <Grid
                 sx={{
                   display: "grid",
@@ -306,6 +203,7 @@ export default function BrandPage() {
                       <Grid
                         key={index}
                         onClick={() => navigate("/brandDetail/" + item.id)}
+                        className="brand-hover"
                       >
                         <Grid
                           sx={{
@@ -318,26 +216,14 @@ export default function BrandPage() {
                             transition: "transform 10s",
                             cursor: "pointer",
                           }}
-                          onMouseEnter={() =>
-                            setShow({ ...show, index: index, show: 1 })
-                          }
-                          onMouseLeave={() =>
-                            setShow({ ...show, index: "", show: 0 })
-                          }
                         >
                           <Grid
                             sx={{
-                              backgroundImage: `url("http://167.172.76.26/${item.brandLogo}")`,
+                              backgroundImage: `url("http://misheel.tk${item.brandLogo}")`,
                               backgroundRepeat: "no-repeat",
                               backgroundSize: "cover",
-                              width:
-                                show.index === index && show.show === 1
-                                  ? ["84px"]
-                                  : ["80px", "95px", "135px"],
-                              height:
-                                show.index === index && show.show === 1
-                                  ? ["84px"]
-                                  : ["80px", "95px", "135px"],
+                              width: ["80px", "95px", "135px"],
+                              height: ["80px", "95px", "135px"],
                               transition: "transform 10s",
                             }}
                           />
@@ -345,7 +231,7 @@ export default function BrandPage() {
                             <Typography
                               sx={{
                                 fontSize: ["10px", "16px"],
-                                fontFamily: "Inter",
+
                                 textTransform: "uppercase",
                               }}
                             >
@@ -354,7 +240,7 @@ export default function BrandPage() {
                             <Typography
                               sx={{
                                 fontSize: ["8px", "13px"],
-                                fontFamily: "Inter",
+
                                 color: "#818181",
                               }}
                             >
@@ -380,6 +266,6 @@ export default function BrandPage() {
         />
         <FooterMain />
       </Grid>
-    </>
+    </div>
   );
 }

@@ -30,7 +30,7 @@ export default function CreatedByProject({
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26/${data.img}")`,
+            backgroundImage: `url("http://misheel.tk${data.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["157px", "410px", "585px"],
@@ -65,16 +65,16 @@ export default function CreatedByProject({
           justifyContent: "center",
         }}
       >
-        <Typography sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}>
+        <Typography sx={{ fontSize: ["10px", "30px"] }}>
           Project {index + 1}
         </Typography>
-        <Typography sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}>
+        <Typography sx={{ fontSize: ["10px", "30px"] }}>
           {data.title}
         </Typography>
         <Typography
           sx={{
             fontSize: ["10px", "16px"],
-            fontFamily: "Inter",
+
             color: "#6B6B6B",
             mt: ["18px", "", "37px"],
           }}

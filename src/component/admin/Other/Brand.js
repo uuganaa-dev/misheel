@@ -15,7 +15,7 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-const URL = "http://167.172.76.26";
+const URL = "http://misheel.tk";
 
 const Brand = () => {
   const formData = new FormData();
@@ -56,50 +56,6 @@ const Brand = () => {
         text: "Нэр оруулна уу.",
         confirmButtonColor: "#0f56b3",
       });
-    }
-  };
-
-  const SubCategorySave = () => {
-    let validation = "";
-    admin.categoryValue ||
-      (validation +=
-        "Ангилал сонгосны дараа Дэд ангилал нэмэх боломжтой.<br/>");
-    admin.subCategoryAddValue || (validation += "Нэр оруулна уу.!<br/>");
-    if (validation !== "") {
-      Swal.fire({
-        icon: "warning",
-        html: validation,
-        confirmButtonColor: "#0f56b3",
-      });
-    } else {
-      setAdmin({ type: "LOADING", data: true });
-      API.postSubCategory({
-        parentId: admin.categoryValue,
-        name: admin.subCategoryAddValue,
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            setAdmin({ type: "SUB_CATEGORY_ADD_VALUE", data: "" });
-            setAdmin({
-              type: "BRAND_LIST_RELOAD",
-            });
-            Swal.fire({
-              icon: "success",
-              title: "Амжилттай хадгалагдлаа.",
-              confirmButtonColor: "#0f56b3",
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire({
-            icon: "error",
-            title: "Алдаа гарлаа.",
-            text: "Хадгалах үед алдаа гарлаа дахин оролдоно уу.",
-            confirmButtonColor: "#0f56b3",
-          });
-        })
-        .finally(() => setAdmin({ type: "LOADING", data: false }));
     }
   };
 
@@ -183,13 +139,17 @@ const Brand = () => {
       admin.subCategoryValue === undefined ? "" : admin.subCategoryValue
     );
     formData.append("brandName", admin.brandName);
-    formData.append("brandLogo", admin.brandLogoUrl);
-    formData.append("brandDetailCoverImg", admin.brandDetailCoverImg);
+    formData.append("brandLogo", admin?.brandLogoUrl?.brandLogoUrl);
+    formData.append(
+      "brandDetailCoverImg",
+      admin?.brandDetailCoverImg?.brandDetailCoverImg
+    );
     formData.append("brandDetailDesc", admin.brandDetailDesc);
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);
     formData.append("brandDetailFacebook", admin.brandDetailFacebook);
     formData.append("user_id", user.userInfo.user_id);
+
     API.putBrand(formData, admin.brandId)
       .then((res) => {
         if (res.status === 200) {
@@ -248,6 +208,9 @@ const Brand = () => {
               text: "Устгах үед алдаа гарлаа дахин оролдоно уу.",
               confirmButtonColor: "#0f56b3",
             });
+          })
+          .finally(() => {
+            setAdmin({ type: "BRAND_LIST_LOADING", data: false });
           });
       }
     });
@@ -268,26 +231,6 @@ const Brand = () => {
           icon: "error",
           title: "Алдаа гарлаа.",
           text: "Категори унших үед алдаа гарлаа дахин оролдоно уу.",
-          confirmButtonColor: "#0f56b3",
-        });
-      });
-  }, [admin.brandListReload, setAdmin]);
-
-  useEffect(() => {
-    API.getSubCategory()
-      .then((res) => {
-        if (res.data.success) {
-          if (res.data.data.length > 0) {
-            setAdmin({ type: "SUB_CATEGORY_LIST", data: res.data.data });
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        Swal.fire({
-          icon: "error",
-          title: "Алдаа гарлаа.",
-          text: "Дэд категори унших үед алдаа гарлаа дахин оролдоно уу.",
           confirmButtonColor: "#0f56b3",
         });
       });
@@ -335,7 +278,9 @@ const Brand = () => {
           confirmButtonColor: "#0f56b3",
         });
       })
-      .finally(() => setAdmin({ type: "BRAND_LIST_LOADING", data: false }));
+      .finally(() => {
+        setAdmin({ type: "BRAND_LIST_LOADING", data: false });
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [admin.brandListReload, setAdmin]);
 
@@ -430,78 +375,7 @@ const Brand = () => {
                     <Option key={el.id}>{el.name}</Option>
                   ))}
                 </Select>
-                <div style={{ marginTop: "10px" }}>Дэд ангилал</div>
-                <Select
-                  showSearch
-                  allowClear
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  size="large"
-                  style={{ width: "100%" }}
-                  placeholder="Дэд ангилал сонгох..."
-                  value={admin.subCategoryValue}
-                  onChange={(value) =>
-                    setAdmin({
-                      type: "SUB_CATEGORY_VALUE",
-                      data: value,
-                    })
-                  }
-                  dropdownRender={(menu) => (
-                    <>
-                      {menu}
-                      <Divider style={{ margin: "8px 0" }} />
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          width: "100%",
-                          paddingLeft: "10px",
-                          paddingRight: "10px",
-                          paddingBottom: "6px",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: "80%",
-                          }}
-                        >
-                          <Input
-                            style={{ width: "80%" }}
-                            placeholder="Ангилал нэмэх..."
-                            value={admin.subCategoryAddValue}
-                            onChange={(e) =>
-                              setAdmin({
-                                type: "SUB_CATEGORY_ADD_VALUE",
-                                data: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <div
-                          style={{
-                            width: "20%",
-                          }}
-                        >
-                          <div
-                            className="modal-add-btn"
-                            onClick={() => SubCategorySave()}
-                          >
-                            {admin.loading ? <LoadingOutlined /> : "Нэмэх"}
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                >
-                  {admin.subCategoryFilteredList.map((el) => (
-                    <Option key={el.id}>{el.name}</Option>
-                  ))}
-                </Select>
+
                 <div style={{ marginTop: "10px" }}>Брэнд нэр</div>
                 <Input
                   size="large"
@@ -686,6 +560,18 @@ const Brand = () => {
 
       <div className="brand-container">
         <div className="category-box">
+          <div
+            className={
+              admin.pageCategoryValue === 99999
+                ? "brand-category-active"
+                : "brand-category"
+            }
+            onClick={() => {
+              setAdmin({ type: "PAGE_CATEGORY_VALUE", data: 99999 });
+            }}
+          >
+            <div>Бүгд</div>
+          </div>
           {admin.categoryList.map((el, index) => (
             <div
               className={
@@ -698,40 +584,11 @@ const Brand = () => {
                 setAdmin({ type: "PAGE_CATEGORY_VALUE", data: el.id });
               }}
             >
-              <svg
-                width={16}
-                height={9}
-                viewBox="0 0 16 9"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.34317 0.257324L0.928955 1.67154L8.00001 8.74263L15.0711 1.67157L13.6569 0.257353L8.00003 5.91419L2.34317 0.257324Z"
-                  fill="currentColor"
-                />
-              </svg>
               <div>{el.name}</div>
             </div>
           ))}
         </div>
-        <div className="sub-category-container">
-          {admin.pageSubCategoryFilteredList.map((el, index) => (
-            <div className="cat-item" key={index}>
-              <input
-                type="radio"
-                name="radio"
-                checked={el.id === admin.pageSubCategoryValue}
-                value={el.id}
-                onChange={(e) => {
-                  setAdmin({
-                    type: "PAGE_SUB_CATEGORY_VALUE",
-                    data: e.target.value,
-                  });
-                }}
-              />
-              <span className="ml-2">{el.name}</span>
-            </div>
-          ))}
-        </div>
+
         {admin.brandListLoading ? (
           <div className="text-center">Уншиж байна...</div>
         ) : (

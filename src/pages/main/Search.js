@@ -64,7 +64,7 @@ const Search = () => {
               {oneData && (
                 <div className="text-center">
                   <img
-                    src={"http://167.172.76.26/" + oneData.productImage[0]}
+                    src={"http://misheel.tk" + oneData.productImage[0]}
                     alt=""
                     width={"100%"}
                     height="200px"
@@ -124,24 +124,13 @@ const Search = () => {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
             }}
           >
             #{params.value.toUpperCase()}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              color: "#707070",
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
       </Grid>
@@ -158,7 +147,7 @@ const Search = () => {
               return (
                 <div className="search-pruduct-item" key={index}>
                   <img
-                    src={"http://167.172.76.26" + el.productImage[0]}
+                    src={"http://misheel.tk" + el.productImage[0]}
                     alt=""
                     height={"100%"}
                     width={"100%"}

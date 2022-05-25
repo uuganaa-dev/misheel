@@ -63,7 +63,7 @@ export default function BrandDetailModal({ handleClose, detail, txt }) {
           <ArrowGreyBgColor click={left} />
           <img
             style={{ width: "255px", height: "255px", objectFit: "cover" }}
-            src={"http://167.172.76.26" + detail.productImage[index]}
+            src={"http://misheel.tk" + detail.productImage[index]}
             alt="detail"
           />
           <ArrowGreyBgColor
@@ -81,7 +81,7 @@ export default function BrandDetailModal({ handleClose, detail, txt }) {
               textAlign: "center",
             }}
           >
-            <Typography sx={{ fontFamily: "Inter", fontSize: "14px" }}>
+            <Typography sx={{ fontSize: "14px" }}>
               {index + 1}/{detail.productImage.length}
             </Typography>
           </Grid>

@@ -19,7 +19,7 @@ export default function Unit({ item, catfind }) {
     >
       <Grid
         sx={{
-          backgroundImage: `url("http://167.172.76.26/${item.priceImage}")`,
+          backgroundImage: `url("http://misheel.tk${item.priceImage}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: ["100px", "370px"],
@@ -31,7 +31,6 @@ export default function Unit({ item, catfind }) {
           <CircleIcon sx={{ fontSize: "6px", color: "#FFD662" }} />
           <Typography
             sx={{
-              fontFamily: "Inter",
               fontSize: "14px",
               mr: "19px",
               color: "#404040",
@@ -40,16 +39,13 @@ export default function Unit({ item, catfind }) {
             {catfind?.name}
           </Typography>
           <AccessTimeIcon sx={{ fontSize: "14px" }} />
-          <Typography
-            sx={{ fontFamily: "Inter", fontSize: "14px", color: "#404040" }}
-          >
+          <Typography sx={{ fontSize: "14px", color: "#404040" }}>
             {moment(item.priceDate).format("YYYY.MM.DD")}
           </Typography>
         </Grid>
         <Typography
           sx={{
-            fontFamily: "Inter",
-            fontSize: "18px",
+            fontSize: ["14px", "18px", "18px"],
             mt: ["5px", "26px"],
             mb: ["5px", "51px"],
           }}
@@ -62,12 +58,12 @@ export default function Unit({ item, catfind }) {
               backgroundImage: `url("${logo}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
-              width: ["32px", "50px"],
-              height: ["26px", "50px"],
+              width: ["24px", "32px", "50px"],
+              height: ["24px", "26px", "50px"],
             }}
           />
           <Typography
-            sx={{ fontFamily: "Inter", fontSize: "14px", color: "#404040" }}
+            sx={{ fontSize: ["10px", "12px", "14px"], color: "#404040" }}
           >
             {item.priceText}
           </Typography>

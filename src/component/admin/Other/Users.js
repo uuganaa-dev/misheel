@@ -245,6 +245,7 @@ const Users = () => {
             >
               <Option value={1}>Admin</Option>
               <Option value={2}>Хэрэглэгч</Option>
+              <Option value={3}>Зах зээлийн админ</Option>
             </Select>
             <div className="gadot-modal-button">
               <div className="modal-save-button" onClick={() => Validate(0)}>

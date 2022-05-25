@@ -70,7 +70,7 @@ export default function MShiidel() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
@@ -81,7 +81,7 @@ export default function MShiidel() {
           <Typography
             sx={{
               fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
+
               letterSpacing: "0.25px",
               textTransform: "uppercase",
               color: "#707070",
@@ -129,7 +129,7 @@ export default function MShiidel() {
                   <Grid sx={{ position: "relative" }}>
                     <Grid
                       sx={{
-                        backgroundImage: `url("http://167.172.76.26/${item.img}")`,
+                        backgroundImage: `url("http://misheel.tk${item.img}")`,
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         width: ["200px", "262px", "370px"],

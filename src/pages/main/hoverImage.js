@@ -83,7 +83,7 @@ export default function HoverImage({ i, show, setShow, sx, logo, fontSize }) {
             height: logo.height,
           }}
         />
-        <Typography sx={{ fontFamily: "Inter", ...fontSize, color: "white" }}>
+        <Typography sx={{ ...fontSize, color: "white" }}>
           {i.imgName}
         </Typography>
       </Grid>

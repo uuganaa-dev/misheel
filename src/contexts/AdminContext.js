@@ -34,7 +34,7 @@ const initialState = {
   brandList: [],
   brandFilteredList: [],
   brandListReload: 1,
-  pageCategoryValue: undefined,
+  pageCategoryValue: 99999,
   pageSubCategoryValue: undefined,
   pageSubCategoryFilteredList: [],
   //Page

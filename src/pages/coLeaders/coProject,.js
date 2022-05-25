@@ -29,7 +29,7 @@ export default function CoProject({ data, show, setShow, index, click }) {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://167.172.76.26/${data.img}")`,
+            backgroundImage: `url("http://misheel.tk${data.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width:
@@ -70,16 +70,16 @@ export default function CoProject({ data, show, setShow, index, click }) {
           justifyContent: "center",
         }}
       >
-        <Typography sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}>
+        <Typography sx={{ fontSize: ["10px", "30px"] }}>
           Episode {index + 1}
         </Typography>
-        <Typography sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}>
+        <Typography sx={{ fontSize: ["10px", "30px"] }}>
           {data.title}
         </Typography>
         <Typography
           sx={{
             fontSize: ["10px", "16px"],
-            fontFamily: "Inter",
+
             color: "#6B6B6B",
             mt: ["18px", "", "37px"],
           }}

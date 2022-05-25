@@ -201,7 +201,7 @@ const AdminReducer = (state, action) => {
     case "PAGE_CATEGORY_VALUE":
       var tempCatList = [];
       var tempBrandList = [];
-      if (action.data !== undefined) {
+      if (action.data !== 99999) {
         if (state.subCategoryList.length > 0) {
           tempCatList = state.subCategoryList.filter(
             (el) => el.parentId === action.data
@@ -211,6 +211,10 @@ const AdminReducer = (state, action) => {
           tempBrandList = state.brandList.filter(
             (el) => el.categoryId === action.data
           );
+        }
+      } else {
+        if (state.brandList.length > 0) {
+          tempBrandList = state.brandList;
         }
       }
       return {
@@ -295,6 +299,7 @@ const AdminReducer = (state, action) => {
           productUsage: "",
           productMaterial: "",
           productColor: "",
+          categoryValue: undefined,
         };
       }
 

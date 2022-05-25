@@ -51,17 +51,13 @@ export default function MainMenu(props) {
               setChoose({ id: item.id, name: item.name });
             }}
           >
-            <Typography sx={{ fontSize: "14px", fontFamily: "Inter" }}>
-              {item.name}
-            </Typography>
+            <Typography sx={{ fontSize: "14px" }}>{item.name}</Typography>
             <ArrowForwardIosIcon sx={{ fontSize: "14px" }} />
           </Grid>
         ))}
       </Grid>
       <Grid sx={{ width: "70%" }}>
-        <Typography sx={{ fontSize: "24px", fontFamily: "Inter" }}>
-          {choose?.name}
-        </Typography>
+        <Typography sx={{ fontSize: "24px" }}>{choose?.name}</Typography>
         <div
           style={{
             display: "flex",
@@ -69,7 +65,6 @@ export default function MainMenu(props) {
             justifyContent: "center",
             flexWrap: "wrap",
             marginTop: "15px",
-            fontFamily: "roboto",
             fontSize: "16px",
             color: "#808080",
           }}

@@ -6,7 +6,7 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import moment from "moment";
 
-const URL = "http://167.172.76.26";
+const URL = "http://misheel.tk";
 
 const { Option } = Select;
 function getBase64(img, callback) {
@@ -108,7 +108,8 @@ const Price = () => {
               text: "Устгах үед алдаа гарлаа дахин оролдоно уу.",
               confirmButtonColor: "#0f56b3",
             });
-          });
+          })
+          .finally(() => setAdmin({ type: "LOADING", data: false }));
       }
     });
   };

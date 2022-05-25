@@ -14,25 +14,38 @@ export default function BrandDisc({ item, show, setShow, index, click }) {
         transition: "transform 10s",
         cursor: "pointer",
         "&:hover": {
-          boxShadow: "0.5px 1px 0.5px 1px rgba(0, 0, 0, 0.3)"
-        }
+          boxShadow: "0.5px 1px 0.5px 1px rgba(0, 0, 0, 0.3)",
+        },
       }}
       onMouseEnter={() => setShow({ ...show, index: index, show: 1 })}
       onMouseLeave={() => setShow({ ...show, index: "", show: 0 })}
-      onClick={click}>
+      onClick={click}
+    >
       <Grid
         sx={{
           backgroundImage: `url("${item.img}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          width: show.index === index && show.show === 1 ? ["84px"] : ["80px", "95px", "135px"],
-          height: show.index === index && show.show === 1 ? ["84px"] : ["80px", "95px", "135px"],
-          transition: "transform 10s"
+          width:
+            show.index === index && show.show === 1
+              ? ["84px"]
+              : ["80px", "95px", "135px"],
+          height:
+            show.index === index && show.show === 1
+              ? ["84px"]
+              : ["80px", "95px", "135px"],
+          transition: "transform 10s",
         }}
       />
       <Grid>
-        <Typography sx={{ fontSize: ["10px", "16px"], fontFamily: "Inter", textTransform: "uppercase" }}>{item.name}</Typography>
-        <Typography sx={{ fontSize: ["8px", "13px"], fontFamily: "Inter", color: "#818181" }}>{item.title}</Typography>
+        <Typography
+          sx={{ fontSize: ["10px", "16px"], textTransform: "uppercase" }}
+        >
+          {item.name}
+        </Typography>
+        <Typography sx={{ fontSize: ["8px", "13px"], color: "#818181" }}>
+          {item.title}
+        </Typography>
       </Grid>
     </Grid>
   );

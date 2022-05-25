@@ -78,7 +78,7 @@ export default function SimilarBrands({ txt, brandList }) {
       <Typography
         sx={{
           fontSize: ["12px", "12px", "24px"],
-          fontFamily: "Inter",
+
           textTransform: "uppercase",
           fontWeight: 200,
         }}
@@ -102,7 +102,7 @@ export default function SimilarBrands({ txt, brandList }) {
               >
                 <Grid
                   sx={{
-                    backgroundImage: `url("http://167.172.76.26${item.brandLogo}")`,
+                    backgroundImage: `url("http://misheel.tk${item.brandLogo}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "contain",
                     width: ["67px", "165px", "232px"],
@@ -114,7 +114,6 @@ export default function SimilarBrands({ txt, brandList }) {
                 />
                 <Typography
                   sx={{
-                    fontFamily: "Inter",
                     fontSize: ["10px", "16px"],
                     pt: ["5px", "14px", "19px"],
                   }}

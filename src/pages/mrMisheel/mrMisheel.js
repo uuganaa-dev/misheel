@@ -78,24 +78,13 @@ export default function MrMisheel() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
             }}
           >
             #MR МИШЭЭЛ
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
-              letterSpacing: "0.25px",
-              textTransform: "uppercase",
-              color: "#707070",
-            }}
-          >
-            ЗӨВЛӨЖ БАЙНА
           </Typography>
         </Grid>
         <Grid sx={{ position: "relative", pb: ["0", "0", "0"] }}>
@@ -132,7 +121,7 @@ export default function MrMisheel() {
                   <Typography
                     sx={{
                       fontSize: "25px",
-                      fontFamily: "Inter",
+
                       letterSpacing: "1.25px",
                       color: "#2D2D2D",
                       cursor: "pointer",

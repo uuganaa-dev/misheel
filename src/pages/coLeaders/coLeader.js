@@ -19,7 +19,7 @@ export default function CoLeader() {
         <Typography
           sx={{
             fontSize: ["10px", "12px"],
-            fontFamily: "Inter",
+
             letterSpacing: "0.25px",
             textTransform: "uppercase",
             textAlign: "center",
@@ -32,7 +32,7 @@ export default function CoLeader() {
         <Typography
           sx={{
             fontSize: ["10px", "31px"],
-            fontFamily: "Inter",
+
             letterSpacing: "2px",
             textTransform: "uppercase",
             fontWeight: 200,
@@ -47,7 +47,7 @@ export default function CoLeader() {
       </Grid>
       <Grid
         sx={{
-          backgroundImage: `url("http://167.172.76.26/${img}")`,
+          backgroundImage: `url("http://misheel.tk${img}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",

@@ -11,10 +11,13 @@ export default function ShowAll({ txt, onClick }) {
         justifyContent: "flex-end",
         color: "#404040",
         gap: [0, 0, "10px"],
-        cursor: "pointer"
+        cursor: "pointer",
       }}
-      onClick={onClick}>
-      <Typography sx={{ fontSize: "16px", fontFamily: "Inter", letterSpacing: "1px" }}>{txt}</Typography>
+      onClick={onClick}
+    >
+      <Typography sx={{ fontSize: "16px", letterSpacing: "1px" }}>
+        {txt}
+      </Typography>
       <img src={icons.arrow} alt="arrow" />
     </Grid>
   );

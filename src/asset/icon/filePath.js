@@ -27,6 +27,6 @@ const icons = {
   cancel: cancel,
   eye: eyeIcon,
   child: child,
-  tree: tree
+  tree: tree,
 };
 export default icons;

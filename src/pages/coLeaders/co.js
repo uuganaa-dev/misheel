@@ -67,7 +67,7 @@ export default function Co() {
           <Typography
             sx={{
               fontSize: ["10px", "31px"],
-              fontFamily: "Inter",
+
               letterSpacing: "2px",
               textTransform: "uppercase",
               fontWeight: 200,
@@ -78,7 +78,7 @@ export default function Co() {
           <Typography
             sx={{
               fontSize: ["10px", "12px"],
-              fontFamily: "Inter",
+
               letterSpacing: "0.25px",
               textTransform: "uppercase",
               color: "#707070",
@@ -133,7 +133,7 @@ export default function Co() {
                   >
                     <Grid
                       sx={{
-                        backgroundImage: `url("http://167.172.76.26/${item.img}")`,
+                        backgroundImage: `url("http://misheel.tk${item.img}")`,
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         width:
@@ -181,20 +181,16 @@ export default function Co() {
                       justifyContent: "center",
                     }}
                   >
-                    <Typography
-                      sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}
-                    >
+                    <Typography sx={{ fontSize: ["10px", "30px"] }}>
                       Episode {index + 1}
                     </Typography>
-                    <Typography
-                      sx={{ fontSize: ["10px", "30px"], fontFamily: "Inter" }}
-                    >
+                    <Typography sx={{ fontSize: ["10px", "30px"] }}>
                       {item.name}
                     </Typography>
                     <Typography
                       sx={{
                         fontSize: ["10px", "16px"],
-                        fontFamily: "Inter",
+
                         color: "#6B6B6B",
                         mt: ["18px", "", "37px"],
                       }}

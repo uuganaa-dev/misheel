@@ -4,22 +4,17 @@ import breakpoints from "../utils/contants/breakpoints";
 const { mobile, tablet, laptop, desktop } = breakpoints;
 const theme = createTheme({
   primary: {
-    white: "white"
+    white: "white",
   },
-  typography: {
-    fontFamily: "Inter",
-    button: {
-      fontFamily: "Inter"
-    }
-  },
+
   breakpoints: {
     values: {
       mobile: mobile,
       tablet: tablet,
       laptop: laptop,
-      desktop: desktop
-    }
-  }
+      desktop: desktop,
+    },
+  },
 });
 
 // background: #ECEBE7;

@@ -74,7 +74,7 @@ export default function ActivityRelated({ list }) {
         <Typography
           sx={{
             fontSize: ["12px", "12px", "18px"],
-            fontFamily: "Inter",
+
             textTransform: "uppercase",
             fontWeight: 600,
           }}
@@ -97,7 +97,7 @@ export default function ActivityRelated({ list }) {
               >
                 <Grid
                   sx={{
-                    backgroundImage: `url("http://167.172.76.26${item.img}")`,
+                    backgroundImage: `url("http://misheel.tk${item.img}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     width: "97%",
