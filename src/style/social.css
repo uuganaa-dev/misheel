@@ -223,8 +223,58 @@
   justify-content: center;
 }
 .main-menu {
+  flex: 1 0 20%;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.main-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #808080;
+}
+.scrollmenu {
+  overflow-y: auto;
+}
+
+.scrollmenu::-webkit-scrollmenu {
+  width: 5px;
+  background-color: transparent;
+}
+
+.scrollmenu::-webkit-scrollmenu-thumb {
+  border-radius: 10px;
+  background-color: rgba(224, 224, 224, 0.2);
+}
+.main-menu.active {
+  color: cornflowerblue;
+}
+@media only screen and (max-width: 1050px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #808080;
+    gap: 8px;
+    padding: 5px;
+    margin-top: 0px;
+  }
 }
 @media only screen and (max-width: 900px) {
+  .main-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    font-size: 12px;
+  }
   .m-shiidel-text {
     font-size: 20px;
   }
@@ -234,6 +284,24 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #808080;
+    gap: 8px;
+    padding: 5px;
+    margin-top: 0px;
+  }
+  .main-menu {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
   .search-filter {
     display: none;
   }

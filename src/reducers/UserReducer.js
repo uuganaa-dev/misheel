@@ -16,6 +16,17 @@ const UserReducer = (state, action) => {
         ...state,
         catList: action.data,
       };
+    case "CHANGE_CATID":
+      return {
+        ...state,
+        carId: action.data,
+        openMenu: false,
+      };
+    case "CHANGE_OPENMENU":
+      return {
+        ...state,
+        openMenu: action.data,
+      };
 
     default:
       return state;

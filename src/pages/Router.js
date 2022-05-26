@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { useUserState } from "../contexts/UserContext";
 import Main from "./main/main";
 import Search from "./main/Search";
+import ProductPage from "./Product";
 import BrandPage from "./brandPage/brandPage";
 import BrandDetail from "./brandDetail/brandDetail";
 import CreatedBy from "./createdBy/createdBy";
@@ -38,6 +39,7 @@ const Router = () => {
     <>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/search/:value" element={<Search />} />
         <Route path="/brandPage" element={<BrandPage />} />
         <Route path="/brandDetail/:id" element={<BrandDetail />} />

@@ -1,5 +1,6 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import UserReducer from "../reducers/UserReducer";
+import * as API from "../api/request";
 
 const UserContext = React.createContext();
 
@@ -7,6 +8,8 @@ const initialState = {
   userInfo: {},
   loggedIn: false,
   catList: [],
+  carId: undefined,
+  openMenu: false,
 };
 
 export const useUserState = () => {
@@ -29,6 +32,11 @@ const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    API.getCategory()
+      .then((res) => {
+        setUser({ type: "SET_CATLIST", data: res.data.data });
+      })
+      .catch((err) => console.log(err));
     if (localStorage.getItem("data")) {
       const userdata = localStorage.getItem("data");
       setUser({ type: "LOGIN", data: JSON.parse(userdata) });

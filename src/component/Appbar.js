@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LogoYellow from "./logoYellow";
@@ -12,7 +12,7 @@ import { useUserState } from "../contexts/UserContext";
 import { Input } from "antd";
 
 const Appbar = () => {
-  const { user } = useUserState();
+  const { user, setUser } = useUserState();
   const [searchValue, setSearchValue] = useState("");
   const [isShow, setIsShow] = useState(false);
 
@@ -20,7 +20,6 @@ const Appbar = () => {
   const txt = context.txt.Bar;
   const navigate = useNavigate();
   const [select, setSelect] = useState();
-  const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <Grid
@@ -59,7 +58,9 @@ const Appbar = () => {
           <>
             <MenuIcon
               sx={{ ...style.pointer }}
-              onClick={() => setOpenMenu(!openMenu)}
+              onClick={() =>
+                setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu })
+              }
             />
             <Typography
               sx={{
@@ -211,7 +212,7 @@ const Appbar = () => {
           </Typography>
         </Grid>
       </Grid>
-      {openMenu && <MainMenu />}
+      {user.openMenu && <MainMenu />}
     </Grid>
   );
 };
