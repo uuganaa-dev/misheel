@@ -1,10 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { useUserState } from "../contexts/UserContext";
 
 const MainMenu = () => {
   const { user, setUser } = useUserState();
-
+  const navigate = useNavigate();
   return (
     <Grid
       sx={{
@@ -30,6 +31,7 @@ const MainMenu = () => {
                   }
                   onClick={() => {
                     setUser({ type: "CHANGE_CATID", data: el.id });
+                    navigate("/product/" + el.id);
                   }}
                 >
                   {el.name}

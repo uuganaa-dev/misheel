@@ -45,6 +45,7 @@ const initialState = {
   brandDetailNumber: "",
   brandDetailEmail: "",
   brandDetailFacebook: "",
+  brandWebsite: "",
   //BRAND DETGAIL END
   // BRAND END
 

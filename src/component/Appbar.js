@@ -179,15 +179,16 @@ const Appbar = () => {
               navigate("/map");
             }}
           />
+          {console.log(user.loggedIn)}
           <i
             className="fa fa-sign-in cursor-pointer"
             onClick={() => {
               user.loggedIn
-                ? user.userInfo.role === 1
+                ? user.userInfo.role === "1"
                   ? navigate("/admin")
-                  : user.userInfo.role === 2
+                  : user.userInfo.role === "2"
                   ? navigate("/brand")
-                  : user.userInfo.role === 3
+                  : user.userInfo.role === "3"
                   ? navigate("/price")
                   : navigate("/login")
                 : navigate("/login");

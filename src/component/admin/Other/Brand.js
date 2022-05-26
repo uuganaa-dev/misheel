@@ -100,6 +100,7 @@ const Brand = () => {
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);
     formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    formData.append("web_url", admin.brandWebsite);
     formData.append("user_id", user.userInfo.user_id);
     API.postBrand(formData)
       .then((res) => {
@@ -139,15 +140,16 @@ const Brand = () => {
       admin.subCategoryValue === undefined ? "" : admin.subCategoryValue
     );
     formData.append("brandName", admin.brandName);
-    formData.append("brandLogo", admin?.brandLogoUrl?.brandLogoUrl);
+    formData.append("brandLogo", admin.brandLogoUrl.brandLogoUrl);
     formData.append(
       "brandDetailCoverImg",
-      admin?.brandDetailCoverImg?.brandDetailCoverImg
+      admin.brandDetailCoverImg.brandDetailCoverImg
     );
     formData.append("brandDetailDesc", admin.brandDetailDesc);
     formData.append("brandDetailNumber", admin.brandDetailNumber);
     formData.append("brandDetailEmail", admin.brandDetailEmail);
     formData.append("brandDetailFacebook", admin.brandDetailFacebook);
+    formData.append("web_url", admin.brandWebsite);
     formData.append("user_id", user.userInfo.user_id);
 
     API.putBrand(formData, admin.brandId)
@@ -385,7 +387,10 @@ const Brand = () => {
                     setAdmin({ type: "BRAND_NAME", data: e.target.value });
                   }}
                 />
-                <div style={{ marginTop: "10px" }}>Брэнд лого</div>
+                <div style={{ marginTop: "10px" }}>
+                  Брэнд лого
+                  <span className="text-danger"> ( 200 × 200px )</span>
+                </div>
                 <Upload
                   name="avatar"
                   listType="picture-card"
@@ -408,9 +413,10 @@ const Brand = () => {
                       src={
                         admin.brandLogoUrl.brandLogoUrlBase
                           ? admin.brandLogoUrl.brandLogoUrlBase
-                          : admin.brandLogoUrl.split("/")[1] === "uploads"
-                          ? URL + admin.brandLogoUrl
-                          : admin.brandLogoUrl
+                          : admin.brandLogoUrl.brandLogoUrl.split("/")[1] ===
+                            "uploads"
+                          ? URL + admin.brandLogoUrl.brandLogoUrl
+                          : admin.brandLogoUrl.brandLogoUrl
                       }
                       alt=""
                       className="upload-img"
@@ -434,7 +440,10 @@ const Brand = () => {
                     </svg>
                   )}
                 </Upload>
-                <div>Брэнд ковер зураг</div>
+                <div>
+                  Брэнд ковер зураг
+                  <span className="text-danger"> ( 1435 × 540 px )</span>
+                </div>
                 <Upload
                   name="avatar"
                   listType="picture-card"
@@ -460,10 +469,11 @@ const Brand = () => {
                       src={
                         admin.brandDetailCoverImg.brandDetailCoverImgBase
                           ? admin.brandDetailCoverImg.brandDetailCoverImgBase
-                          : admin.brandDetailCoverImg.split("/")[1] ===
-                            "uploads"
-                          ? URL + admin.brandDetailCoverImg
-                          : admin.brandDetailCoverImg
+                          : admin.brandDetailCoverImg.brandDetailCoverImg.split(
+                              "/"
+                            )[1] === "uploads"
+                          ? URL + admin.brandDetailCoverImg.brandDetailCoverImg
+                          : admin.brandDetailCoverImg.brandDetailCoverImg
                       }
                       alt=""
                       className="upload-img"
@@ -524,7 +534,7 @@ const Brand = () => {
                     })
                   }
                 />
-                <div style={{ marginTop: "10px" }}>Фэйсбүүк :</div>
+                <div style={{ marginTop: "10px" }}>Фэйсбүүк:</div>
                 <Input
                   size="large"
                   placeholder="Фэйсбүүк бичих..."
@@ -532,6 +542,18 @@ const Brand = () => {
                   onChange={(e) =>
                     setAdmin({
                       type: "BRAND_DETAIL_FACEBOOK",
+                      data: e.target.value,
+                    })
+                  }
+                />
+                <div style={{ marginTop: "10px" }}>Вэбсайт URL:</div>
+                <Input
+                  size="large"
+                  placeholder="Вэбсайт URL..."
+                  value={admin.brandWebsite}
+                  onChange={(e) =>
+                    setAdmin({
+                      type: "BRAND_DETAIL_WEBSITE",
                       data: e.target.value,
                     })
                   }

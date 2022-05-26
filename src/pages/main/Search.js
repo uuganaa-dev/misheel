@@ -5,6 +5,8 @@ import * as API from "../../api/request";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import { Modal } from "antd";
+import Zoom from "react-medium-image-zoom";
+
 const Search = () => {
   const params = useParams();
   const [isShow, setIsShow] = useState(false);
@@ -39,9 +41,7 @@ const Search = () => {
     if (allproducts.length > 0) {
       setProducts(
         allproducts.filter((el) =>
-          el.productOpenStyle
-            .toLowerCase()
-            .includes(params.value.toLocaleLowerCase())
+          el.productOpenStyle.toLowerCase().includes(params.value.toLowerCase())
         )
       );
     }
@@ -63,13 +63,16 @@ const Search = () => {
             <div className="gadot-uploadType2">
               {oneData && (
                 <div className="text-center">
-                  <img
-                    src={"http://mmmall.mn" + oneData.productImage[0]}
-                    alt=""
-                    width={"100%"}
-                    height="200px"
-                    style={{ objectFit: "cover" }}
-                  />
+                  <Zoom>
+                    <img
+                      src={"http://mmmall.mn" + oneData.productImage[0]}
+                      alt=""
+                      width={"100%"}
+                      height="200px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </Zoom>
+
                   <div className="text-left">
                     <span style={{ fontWeight: 600 }}>Брэнд нэр: </span>
                     {oneData.brandDetail.brandName}

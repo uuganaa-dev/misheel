@@ -92,13 +92,16 @@ const AdminReducer = (state, action) => {
             subCategoryValue: findData?.subCategoryId,
             subCategoryAddValue: "",
             brandName: findData?.brandName,
-            brandLogoUrl: findData?.brandLogo,
+            brandLogoUrl: { brandLogoUrl: findData?.brandLogo },
             brandId: findData?.id,
-            brandDetailCoverImg: findData?.brandDetailCoverImg,
+            brandDetailCoverImg: {
+              brandDetailCoverImg: findData?.brandDetailCoverImg,
+            },
             brandDetailDesc: findData?.brandDetailDesc,
             brandDetailNumber: findData?.brandDetailNumber,
             brandDetailEmail: findData?.brandDetailEmail,
             brandDetailFacebook: findData?.brandDetailFacebook,
+            brandWebsite: findData?.web_url,
           };
         }
       } else {
@@ -117,6 +120,7 @@ const AdminReducer = (state, action) => {
           brandDetailNumber: "",
           brandDetailEmail: "",
           brandDetailFacebook: "",
+          brandWebsite: "",
         };
       }
 
@@ -267,6 +271,12 @@ const AdminReducer = (state, action) => {
         ...state,
         brandDetailFacebook: action.data,
       };
+    case "BRAND_DETAIL_WEBSITE":
+      return {
+        ...state,
+        brandWebsite: action.data,
+      };
+
     //BRAND DETGAIL END
     // BRAND END
     //PRODUCT BEGIN
