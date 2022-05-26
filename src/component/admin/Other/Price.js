@@ -177,7 +177,10 @@ const Price = () => {
           <div className="gadot-text-body">
             <div className="gadot-uploadType2">
               <div className="gadot-uploadType2-2">
-                <div style={{ marginTop: "10px" }}>Нүүр зураг</div>
+                <div style={{ marginTop: "10px" }}>
+                  Нүүр зураг
+                  <span className="text-danger"> ( 1000 × 400px )</span>
+                </div>
                 <Upload
                   name="avatar"
                   listType="picture-card"

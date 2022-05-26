@@ -179,7 +179,6 @@ const Appbar = () => {
               navigate("/map");
             }}
           />
-          {console.log(user.loggedIn)}
           <i
             className="fa fa-sign-in cursor-pointer"
             onClick={() => {

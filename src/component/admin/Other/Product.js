@@ -361,7 +361,10 @@ const Product = () => {
                     <Option key={el.id}>{el.name}</Option>
                   ))}
                 </Select>
-                <div style={{ marginTop: "10px" }}>Бүтээгдэхүүн</div>
+                <div style={{ marginTop: "10px" }}>
+                  Бүтээгдэхүүн
+                  <span className="text-danger"> ( 500 × 500px )</span>
+                </div>
                 <Upload
                   beforeUpload={() => false}
                   multiple

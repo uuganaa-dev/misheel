@@ -165,6 +165,17 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+.search-pruduct2 {
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .search-pruduct-item {
   width: 230px;
   height: 150px;
@@ -176,6 +187,19 @@
   justify-content: center;
   border: 1px solid #e5e5e5;
   padding: 5px;
+}
+.search-pruduct-item2 {
+  width: 230px;
+  height: 170px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #e5e5e5;
+  padding: 5px;
+  overflow: hidden;
+  cursor: pointer;
 }
 .search-pruduct-item:hover .search-btn {
   display: flex;

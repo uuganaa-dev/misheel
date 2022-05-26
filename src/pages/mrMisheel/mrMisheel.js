@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
-import background from "../../asset/backgroundImages/mrMishee/Rectangle 1392.png";
-import breakpoints from "../../utils/contants/breakpoints";
-import json2mq from "json2mq";
 
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
@@ -13,8 +10,6 @@ import { Modal } from "antd";
 const MrMisheel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [url, setUrl] = useState();
-  const { laptop } = breakpoints;
-  const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -39,7 +34,6 @@ const MrMisheel = () => {
 
   return (
     <>
-      <Appbar />
       <Modal
         title=""
         visible={isModalVisible}
@@ -50,11 +44,21 @@ const MrMisheel = () => {
         <div className="gadot-primary-modal-body">
           <div className="gadot-text-body">
             <div className="gadot-uploadType2">
-              <div dangerouslySetInnerHTML={{ __html: url && url }} />
+              <iframe
+                width={"100%"}
+                height={window.innerWidth < 600 ? 300 : 500}
+                src={"https://www.youtube.com/embed/" + url}
+                title="YouTube video player"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
           </div>
         </div>
       </Modal>
+      <Appbar />
+
       <Grid
         sx={{
           backgroundColor: ["#FFFFFF", "#FFFFFF", "#ECEBE7"],
@@ -87,64 +91,72 @@ const MrMisheel = () => {
             #MR МИШЭЭЛ
           </Typography>
         </Grid>
-        <Grid sx={{ position: "relative", pb: ["0", "0", "0"] }}>
-          <Grid
-            sx={{
-              backgroundImage: `url("${background}")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              width: "100%",
-              height: "calc(100vw * 0.50)",
-              opacity: isLaptop ? 0.5 : 1,
-            }}
-          />
-          {isLaptop && (
+        {/* <Grid
+          sx={{
+            backgroundColor: "white",
+            width: "100%",
+            height: "calc(60vw *0.60)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {data.map((item, index) => (
             <Grid
-              sx={{
-                backgroundColor: "white",
-                width: "60%",
-                height: "calc(60vw *0.80)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                pl: "49px",
-                position: "absolute",
-                top: ["0px", "0px"],
-                left: ["4%"],
-              }}
+              key={index}
+              sx={{ display: "flex", alignItems: "center", gap: "20px" }}
             >
-              {data.map((item, index) => (
-                <Grid
-                  key={index}
-                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "25px",
-
-                      letterSpacing: "1.25px",
-                      color: "#2D2D2D",
-                      cursor: "pointer",
-                      textDecoration: "underline",
-                      "&:hover": {
-                        textDecoration: "none",
-                      },
-                    }}
-                    onClick={() => {
-                      setIsModalVisible(true);
-                      setUrl(item.url);
-                    }}
-                  >
-                    {index + 1}. {item.txt}
-                  </Typography>
-                </Grid>
-              ))}
+              <Typography
+                sx={{
+                  fontSize: "25px",
+                  letterSpacing: "1.25px",
+                  color: "#2D2D2D",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setIsModalVisible(true);
+                  var video_id = item.url.split("v=")[1];
+                  var ampersandPosition = video_id.indexOf("&");
+                  if (ampersandPosition !== -1) {
+                    video_id = video_id.substring(0, ampersandPosition);
+                  }
+                  setUrl(video_id);
+                }}
+              >
+                {index + 1}. {item.txt}
+              </Typography>
             </Grid>
-          )}
-        </Grid>
-
-        <FooterMain />
+          ))}
+        </Grid> */}
+        <div className="search-pruduct2">
+          {data.map((item, index) => {
+            return (
+              <div
+                className="search-pruduct-item2"
+                key={index}
+                onClick={() => {
+                  setIsModalVisible(true);
+                  var video_id = item.url.split("v=")[1];
+                  var ampersandPosition = video_id.indexOf("&");
+                  if (ampersandPosition !== -1) {
+                    video_id = video_id.substring(0, ampersandPosition);
+                  }
+                  setUrl(video_id);
+                }}
+              >
+                <img
+                  src={"http://mmmall.mn" + item.icon}
+                  alt=""
+                  height={114}
+                  width={218}
+                  style={{ objectFit: "cover" }}
+                />
+                <div>{item.txt}</div>
+              </div>
+            );
+          })}
+        </div>
       </Grid>
+      <FooterMain />
     </>
   );
 };

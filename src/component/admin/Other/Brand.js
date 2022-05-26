@@ -389,7 +389,7 @@ const Brand = () => {
                 />
                 <div style={{ marginTop: "10px" }}>
                   Брэнд лого
-                  <span className="text-danger"> ( 200 × 200px )</span>
+                  <span className="text-danger"> ( 500 × 500px )</span>
                 </div>
                 <Upload
                   name="avatar"

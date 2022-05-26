@@ -233,13 +233,7 @@ const Social = () => {
             admin.mrMisheelData.map((el, index) => (
               <div className="social-item-container-item" key={index}>
                 <img
-                  src={
-                    el.icon
-                      ? el.icon.split("/")[0] === "uploads"
-                        ? URL + el.icon
-                        : el.icon
-                      : ""
-                  }
+                  src={URL + el.icon}
                   alt="Зураггүй"
                   className="social-item-container-item-img"
                 />
