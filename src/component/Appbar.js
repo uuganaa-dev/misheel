@@ -8,10 +8,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MainMenu from "./mainMenu";
 import { useUserState } from "../contexts/UserContext";
-import * as API from "../api/request";
+
 import { Input } from "antd";
 
-export default function Appbar() {
+const Appbar = () => {
   const { user } = useUserState();
   const [searchValue, setSearchValue] = useState("");
   const [isShow, setIsShow] = useState(false);
@@ -21,24 +21,6 @@ export default function Appbar() {
   const navigate = useNavigate();
   const [select, setSelect] = useState();
   const [openMenu, setOpenMenu] = useState(false);
-  const [category, setCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
-
-  useEffect(() => {
-    API.getCategory()
-      .then((res) => {
-        setCategory(res.data.data.slice(0, 5));
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    API.getSubCategory()
-      .then((res) => {
-        setSubCategory(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <Grid
@@ -202,7 +184,11 @@ export default function Appbar() {
               user.loggedIn
                 ? user.userInfo.role === 1
                   ? navigate("/admin")
-                  : navigate("/brand")
+                  : user.userInfo.role === 2
+                  ? navigate("/brand")
+                  : user.userInfo.role === 3
+                  ? navigate("/price")
+                  : navigate("/login")
                 : navigate("/login");
             }}
           />
@@ -225,10 +211,12 @@ export default function Appbar() {
           </Typography>
         </Grid>
       </Grid>
-      {openMenu && <MainMenu category={category} subCategory={subCategory} />}
+      {openMenu && <MainMenu />}
     </Grid>
   );
-}
+};
+
+export default React.memo(Appbar);
 
 const style = {
   txt: { fontSize: "14px", textTransform: "uppercase" },

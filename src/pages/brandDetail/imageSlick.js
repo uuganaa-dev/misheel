@@ -52,7 +52,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function ImageSlick({ txt }) {
+const ImageSlick = ({ txt }) => {
   const params = useParams();
   const [detail, setDetail] = useState([]);
   const [itemDetail, setItemDetail] = useState();
@@ -167,4 +167,5 @@ export default function ImageSlick({ txt }) {
       </Modal>
     </Grid>
   );
-}
+};
+export default React.memo(ImageSlick);

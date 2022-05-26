@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function BrandPage() {
+const BrandPage = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -115,7 +115,6 @@ export default function BrandPage() {
         </Grid>
         <Grid
           sx={{
-            pt: ["20px"],
             width: ["95%", "71%", "72%"],
             pb: ["64px", "50px", "72px"],
           }}
@@ -137,7 +136,7 @@ export default function BrandPage() {
                 sx={{
                   display: "flex",
                   flexWrap: "wrap",
-                  gap: ["4px", "24px", "34px"],
+                  gap: ["4px", "15px", "15px"],
                   justifyContent: "space-between",
                   mb: "20px",
                 }}
@@ -268,4 +267,5 @@ export default function BrandPage() {
       </Grid>
     </div>
   );
-}
+};
+export default React.memo(BrandPage);

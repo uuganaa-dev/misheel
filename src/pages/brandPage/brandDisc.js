@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 
-export default function BrandDisc({ item, show, setShow, index, click }) {
+const BrandDisc = ({ item, show, setShow, index, click }) => {
   return (
     <Grid
       sx={{
@@ -49,4 +49,5 @@ export default function BrandDisc({ item, show, setShow, index, click }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(BrandDisc);

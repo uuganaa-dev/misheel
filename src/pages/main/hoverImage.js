@@ -4,7 +4,7 @@ import icons from "../../asset/icon/filePath";
 import breakpoints from "../../utils/contants/breakpoints";
 import json2mq from "json2mq";
 
-export default function HoverImage({ i, show, setShow, sx, logo, fontSize }) {
+const HoverImage = ({ i, show, setShow, sx, logo, fontSize }) => {
   const { tablet, laptop } = breakpoints;
   const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
   const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
@@ -89,4 +89,5 @@ export default function HoverImage({ i, show, setShow, sx, logo, fontSize }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(HoverImage);

@@ -50,7 +50,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function SimilarBrands({ txt, brandList }) {
+const SimilarBrands = ({ txt, brandList }) => {
   const navigate = useNavigate();
   const settings = {
     className: "center",
@@ -126,4 +126,5 @@ export default function SimilarBrands({ txt, brandList }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(SimilarBrands);

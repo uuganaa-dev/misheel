@@ -13,7 +13,7 @@ import BrandDetailModal from "./brandDetailModal";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function BrandDetail() {
+const BrandDetail = () => {
   const params = useParams();
   const context = useContext(TheContext);
   const [openModal, setOpenModal] = useState(false);
@@ -116,8 +116,8 @@ export default function BrandDetail() {
       </Grid>
     </>
   );
-}
-
+};
+export default React.memo(BrandDetail);
 const detail = {
   img: [fileBD.pillow, fileBD.table],
   openStyle: "cotton",

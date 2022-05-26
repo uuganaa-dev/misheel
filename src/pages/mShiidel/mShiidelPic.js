@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import icons from "../../asset/icon/filePath";
 
-export default function MShiidelPic({ data, show, setShow, index, click }) {
+const MShiidelPic = ({ data, show, setShow, index, click }) => {
   return (
     <Grid
       sx={{
@@ -43,4 +43,5 @@ export default function MShiidelPic({ data, show, setShow, index, click }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(MShiidelPic);

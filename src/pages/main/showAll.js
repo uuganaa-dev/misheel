@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import icons from "../../asset/icon/filePath";
 
-export default function ShowAll({ txt, onClick }) {
+const ShowAll = ({ txt, onClick }) => {
   return (
     <Grid
       sx={{
@@ -21,4 +21,5 @@ export default function ShowAll({ txt, onClick }) {
       <img src={icons.arrow} alt="arrow" />
     </Grid>
   );
-}
+};
+export default React.memo(ShowAll);

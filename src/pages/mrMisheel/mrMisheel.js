@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import * as API from "../../api/request";
 import { Modal } from "antd";
 
-export default function MrMisheel() {
+const MrMisheel = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [url, setUrl] = useState();
   const { laptop } = breakpoints;
@@ -147,4 +147,5 @@ export default function MrMisheel() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(MrMisheel);

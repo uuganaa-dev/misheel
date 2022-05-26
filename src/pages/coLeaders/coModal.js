@@ -55,7 +55,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function CoModal({ CloseModal, data }) {
+const CoModal = ({ CloseModal, data }) => {
   const settings = {
     className: "center",
     infinite: true,
@@ -127,4 +127,5 @@ export default function CoModal({ CloseModal, data }) {
       </Slider>
     </Grid>
   );
-}
+};
+export default React.memo(CoModal);

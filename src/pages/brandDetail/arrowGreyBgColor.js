@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 
-export default function ArrowGreyBgColor({ sx,click }) {
+const ArrowGreyBgColor = ({ sx, click }) => {
   return (
     <Grid
       sx={{
@@ -13,11 +13,12 @@ export default function ArrowGreyBgColor({ sx,click }) {
         p: "10px",
         alignItems: "center",
         cursor: "pointer",
-        ...sx
+        ...sx,
       }}
-       onClick={click}
-       >
+      onClick={click}
+    >
       <ArrowBackIosNew />
     </Grid>
   );
-}
+};
+export default React.memo(ArrowGreyBgColor);

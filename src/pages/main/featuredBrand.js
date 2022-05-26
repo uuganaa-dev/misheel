@@ -10,7 +10,7 @@ import breakpoints from "../../utils/contants/breakpoints";
 import FeaturedBrandSlide from "./featuredBrandSlide";
 import _ from "lodash";
 
-export default function FeaturedBrand({ txt, list }) {
+const FeaturedBrand = ({ txt, list }) => {
   const { tablet, laptop } = breakpoints;
   const isLaptop = useMediaQuery(json2mq({ minWidth: laptop }));
   const isTablet = useMediaQuery(json2mq({ minWidth: tablet }));
@@ -320,4 +320,5 @@ export default function FeaturedBrand({ txt, list }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(FeaturedBrand);

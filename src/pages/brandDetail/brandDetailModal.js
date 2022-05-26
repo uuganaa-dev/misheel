@@ -3,7 +3,7 @@ import { Grid, Typography } from "@mui/material";
 import icons from "../../asset/icon/filePath";
 import ArrowGreyBgColor from "./arrowGreyBgColor";
 
-export default function BrandDetailModal({ handleClose, detail, txt }) {
+const BrandDetailModal = ({ handleClose, detail, txt }) => {
   const [index, setIndex] = useState(0);
   const left = () => {
     if (index > 0) {
@@ -107,4 +107,5 @@ export default function BrandDetailModal({ handleClose, detail, txt }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(BrandDetailModal);

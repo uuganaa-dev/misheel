@@ -2,13 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import icons from "../../asset/icon/filePath";
 
-export default function CreatedByProject({
-  data,
-  show,
-  setShow,
-  index,
-  click,
-}) {
+const CreatedByProject = ({ data, show, setShow, index, click }) => {
   return (
     <Grid
       sx={{
@@ -84,4 +78,5 @@ export default function CreatedByProject({
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(CreatedByProject);

@@ -55,7 +55,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function MShiidelModal({ CloseModal, itemDetail }) {
+const MShiidelModal = ({ CloseModal, itemDetail }) => {
   const settings = {
     className: "center",
     infinite: true,
@@ -136,4 +136,5 @@ export default function MShiidelModal({ CloseModal, itemDetail }) {
       </Slider>
     </Grid>
   );
-}
+};
+export default React.memo(MShiidelModal);

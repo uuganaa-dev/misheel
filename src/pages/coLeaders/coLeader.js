@@ -4,7 +4,7 @@ import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import img from "./Im.png";
 
-export default function CoLeader() {
+const CoLeader = () => {
   return (
     <Grid sx={{ backgroundColor: "#ECEBE7" }}>
       <Appbar />
@@ -57,4 +57,5 @@ export default function CoLeader() {
       <FooterMain />
     </Grid>
   );
-}
+};
+export default React.memo(CoLeader);

@@ -57,12 +57,18 @@ const Router = () => {
               <Route path="/users" element={<Users />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/social" element={<Social />} />
-              <Route path="/price" element={<Price />} />
               <Route path="/about" element={<About />} />
             </>
           )}
-          <Route path="/brand" element={<Brand />} />
-          <Route path="/product" element={<Product />} />
+          {(user.userInfo.role === "1" || user.userInfo.role === "3") && (
+            <Route path="/price" element={<Price />} />
+          )}
+          {(user.userInfo.role === "1" || user.userInfo.role === "2") && (
+            <>
+              <Route path="/brand" element={<Brand />} />
+              <Route path="/product" element={<Product />} />
+            </>
+          )}
         </Routes>
       )}
     </>

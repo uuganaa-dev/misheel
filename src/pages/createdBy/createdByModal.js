@@ -55,7 +55,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function CreatedByModal({ CloseModal, itemDetail }) {
+const CreatedByModal = ({ CloseModal, itemDetail }) => {
   const settings = {
     className: "center",
     infinite: true,
@@ -137,4 +137,5 @@ export default function CreatedByModal({ CloseModal, itemDetail }) {
       </Slider>
     </Grid>
   );
-}
+};
+export default React.memo(CreatedByModal);

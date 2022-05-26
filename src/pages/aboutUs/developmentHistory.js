@@ -4,7 +4,7 @@ import HorizontalTimeline from "react-horizontal-timeline";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function DevelopmentHistory() {
+const DevelopmentHistory = () => {
   const [list, setlist] = useState([]);
   const [state, setState] = useState({
     curIdx: 0,
@@ -93,4 +93,5 @@ export default function DevelopmentHistory() {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(DevelopmentHistory);

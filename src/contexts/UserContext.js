@@ -6,6 +6,7 @@ const UserContext = React.createContext();
 const initialState = {
   userInfo: {},
   loggedIn: false,
+  catList: [],
 };
 
 export const useUserState = () => {

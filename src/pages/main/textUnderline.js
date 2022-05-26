@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 
-export default function TextUnderline({ txt, isTablet = false }) {
+const TextUnderline = ({ txt, isTablet = false }) => {
   return (
     <Grid sx={{ color: "#404040" }}>
       <Typography
@@ -20,4 +20,5 @@ export default function TextUnderline({ txt, isTablet = false }) {
       />
     </Grid>
   );
-}
+};
+export default React.memo(TextUnderline);

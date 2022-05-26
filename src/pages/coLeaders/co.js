@@ -7,7 +7,7 @@ import icons from "../../asset/icon/filePath";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function Co() {
+const Co = () => {
   const [show, setShow] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -213,4 +213,5 @@ export default function Co() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(Co);

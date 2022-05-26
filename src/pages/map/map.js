@@ -9,7 +9,7 @@ import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 const { Option } = Select;
 
-export default function Map() {
+const Map = () => {
   const [value, setValue] = useState(1);
 
   return (
@@ -91,4 +91,5 @@ export default function Map() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(Map);

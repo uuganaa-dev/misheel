@@ -86,7 +86,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function FeaturedBrandSlide({ images, ClickNavigate }) {
+const FeaturedBrandSlide = ({ images, ClickNavigate }) => {
   const settings = {
     className: "center",
     infinite: false,
@@ -130,4 +130,5 @@ export default function FeaturedBrandSlide({ images, ClickNavigate }) {
       </Slider>
     </Grid>
   );
-}
+};
+export default React.memo(FeaturedBrandSlide);

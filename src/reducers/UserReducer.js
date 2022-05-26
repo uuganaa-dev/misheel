@@ -11,6 +11,11 @@ const UserReducer = (state, action) => {
         ...state,
         loggedIn: false,
       };
+    case "SET_CATLIST":
+      return {
+        ...state,
+        catList: action.data,
+      };
 
     default:
       return state;

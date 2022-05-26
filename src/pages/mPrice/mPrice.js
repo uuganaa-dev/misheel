@@ -7,7 +7,7 @@ import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
 
-export default function MPrice() {
+const MPrice = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [onedata, setOnedata] = useState();
   const [data, setData] = useState([]);
@@ -233,4 +233,5 @@ export default function MPrice() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(MPrice);

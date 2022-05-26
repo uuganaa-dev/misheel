@@ -88,47 +88,52 @@ const Sidebar = (props) => {
                 </li>
               </>
             )}
+            {(user.userInfo.role === "1" || user.userInfo.role === "2") && (
+              <>
+                <li
+                  className={
+                    location.pathname === "/brand"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/brand" id="gadotMenuHide">
+                    <div className="custom-logo">
+                      <svg
+                        width="23"
+                        height="23"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        className="feather feather-bar-chart-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs></defs>{" "}
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                      </svg>
+                    </div>
 
-            <li
-              className={
-                location.pathname === "/brand"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/brand" id="gadotMenuHide">
-                <div className="custom-logo">
-                  <svg
-                    width="23"
-                    height="23"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    className="feather feather-bar-chart-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs></defs> <line x1="18" y1="20" x2="18" y2="10"></line>
-                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                  </svg>
-                </div>
+                    <span>Брэнд</span>
+                  </Link>
+                </li>
+                <li
+                  className={
+                    location.pathname === "/product"
+                      ? "has-sub nav-item active"
+                      : "has-sub nav-item"
+                  }
+                >
+                  <Link to="/product" id="gadotMenuHide">
+                    <i className="ft-shopping-bag" />
+                    <span>Бүтээгдэхүүн</span>
+                  </Link>
+                </li>
+              </>
+            )}
 
-                <span>Брэнд</span>
-              </Link>
-            </li>
-            <li
-              className={
-                location.pathname === "/product"
-                  ? "has-sub nav-item active"
-                  : "has-sub nav-item"
-              }
-            >
-              <Link to="/product" id="gadotMenuHide">
-                <i className="ft-shopping-bag" />
-                <span>Бүтээгдэхүүн</span>
-              </Link>
-            </li>
             {user.userInfo.role === "1" && (
               <>
                 <li
@@ -143,31 +148,35 @@ const Sidebar = (props) => {
                     <span>Сошиал хөтөлбөр</span>
                   </Link>
                 </li>
-                <li
-                  className={
-                    location.pathname === "/price"
-                      ? "has-sub nav-item active"
-                      : "has-sub nav-item"
-                  }
-                >
-                  <Link to="/price" id="gadotMenuHide">
-                    <i className="ft-trending-up" />
-                    <span>Зах зээлийн үнэ</span>
-                  </Link>
-                </li>
-                <li
-                  className={
-                    location.pathname === "/about"
-                      ? "has-sub nav-item active"
-                      : "has-sub nav-item"
-                  }
-                >
-                  <Link to="/about" id="gadotMenuHide">
-                    <i className="ft-info" />
-                    <span>Бидний тухай</span>
-                  </Link>
-                </li>
               </>
+            )}
+            {(user.userInfo.role === "1" || user.userInfo.role === "3") && (
+              <li
+                className={
+                  location.pathname === "/price"
+                    ? "has-sub nav-item active"
+                    : "has-sub nav-item"
+                }
+              >
+                <Link to="/price" id="gadotMenuHide">
+                  <i className="ft-trending-up" />
+                  <span>Зах зээлийн үнэ</span>
+                </Link>
+              </li>
+            )}
+            {user.userInfo.role === "1" && (
+              <li
+                className={
+                  location.pathname === "/about"
+                    ? "has-sub nav-item active"
+                    : "has-sub nav-item"
+                }
+              >
+                <Link to="/about" id="gadotMenuHide">
+                  <i className="ft-info" />
+                  <span>Бидний тухай</span>
+                </Link>
+              </li>
             )}
           </ul>
         </div>

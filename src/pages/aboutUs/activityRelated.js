@@ -49,7 +49,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function ActivityRelated({ list }) {
+const ActivityRelated = ({ list }) => {
   const settings = {
     className: "center",
     infinite: true,
@@ -111,4 +111,5 @@ export default function ActivityRelated({ list }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(ActivityRelated);

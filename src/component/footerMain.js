@@ -6,7 +6,7 @@ import LogoYellow from "./logoYellow";
 import icons from "../asset/icon/filePath";
 import TheContext from "../utils/context/userContext";
 
-export default function FooterMain() {
+const FooterMain = () => {
   const context = useContext(TheContext);
   const txt = context.txt.mainFooter;
   return (
@@ -183,4 +183,5 @@ export default function FooterMain() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(FooterMain);

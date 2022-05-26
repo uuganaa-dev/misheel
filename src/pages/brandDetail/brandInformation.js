@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 
-export default function BrandInformation({ sx, data, txt }) {
+const BrandInformation = ({ sx, data, txt }) => {
   return (
     <Grid
       sx={{
@@ -49,4 +49,5 @@ export default function BrandInformation({ sx, data, txt }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(BrandInformation);

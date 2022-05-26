@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { ArrowBackIosNew } from "@mui/icons-material";
 
-export default function CategoryArrow({ txt, chooseCategory = false }) {
+const CategoryArrow = ({ txt, chooseCategory = false }) => {
   return (
     <Grid
       sx={{
@@ -34,4 +34,5 @@ export default function CategoryArrow({ txt, chooseCategory = false }) {
       </Typography>
     </Grid>
   );
-}
+};
+export default React.memo(CategoryArrow);

@@ -1,7 +1,7 @@
 import { Grid, Radio, Typography } from "@mui/material";
 import React from "react";
 
-export default function CategoryRadioBttn({ txt, onChange, checked = false }) {
+const CategoryRadioBttn = ({ txt, onChange, checked = false }) => {
   return (
     <Grid sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
       <Radio
@@ -22,4 +22,5 @@ export default function CategoryRadioBttn({ txt, onChange, checked = false }) {
       </Typography>
     </Grid>
   );
-}
+};
+export default React.memo(CategoryRadioBttn);

@@ -5,7 +5,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import logo from "./Ellipse 67.png";
 import moment from "moment";
 
-export default function Unit({ item, catfind }) {
+const Unit = ({ item, catfind }) => {
   return (
     <Grid
       sx={{
@@ -71,4 +71,5 @@ export default function Unit({ item, catfind }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(Unit);

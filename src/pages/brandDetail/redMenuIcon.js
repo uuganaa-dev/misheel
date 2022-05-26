@@ -1,7 +1,7 @@
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-export default function RedMenuIcon({ sx, click }) {
+const RedMenuIcon = ({ sx, click }) => {
   return (
     <MenuIcon
       sx={{
@@ -13,9 +13,10 @@ export default function RedMenuIcon({ sx, click }) {
         borderRadius: "10px",
         p: "4px",
         cursor: "pointer",
-        ...sx
+        ...sx,
       }}
       onClick={click}
     />
   );
-}
+};
+export default React.memo(RedMenuIcon);

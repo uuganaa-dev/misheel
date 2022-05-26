@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 
 const URL = "http://misheel.tk";
 
-export default function Main() {
+const Main = () => {
   const context = useContext(TheContext);
   const [open, setOpen] = useState(true);
   const [progress] = useState(0);
@@ -235,4 +235,5 @@ export default function Main() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(Main);

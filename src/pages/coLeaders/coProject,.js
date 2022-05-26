@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import icons from "../../asset/icon/filePath";
-export default function CoProject({ data, show, setShow, index, click }) {
+const CoProject = ({ data, show, setShow, index, click }) => {
   return (
     <Grid
       sx={{
@@ -89,4 +89,5 @@ export default function CoProject({ data, show, setShow, index, click }) {
       </Grid>
     </Grid>
   );
-}
+};
+export default React.memo(CoProject);

@@ -7,7 +7,7 @@ import DevelopmentHistory from "./developmentHistory";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function AboutUs() {
+const AboutUs = () => {
   const [list, setlist] = useState([]);
 
   useEffect(() => {
@@ -106,4 +106,5 @@ export default function AboutUs() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(AboutUs);

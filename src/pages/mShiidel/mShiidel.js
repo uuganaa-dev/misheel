@@ -7,7 +7,7 @@ import * as API from "../../api/request";
 import Swal from "sweetalert2";
 import icons from "../../asset/icon/filePath";
 
-export default function MShiidel() {
+const MShiidel = () => {
   const [show, setShow] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -177,4 +177,5 @@ export default function MShiidel() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(MShiidel);

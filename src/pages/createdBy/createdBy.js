@@ -7,7 +7,7 @@ import icons from "../../asset/icon/filePath";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-export default function CreatedBy() {
+const CreatedBy = () => {
   const [show, setShow] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -212,4 +212,5 @@ export default function CreatedBy() {
       </Grid>
     </>
   );
-}
+};
+export default React.memo(CreatedBy);
