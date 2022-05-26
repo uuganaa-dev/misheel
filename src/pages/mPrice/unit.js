@@ -19,7 +19,7 @@ const Unit = ({ item, catfind }) => {
     >
       <Grid
         sx={{
-          backgroundImage: `url("http://misheel.tk${item.priceImage}")`,
+          backgroundImage: `url("http://mmmall.mn${item.priceImage}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: ["100px", "370px"],

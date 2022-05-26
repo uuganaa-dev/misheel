@@ -129,7 +129,7 @@ const MShiidel = () => {
                   <Grid sx={{ position: "relative" }}>
                     <Grid
                       sx={{
-                        backgroundImage: `url("http://misheel.tk${item.img}")`,
+                        backgroundImage: `url("http://mmmall.mn${item.img}")`,
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         width: ["200px", "262px", "370px"],

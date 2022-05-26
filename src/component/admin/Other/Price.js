@@ -6,7 +6,7 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import moment from "moment";
 
-const URL = "http://misheel.tk";
+const URL = "http://mmmall.mn";
 
 const { Option } = Select;
 function getBase64(img, callback) {

@@ -71,7 +71,7 @@ const DevelopmentHistory = () => {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://misheel.tk${state.img}")`,
+            backgroundImage: `url("http://mmmall.mn${state.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["71%", "419px"],

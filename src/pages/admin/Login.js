@@ -42,7 +42,7 @@ const Login = () => {
     } else {
       axios
         .post(
-          "http://misheel.tk/api/auth/login",
+          "http://mmmall.mn/api/auth/login",
           { username: username, password: password },
           {
             "Content-Type": "application/json",

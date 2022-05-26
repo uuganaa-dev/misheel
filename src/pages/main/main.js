@@ -11,7 +11,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-const URL = "http://misheel.tk";
+const URL = "http://mmmall.mn";
 
 const Main = () => {
   const context = useContext(TheContext);

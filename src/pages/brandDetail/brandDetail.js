@@ -62,7 +62,7 @@ const BrandDetail = () => {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://misheel.tk${data?.brandDetailCoverImg}")`,
+            backgroundImage: `url("http://mmmall.mn${data?.brandDetailCoverImg}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: "100%",

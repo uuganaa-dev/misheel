@@ -125,7 +125,7 @@ const CreatedByModal = ({ CloseModal, itemDetail }) => {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("http://misheel.tk${item.img}")`,
+                  backgroundImage: `url("http://mmmall.mn${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["190px", "250px", "400px"],

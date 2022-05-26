@@ -81,7 +81,7 @@ const MPrice = () => {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://misheel.tk${lastItem?.priceImage}")`,
+              backgroundImage: `url("http://mmmall.mn${lastItem?.priceImage}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
@@ -218,7 +218,7 @@ const MPrice = () => {
                 <div className="gadot-uploadType2">
                   <div onClick={() => HandleClick(0)}>
                     <img
-                      src={"http://misheel.tk" + onedata?.priceAllPriceImage}
+                      src={"http://mmmall.mn" + onedata?.priceAllPriceImage}
                       alt=""
                       width={"100%"}
                     />

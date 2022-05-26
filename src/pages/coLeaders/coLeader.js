@@ -47,7 +47,7 @@ const CoLeader = () => {
       </Grid>
       <Grid
         sx={{
-          backgroundImage: `url("http://misheel.tk${img}")`,
+          backgroundImage: `url("http://mmmall.mn${img}")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",

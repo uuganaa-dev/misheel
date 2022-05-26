@@ -136,7 +136,7 @@ const CreatedBy = () => {
                     >
                       <Grid
                         sx={{
-                          backgroundImage: `url("http://misheel.tk${item.img}")`,
+                          backgroundImage: `url("http://mmmall.mn${item.img}")`,
                           backgroundRepeat: "no-repeat",
                           backgroundSize: "cover",
                           width: ["157px", "410px", "585px"],

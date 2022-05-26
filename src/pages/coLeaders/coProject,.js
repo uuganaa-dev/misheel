@@ -29,7 +29,7 @@ const CoProject = ({ data, show, setShow, index, click }) => {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://misheel.tk${data.img}")`,
+            backgroundImage: `url("http://mmmall.mn${data.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width:

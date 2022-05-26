@@ -142,7 +142,7 @@ const ImageSlick = ({ txt }) => {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("http://misheel.tk${item.productImage[0]}")`,
+                  backgroundImage: `url("http://mmmall.mn${item.productImage[0]}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["100px", "244px"],

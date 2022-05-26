@@ -110,7 +110,7 @@ const CoModal = ({ CloseModal, data }) => {
             <Grid sx={{ display: "flex", gap: "30px" }}>
               <Grid
                 sx={{
-                  backgroundImage: `url("http://misheel.tk${item.img}")`,
+                  backgroundImage: `url("http://mmmall.mn${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   width: "50%",

@@ -15,7 +15,7 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-const URL = "http://misheel.tk";
+const URL = "http://mmmall.mn";
 
 const Brand = () => {
   const formData = new FormData();

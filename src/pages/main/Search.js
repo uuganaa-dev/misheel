@@ -64,7 +64,7 @@ const Search = () => {
               {oneData && (
                 <div className="text-center">
                   <img
-                    src={"http://misheel.tk" + oneData.productImage[0]}
+                    src={"http://mmmall.mn" + oneData.productImage[0]}
                     alt=""
                     width={"100%"}
                     height="200px"
@@ -147,7 +147,7 @@ const Search = () => {
               return (
                 <div className="search-pruduct-item" key={index}>
                   <img
-                    src={"http://misheel.tk" + el.productImage[0]}
+                    src={"http://mmmall.mn" + el.productImage[0]}
                     alt=""
                     height={"100%"}
                     width={"100%"}

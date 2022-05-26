@@ -11,7 +11,7 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 const { Option } = Select;
-const URL = "http://misheel.tk";
+const URL = "http://mmmall.mn";
 
 const Admin = () => {
   const { admin, setAdmin } = useAdminState();

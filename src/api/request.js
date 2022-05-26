@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const URL = "http://misheel.tk/api";
+const URL = "http://mmmall.mn/api";
 
 export function MISHEEL() {
   return createInstance(URL);

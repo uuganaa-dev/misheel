@@ -124,7 +124,7 @@ const MShiidelModal = ({ CloseModal, itemDetail }) => {
             >
               <Grid
                 sx={{
-                  backgroundImage: `url("http://misheel.tk${item.img}")`,
+                  backgroundImage: `url("http://mmmall.mn${item.img}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   width: ["200px", "370px"],

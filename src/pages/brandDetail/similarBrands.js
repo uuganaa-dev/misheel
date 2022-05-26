@@ -102,7 +102,7 @@ const SimilarBrands = ({ txt, brandList }) => {
               >
                 <Grid
                   sx={{
-                    backgroundImage: `url("http://misheel.tk${item.brandLogo}")`,
+                    backgroundImage: `url("http://mmmall.mn${item.brandLogo}")`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "contain",
                     width: ["67px", "165px", "232px"],

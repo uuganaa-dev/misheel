@@ -218,7 +218,7 @@ const BrandPage = () => {
                         >
                           <Grid
                             sx={{
-                              backgroundImage: `url("http://misheel.tk${item.brandLogo}")`,
+                              backgroundImage: `url("http://mmmall.mn${item.brandLogo}")`,
                               backgroundRepeat: "no-repeat",
                               backgroundSize: "cover",
                               width: ["80px", "95px", "135px"],
