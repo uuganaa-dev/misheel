@@ -67,7 +67,7 @@ const ImageSlick = ({ txt }) => {
     infinite: true,
     centerMode: true,
     centerPadding: "60px",
-    slidesToShow: 4,
+    slidesToShow: parseInt(detail.length),
     swipeToSlide: true,
     afterChange: function (index) {},
     nextArrow: <SampleNextArrow />,
