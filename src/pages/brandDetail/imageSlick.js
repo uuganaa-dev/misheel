@@ -14,16 +14,17 @@ function SampleNextArrow(props) {
       sx={{
         ...style,
         position: "absolute",
-        top: "19%",
+        top: ["30%", "19%", "19%"],
         right: "3%",
         boxShadow: 3,
         borderRadius: "30px",
-        width: ["16px", "40px", "50px"],
-        height: ["16px", "40px", "50px"],
+        width: ["30px", "60px", "90px"],
+        height: ["30px", "60px", "90px"],
+        backgroundColor: "gray",
       }}
       onClick={onClick}
     >
-      <NavigateNextIcon sx={{ fontSize: [16, 40, 50] }} />
+      <NavigateNextIcon sx={{ fontSize: [30, 60, 90], color: "white" }} />
     </Grid>
   );
 }
@@ -35,18 +36,23 @@ function SamplePrevArrow(props) {
       sx={{
         ...style,
         position: "absolute",
-        top: "19%",
+        top: ["30%", "19%", "19%"],
         left: "3%",
         zIndex: "snackbar",
         boxShadow: 3,
         borderRadius: "30px",
-        width: ["16px", "40px", "50px"],
-        height: ["16px", "40px", "50px"],
+        width: ["30px", "60px", "90px"],
+        height: ["30px", "60px", "90px"],
+        backgroundColor: "gray",
       }}
       onClick={onClick}
     >
       <NavigateNextIcon
-        sx={{ transform: "rotate(180deg)", fontSize: [16, 40, 50] }}
+        sx={{
+          transform: "rotate(180deg)",
+          fontSize: [30, 60, 90],
+          color: "white",
+        }}
       />
     </Grid>
   );
@@ -67,7 +73,7 @@ const ImageSlick = ({ txt }) => {
     infinite: true,
     centerMode: true,
     centerPadding: "60px",
-    slidesToShow: parseInt(detail.length),
+    slidesToShow: detail.length >= 4 ? 4 : parseInt(detail.length),
     swipeToSlide: true,
     afterChange: function (index) {},
     nextArrow: <SampleNextArrow />,
