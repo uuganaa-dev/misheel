@@ -4,6 +4,7 @@ const enText = {
     price: "Market Price",
     brand: "Brand",
     ours: "About Us",
+    mall: "Service center",
     lan: "EN",
   },
   brand: {

@@ -27,6 +27,11 @@ const UserReducer = (state, action) => {
         ...state,
         openMenu: action.data,
       };
+    case "CHANGE_LEFT_MENU":
+      return {
+        ...state,
+        leftMenu: action.data,
+      };
 
     default:
       return state;

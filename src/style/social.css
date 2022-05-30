@@ -280,6 +280,20 @@
 .slick-track {
   text-align: -webkit-center;
 }
+.service-item {
+  width: 600px;
+  text-align: center;
+  height: 320px;
+}
+.service-item-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.service-item:hover {
+  transform: scale(0.98);
+  transition: all 0.3s;
+}
 @media only screen and (max-width: 1050px) {
   .main-container {
     display: flex;
@@ -341,9 +355,6 @@
   .search-pruduct-item {
     width: 150px;
     height: 100px;
-  }
-  .header-logo {
-    display: none;
   }
   .m-shiidel-text {
     font-size: 10px;

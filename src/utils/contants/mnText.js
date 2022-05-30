@@ -4,6 +4,7 @@ const mnText = {
     price: "Зах зээлийн үнэ",
     brand: "Брэнд",
     ours: "Бидний тухай",
+    mall: "Үйлчилгээний төвүүд",
     lan: "MN",
   },
   brand: {

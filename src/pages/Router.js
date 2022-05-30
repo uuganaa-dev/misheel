@@ -12,6 +12,7 @@ import MShiidel from "./mShiidel/mShiidel";
 import MrMisheel from "./mrMisheel/mrMisheel";
 import AboutUs from "./aboutUs/aboutUs";
 import MPrice from "./mPrice/mPrice";
+import Mall from "./Mall";
 import Map from "./map/map";
 // Admin
 import Login from "./admin/Login";
@@ -49,6 +50,7 @@ const Router = () => {
         <Route path="/mrMisheel" element={<MrMisheel />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/mprice" element={<MPrice />} />
+        <Route path="/mall" element={<Mall />} />
         <Route path="/map" element={<Map />} />
         <Route path="/login" element={<Login />} />
       </Routes>

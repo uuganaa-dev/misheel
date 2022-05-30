@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MainMenu from "./mainMenu";
+import LeftMenu from "./LeftMenu";
 import { useUserState } from "../contexts/UserContext";
 
 import { Input } from "antd";
@@ -42,6 +43,7 @@ const Appbar = () => {
           alignItems: "center",
           justifyContent: "space-between",
           px: ["10px", "10px", "200px"],
+          zIndex: "2",
         }}
       >
         {isShow ? (
@@ -51,6 +53,7 @@ const Appbar = () => {
             placeholder="хайх үгээ бичээд Enter дарна уу"
             onPressEnter={() => {
               navigate("/search/" + searchValue);
+              setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu });
             }}
             size="small"
           />
@@ -101,7 +104,6 @@ const Appbar = () => {
                 setSelect(txt.home);
                 navigate("/");
               }}
-              className="header-logo"
             >
               <LogoYellow
                 ysx={{
@@ -113,7 +115,7 @@ const Appbar = () => {
                   width: ["50px", "42px", "45px"],
                   height: ["50px", "42px", "45px"],
                 }}
-                backgroundColor={["white", "white", "#FFD662"]}
+                backgroundColor={["#FFD662", "#FFD662", "#FFD662"]}
               />
             </Grid>
             <Typography
@@ -150,13 +152,30 @@ const Appbar = () => {
             >
               {txt.ours}
             </Typography>
+            <Typography
+              sx={{
+                ...style.txt,
+                ...style.fourHundred,
+                ...style.pointer,
+                ...(select === txt.mall && {
+                  color: ["white", "white", "white"],
+                }),
+              }}
+              className="my-font-size"
+              onClick={() => {
+                setSelect(txt.mall);
+                navigate("/mall");
+              }}
+            >
+              {txt.mall}
+            </Typography>
           </>
         )}
 
         <Grid
           sx={{
-            display: "flex",
-            gap: ["10px", "24px", "24px"],
+            display: ["none", "flex", "flex"],
+            gap: ["8px", "24px", "24px"],
             alignItems: "center",
             fontSize: ["10px", "16px", "16px"],
           }}
@@ -211,8 +230,15 @@ const Appbar = () => {
             {txt.lan}
           </Typography>
         </Grid>
+        <MenuIcon
+          sx={{ ...style.pointer, display: ["block", "none", "none"] }}
+          onClick={() =>
+            setUser({ type: "CHANGE_LEFT_MENU", data: !user.leftMenu })
+          }
+        />
       </Grid>
       {user.openMenu && <MainMenu />}
+      {user.leftMenu && <LeftMenu />}
     </Grid>
   );
 };
@@ -220,7 +246,11 @@ const Appbar = () => {
 export default React.memo(Appbar);
 
 const style = {
-  txt: { fontSize: "14px", textTransform: "uppercase" },
+  txt: {
+    fontSize: "14px",
+    textTransform: "uppercase",
+    display: ["none", "block", "block"],
+  },
   pointer: { cursor: "pointer", "&:hover": { opacity: 0.7 } },
   fourHundred: { fontWeight: 400 },
   sixHundred: { fontWeight: 600 },

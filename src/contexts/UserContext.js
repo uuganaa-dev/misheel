@@ -10,6 +10,7 @@ const initialState = {
   catList: [],
   carId: undefined,
   openMenu: false,
+  leftMenu: false,
 };
 
 export const useUserState = () => {
