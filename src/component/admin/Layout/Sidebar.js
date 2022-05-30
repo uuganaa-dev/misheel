@@ -178,6 +178,20 @@ const Sidebar = (props) => {
                 </Link>
               </li>
             )}
+            {user.userInfo.role === "1" && (
+              <li
+                className={
+                  location.pathname === "/service"
+                    ? "has-sub nav-item active"
+                    : "has-sub nav-item"
+                }
+              >
+                <Link to="/service" id="gadotMenuHide">
+                  <i className="ft-box" />
+                  <span>Үйлчилгээний төвүүд</span>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

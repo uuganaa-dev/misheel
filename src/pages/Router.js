@@ -14,6 +14,7 @@ import AboutUs from "./aboutUs/aboutUs";
 import MPrice from "./mPrice/mPrice";
 import Mall from "./Mall";
 import Map from "./map/map";
+import Service from "./admin/Service";
 // Admin
 import Login from "./admin/Login";
 import Users from "./admin/Users";
@@ -62,6 +63,7 @@ const Router = () => {
               <Route path="/admin" element={<Admin />} />
               <Route path="/social" element={<Social />} />
               <Route path="/about" element={<About />} />
+              <Route path="/service" element={<Service />} />
             </>
           )}
           {(user.userInfo.role === "1" || user.userInfo.role === "3") && (
