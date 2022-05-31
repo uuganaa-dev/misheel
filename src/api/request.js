@@ -216,3 +216,17 @@ export async function getUser() {
   return response;
 }
 // About
+// Service
+export async function getService() {
+  const response = await MISHEEL().get("/service");
+  return response;
+}
+export async function postServie(formData) {
+  const response = await MISHEEL().post("/service", formData);
+  return response;
+}
+export async function deleteServie(id) {
+  const response = await MISHEEL().delete("/service/" + id);
+  return response;
+}
+// Service

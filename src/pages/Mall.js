@@ -1,13 +1,17 @@
+import React, { useEffect, useState } from "react";
 import { Grid, Typography } from "@mui/material";
-import React from "react";
 import Appbar from "../component/Appbar";
 import FooterMain from "../component/footerMain";
-import img1 from "../asset/1 (1).jpeg";
-import img2 from "../asset/1 (1).jpg";
-import img3 from "../asset/1 (2).jpg";
-import img4 from "../asset/1 (3).jpg";
+import * as API from "../api/request";
 
 const Mall = () => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    API.getService()
+      .then((res) => setList(res.data.data))
+      .catch(() => {});
+  }, []);
+
   return (
     <div style={{ fontFamily: "roboto" }}>
       <Appbar />
@@ -44,22 +48,19 @@ const Mall = () => {
         </Grid>
       </Grid>
       <div className="search-contaner" style={{ flexWrap: "wrap" }}>
-        <div className="service-item">
-          <img src={img1} alt="" className="service-item-img" />
-          <div>Банкны үйлчилгээ</div>
-        </div>
-        <div className="service-item">
-          <img src={img2} alt="" className="service-item-img" />
-          <div>Нийслэлийн үйлчилгээний нэгдсэн төв</div>
-        </div>
-        <div className="service-item">
-          <img src={img3} alt="" className="service-item-img" />
-          <div>Хүргэлтийн үйлчилгээ</div>
-        </div>
-        <div className="service-item">
-          <img src={img4} alt="" className="service-item-img" />
-          <div>Кофе шоп</div>
-        </div>
+        {list.length > 0 &&
+          list.map((el, index) => {
+            return (
+              <div className="service-item" key={index}>
+                <img
+                  src={"http://mmmall.mn" + el.imageUrl}
+                  alt=""
+                  className="service-item-img"
+                />
+                <div>{el.text}</div>
+              </div>
+            );
+          })}
       </div>
       <FooterMain />
     </div>
