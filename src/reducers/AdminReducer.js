@@ -392,7 +392,7 @@ const AdminReducer = (state, action) => {
           priceCategory: undefined,
           priceDate: new Date(),
           priceText: "Мишээл Барилгын Их Дэлгүүр",
-          priceAllPriceImage: undefined,
+          priceAllPriceImage: [],
         };
       }
     case "PRICE_IMAGE":

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Upload, Modal, Select } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../../api/request";
@@ -15,6 +15,25 @@ const URL = "http://mmmall.mn";
 
 const Admin = () => {
   const { admin, setAdmin } = useAdminState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [banner, setBanner] = useState();
+
+  const BannerSave = () => {
+    if (banner?.file) {
+      const bannerform = new FormData();
+      bannerform.append("img", banner.file);
+      API.putBanner()
+        .then((res) => {})
+        .catch((err) => {});
+    } else {
+      Swal.fire({
+        icon: "warning",
+        text: "Зураг оруулна уу!",
+        confirmButtonColor: "#0f56b3",
+      });
+    }
+  };
+  useEffect(() => {}, []);
 
   const uploadButton = (
     <div>
@@ -588,6 +607,80 @@ const Admin = () => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </Modal>
+      <div
+        style={{
+          backgroundColor: "blue",
+          width: "150px",
+          textAlign: "center",
+          borderRadius: "5px",
+          marginTop: "15px",
+          color: "white",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          setIsModalVisible(true);
+        }}
+      >
+        Banner
+      </div>
+      <Modal
+        visible={isModalVisible}
+        footer={false}
+        onCancel={() => setIsModalVisible(false)}
+      >
+        <div className="gadot-primary-modal-body">
+          <div className="gadot-text-body">
+            <Upload
+              name="avatar"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              beforeUpload={() => false}
+              accept=".jpg, .png, .jpeg"
+              maxCount={1}
+              onChange={({ file }) => {
+                getBase64(file, (imageBase) => {
+                  setBanner({ file: file, base: imageBase });
+                });
+              }}
+            >
+              {banner?.base ? (
+                <img src={banner?.base} alt="" className="upload-img" />
+              ) : (
+                uploadButton
+              )}
+            </Upload>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "green",
+                  width: "150px",
+                  textAlign: "center",
+                  borderRadius: "5px",
+                  marginTop: "15px",
+                  color: "white",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  BannerSave();
+                }}
+              >
+                Хадгалах
+              </div>
+            </div>
           </div>
         </div>
       </Modal>

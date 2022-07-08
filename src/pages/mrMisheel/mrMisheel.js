@@ -127,7 +127,14 @@ const MrMisheel = () => {
             </Grid>
           ))}
         </Grid> */}
-        <div className="search-pruduct2">
+        <div
+          className="search-pruduct2"
+          style={{
+            paddingTop: "100px",
+            paddingBottom: "100px",
+            backgroundColor: "white",
+          }}
+        >
           {data.map((item, index) => {
             return (
               <div

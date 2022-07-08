@@ -4,7 +4,6 @@ const mnText = {
     price: "Зах зээлийн үнэ",
     brand: "Брэнд",
     ours: "Бидний тухай",
-    mall: "Үйлчилгээний төвүүд",
     lan: "MN",
   },
   brand: {
@@ -26,7 +25,7 @@ const mnText = {
         icon: "phone",
       },
       {
-        txt: "info@mmall.mn",
+        txt: "info@mmmall.mn",
         icon: "mail",
       },
     ],

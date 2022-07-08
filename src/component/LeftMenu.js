@@ -43,23 +43,13 @@ const LeftMenu = () => {
           </div>
           <div
             className={
-              location.pathname.split("/")[1] === ""
-                ? "main-menu active"
-                : "main-menu"
-            }
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            {txt.home}
-          </div>
-          <div
-            className={
               location.pathname.split("/")[1] === "mprice"
                 ? "main-menu active"
                 : "main-menu"
             }
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               navigate("/mprice");
             }}
           >
@@ -72,6 +62,8 @@ const LeftMenu = () => {
                 : "main-menu"
             }
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               navigate("/brandPage");
             }}
           >
@@ -84,22 +76,12 @@ const LeftMenu = () => {
                 : "main-menu"
             }
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               navigate("/aboutUs");
             }}
           >
             {txt.ours}
-          </div>
-          <div
-            className={
-              location.pathname.split("/")[1] === "mall"
-                ? "main-menu active"
-                : "main-menu"
-            }
-            onClick={() => {
-              navigate("/mall");
-            }}
-          >
-            {txt.mall}
           </div>
           <div
             className={
@@ -108,6 +90,8 @@ const LeftMenu = () => {
                 : "main-menu"
             }
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               navigate("/map");
             }}
           >

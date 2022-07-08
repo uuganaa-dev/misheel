@@ -78,6 +78,15 @@ export async function deleteImg(id) {
   const response = await MISHEEL().delete("/admin/" + id);
   return response;
 }
+
+export async function getBanner() {
+  const response = await MISHEEL().get("/banner");
+  return response;
+}
+export async function putBanner(formData) {
+  const response = await MISHEEL().put("/banner", formData);
+  return response;
+}
 // Нүүр хуудас
 // Брэнд
 

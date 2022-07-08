@@ -217,11 +217,15 @@ const MPrice = () => {
               <div className="gadot-primary-modal-body">
                 <div className="gadot-uploadType2">
                   <div onClick={() => HandleClick(0)}>
-                    <img
-                      src={"http://mmmall.mn" + onedata?.priceAllPriceImage}
-                      alt=""
-                      width={"100%"}
-                    />
+                    {onedata?.priceAllPriceImage.map((el) => {
+                      return (
+                        <img
+                          src={"http://mmmall.mn" + el.url}
+                          alt=""
+                          width={"100%"}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>

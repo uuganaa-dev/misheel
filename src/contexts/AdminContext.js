@@ -74,7 +74,7 @@ const initialState = {
   priceCategory: undefined,
   priceDate: new Date(),
   priceText: "Мишээл Барилгын Их Дэлгүүр",
-  priceAllPriceImage: undefined,
+  priceAllPriceImage: [],
   // PRICE END
   // SOCIAL
   createdby: false,

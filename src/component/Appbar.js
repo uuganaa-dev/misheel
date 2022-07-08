@@ -61,27 +61,12 @@ const Appbar = () => {
           <>
             <MenuIcon
               sx={{ ...style.pointer }}
-              onClick={() =>
-                setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu })
-              }
-            />
-            <Typography
-              sx={{
-                ...style.txt,
-                ...style.fourHundred,
-                ...style.pointer,
-                ...(select === txt.home && {
-                  color: ["white", "white", "white"],
-                }),
-              }}
-              className="my-font-size"
               onClick={() => {
-                setSelect(txt.home);
-                navigate("/");
+                setUser({ type: "CHANGE_LEFT_MENU", data: false });
+                setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu });
               }}
-            >
-              {txt.home}
-            </Typography>
+            />
+
             <Typography
               sx={{
                 ...style.txt,
@@ -93,6 +78,8 @@ const Appbar = () => {
               }}
               className="my-font-size"
               onClick={() => {
+                setUser({ type: "CHANGE_OPENMENU", data: false });
+                setUser({ type: "CHANGE_LEFT_MENU", data: false });
                 setSelect(txt.price);
                 navigate("/mprice");
               }}
@@ -101,6 +88,8 @@ const Appbar = () => {
             </Typography>
             <Grid
               onClick={() => {
+                setUser({ type: "CHANGE_OPENMENU", data: false });
+                setUser({ type: "CHANGE_LEFT_MENU", data: false });
                 setSelect(txt.home);
                 navigate("/");
               }}
@@ -129,6 +118,8 @@ const Appbar = () => {
               }}
               className="my-font-size"
               onClick={() => {
+                setUser({ type: "CHANGE_OPENMENU", data: false });
+                setUser({ type: "CHANGE_LEFT_MENU", data: false });
                 setSelect(txt.brand);
                 navigate("/brandPage");
               }}
@@ -146,28 +137,13 @@ const Appbar = () => {
               }}
               className="my-font-size"
               onClick={() => {
+                setUser({ type: "CHANGE_OPENMENU", data: false });
+                setUser({ type: "CHANGE_LEFT_MENU", data: false });
                 setSelect(txt.ours);
                 navigate("/aboutUs");
               }}
             >
               {txt.ours}
-            </Typography>
-            <Typography
-              sx={{
-                ...style.txt,
-                ...style.fourHundred,
-                ...style.pointer,
-                ...(select === txt.mall && {
-                  color: ["white", "white", "white"],
-                }),
-              }}
-              className="my-font-size"
-              onClick={() => {
-                setSelect(txt.mall);
-                navigate("/mall");
-              }}
-            >
-              {txt.mall}
             </Typography>
           </>
         )}
@@ -182,7 +158,11 @@ const Appbar = () => {
         >
           <SearchIcon
             sx={{ ...style.pointer, fontSize: ["10px", "16px", "16px"] }}
-            onClick={() => setIsShow(!isShow)}
+            onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
+              setIsShow(!isShow);
+            }}
           />
 
           <LocationOnIcon
@@ -194,6 +174,8 @@ const Appbar = () => {
               fontSize: ["10px", "16px", "16px"],
             }}
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               setSelect("map");
               navigate("/map");
             }}
@@ -201,6 +183,8 @@ const Appbar = () => {
           <i
             className="fa fa-sign-in cursor-pointer"
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               user.loggedIn
                 ? user.userInfo.role === "1"
                   ? navigate("/admin")
@@ -223,6 +207,8 @@ const Appbar = () => {
             }}
             className="my-font-size"
             onClick={() => {
+              setUser({ type: "CHANGE_OPENMENU", data: false });
+              setUser({ type: "CHANGE_LEFT_MENU", data: false });
               setSelect(txt.lan);
               context.index === 0 ? context.ChangeTxt(1) : context.ChangeTxt(0);
             }}
@@ -232,9 +218,10 @@ const Appbar = () => {
         </Grid>
         <MenuIcon
           sx={{ ...style.pointer, display: ["block", "none", "none"] }}
-          onClick={() =>
-            setUser({ type: "CHANGE_LEFT_MENU", data: !user.leftMenu })
-          }
+          onClick={() => {
+            setUser({ type: "CHANGE_OPENMENU", data: false });
+            setUser({ type: "CHANGE_LEFT_MENU", data: !user.leftMenu });
+          }}
         />
       </Grid>
       {user.openMenu && <MainMenu />}

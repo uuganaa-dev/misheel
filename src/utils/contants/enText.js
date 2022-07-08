@@ -4,7 +4,6 @@ const enText = {
     price: "Market Price",
     brand: "Brand",
     ours: "About Us",
-    mall: "Service center",
     lan: "EN",
   },
   brand: {
@@ -26,7 +25,7 @@ const enText = {
         icon: "phone",
       },
       {
-        txt: "info@mmall.mn",
+        txt: "info@mmmall.mn",
         icon: "mail",
       },
     ],
