@@ -105,13 +105,11 @@ const BrandDetail = () => {
 
         <FooterMain />
         <Modal open={openModal} onClose={handleClose}>
-          <div>
-            <BrandDetailModal
-              handleClose={handleClose}
-              detail={detail}
-              txt={context.txt.brandDetail}
-            />
-          </div>
+          <BrandDetailModal
+            handleClose={handleClose}
+            detail={detail}
+            txt={context.txt.brandDetail}
+          />
         </Modal>
       </Grid>
     </>

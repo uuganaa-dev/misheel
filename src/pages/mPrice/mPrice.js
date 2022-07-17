@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "antd";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Modal } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
 import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
+import icons from "../../asset/icon/filePath";
 
 const MPrice = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -72,6 +72,7 @@ const MPrice = () => {
   return (
     <>
       <Appbar />
+
       <Grid
         sx={{
           backgroundColor: ["#ECEBE7", "#ECEBE7", "#ECEBE7"],
@@ -208,29 +209,37 @@ const MPrice = () => {
 
           {onedata !== undefined && (
             <Modal
-              title=""
-              visible={isModalVisible}
-              onCancel={() => setIsModalVisible(false)}
-              footer={false}
-              width={1000}
+              open={isModalVisible}
+              onClose={() => setIsModalVisible(false)}
             >
-              <div className="gadot-primary-modal-body">
-                <div className="gadot-uploadType2">
-                  <div onClick={() => HandleClick(0)}>
-                    {onedata?.priceAllPriceImage.length > 0 &&
-                      onedata?.priceAllPriceImage.map((el, index) => {
-                        return (
-                          <img
-                            key={index}
-                            src={"http://mmmall.mn" + el.img}
-                            alt=""
-                            width={"100%"}
-                          />
-                        );
-                      })}
-                  </div>
+              <Grid
+                sx={{
+                  position: "absolute",
+                  height: "100vh",
+                  width: "80%",
+                  marginTop: "58px",
+                  left: "50%",
+                  transform: "translate(-50%)",
+                }}
+              >
+                <div
+                  onClick={() => HandleClick(0)}
+                  style={{ height: "100vh" }}
+                  className="scrollbar"
+                >
+                  {onedata?.priceAllPriceImage.length > 0 &&
+                    onedata?.priceAllPriceImage.map((el, index) => {
+                      return (
+                        <img
+                          key={index}
+                          src={"http://mmmall.mn" + el.img}
+                          alt=""
+                          width={"100%"}
+                        />
+                      );
+                    })}
                 </div>
-              </div>
+              </Grid>
             </Modal>
           )}
         </Grid>

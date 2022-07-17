@@ -1,3 +1,16 @@
+.scrollbar {
+  overflow-y: auto;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 2px;
+  border-radius: 2px;
+  background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: gray;
+}
+
 #style-1::-webkit-scrollbar {
   width: 5px;
   background-color: transparent;
