@@ -220,7 +220,8 @@ const BrandPage = () => {
                             sx={{
                               backgroundImage: `url("http://mmmall.mn${item.brandLogo}")`,
                               backgroundRepeat: "no-repeat",
-                              backgroundSize: "cover",
+                              backgroundSize: "contain",
+                              backgroundPositionY: "center",
                               width: ["80px", "95px", "135px"],
                               height: ["80px", "95px", "135px"],
                               transition: "transform 10s",

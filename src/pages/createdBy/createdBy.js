@@ -138,7 +138,7 @@ const CreatedBy = () => {
                         sx={{
                           backgroundImage: `url("http://mmmall.mn${item.img}")`,
                           backgroundRepeat: "no-repeat",
-                          backgroundSize: "cover",
+                          backgroundSize: "contain",
                           width: ["157px", "410px", "585px"],
                           height: ["148px", "387px", "554px"],
                           transition: "transform 2s",
@@ -158,7 +158,7 @@ const CreatedBy = () => {
                         sx={{
                           backgroundImage: `url("${icons.eye}")`,
                           backgroundRepeat: "no-repeat",
-                          backgroundSize: "cover",
+                          backgroundSize: "contain",
                           width: ["24px", "62px", "88px"],
                           height: ["16px", "42px", "60px"],
                           position: "absolute",

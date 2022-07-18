@@ -58,7 +58,7 @@ function SamplePrevArrow(props) {
 const CreatedByModal = ({ CloseModal, itemDetail }) => {
   const settings = {
     className: "center",
-    infinite: true,
+    infinite: false,
     centerPadding: "60px",
     centerMode: true,
     slidesToShow: 3,
@@ -92,7 +92,7 @@ const CreatedByModal = ({ CloseModal, itemDetail }) => {
         left: "50%",
         transform: "translate(-50%, -50%)",
         width: "100%",
-        height: ["50vh", "70vh", "85vh"],
+        height: ["40vh", "50vh", "65vh"],
         backgroundColor: "rgba(0,0,0,0.6)",
         color: "white",
         p: "32px 47px",
@@ -103,7 +103,7 @@ const CreatedByModal = ({ CloseModal, itemDetail }) => {
           sx={{
             backgroundImage: `url("${icons.cancel}")`,
             backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+            backgroundSize: "contain !important",
             width: "20px",
             height: "20px",
             cursor: "pointer",

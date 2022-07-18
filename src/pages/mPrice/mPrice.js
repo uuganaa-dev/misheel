@@ -6,6 +6,8 @@ import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
 
+const URL = "http://mmmall.mn";
+
 const MPrice = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [onedata, setOnedata] = useState();
@@ -45,6 +47,20 @@ const MPrice = () => {
   }, []);
 
   useEffect(() => {
+    API.getPriceCover()
+      .then((res) => {
+        if (res.data.data.length > 0) {
+          setLastItem({
+            title: res.data.data[0].title,
+            cover: res.data.data[0].cover,
+            file: res.data.data[0].file,
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     API.getPrice()
       .then((res) => {
         if (res.data.success) {
@@ -80,7 +96,7 @@ const MPrice = () => {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://mmmall.mn${lastItem?.priceImage}")`,
+              backgroundImage: `url("http://mmmall.mn${lastItem?.cover}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
@@ -90,7 +106,7 @@ const MPrice = () => {
           <Typography
             sx={{
               fontSize: ["10px", "34px"],
-
+              maxWidth: "700px",
               letterSpacing: "3.25px",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -106,10 +122,10 @@ const MPrice = () => {
               flexDirection: "column",
             }}
           >
-            {lastItem?.priceTitle}
+            {lastItem?.title}
             <span
               className="detail-btn"
-              onClick={() => HandleClick(lastItem?.id)}
+              onClick={() => window.open(URL + lastItem?.file, "_blank")}
             >
               Дэлгэрэнгүй
             </span>
