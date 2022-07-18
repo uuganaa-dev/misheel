@@ -5,7 +5,6 @@ import FooterMain from "../../component/footerMain";
 import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
-import icons from "../../asset/icon/filePath";
 
 const MPrice = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -51,7 +50,6 @@ const MPrice = () => {
         if (res.data.success) {
           if (res.data.data.length > 0) {
             setData(res.data.data);
-            setLastItem(res.data.data.reverse()[0]);
           }
         }
       })
@@ -215,7 +213,6 @@ const MPrice = () => {
               <Grid
                 sx={{
                   position: "absolute",
-                  height: "100vh",
                   width: "80%",
                   marginTop: "58px",
                   left: "50%",
@@ -224,7 +221,7 @@ const MPrice = () => {
               >
                 <div
                   onClick={() => HandleClick(0)}
-                  style={{ height: "100vh" }}
+                  style={{ height: "93.5vh" }}
                   className="scrollbar"
                 >
                   {onedata?.priceAllPriceImage.length > 0 &&

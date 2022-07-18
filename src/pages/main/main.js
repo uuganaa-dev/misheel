@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Grid, Modal, LinearProgress } from "@mui/material";
-import fileMain from "../../asset/backgroundImages/main/fileMain";
 import Appbar from "../../component/Appbar";
 import FeaturedBrand from "./featuredBrand";
 import Footer from "../../component/footerMain";
@@ -26,6 +25,17 @@ const Main = () => {
   const [cover3, setCover3] = useState();
   const [count, setCount] = useState(0);
   const [list, setList] = useState([]);
+  const [banner, setBanner] = useState();
+
+  useEffect(() => {
+    API.getBanner()
+      .then((res) => {
+        if (res.data.data.length > 0) {
+          setBanner(URL + res.data.data[0].img);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -208,7 +218,7 @@ const Main = () => {
             <Grid sx={{ width: "100%", height: "100%", position: "relative" }}>
               <Grid
                 sx={{
-                  backgroundImage: `url("${fileMain.reclam}")`,
+                  backgroundImage: `url("${banner}")`,
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   width: "100%",

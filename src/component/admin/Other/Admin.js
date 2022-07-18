@@ -19,12 +19,25 @@ const Admin = () => {
   const [banner, setBanner] = useState();
 
   const BannerSave = () => {
-    if (banner?.file) {
-      const bannerform = new FormData();
-      bannerform.append("img", banner.file);
-      API.putBanner()
-        .then((res) => {})
-        .catch((err) => {});
+    if (banner) {
+      var formData22 = new FormData();
+      formData22.append("img", banner?.file);
+      API.postBanner(formData22)
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: "Амжилттай хадгалагдлаа.",
+            confirmButtonColor: "#0f56b3",
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Алдаа гарлаа.",
+            text: "Серверт хадгалах үед алдаа гарлаа дахин оролдоно уу.",
+            confirmButtonColor: "#0f56b3",
+          });
+        });
     } else {
       Swal.fire({
         icon: "warning",
@@ -33,7 +46,6 @@ const Admin = () => {
       });
     }
   };
-  useEffect(() => {}, []);
 
   const uploadButton = (
     <div>
@@ -623,7 +635,19 @@ const Admin = () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          setIsModalVisible(true);
+          API.getBanner()
+            .then((res) => {
+              if (res.data.data.length > 0) {
+                setBanner({
+                  file: res.data.data[0].img,
+                  base: URL + res.data.data[0].img,
+                });
+              }
+            })
+            .catch(() => {})
+            .finally(() => {
+              setIsModalVisible(true);
+            });
         }}
       >
         Banner
@@ -631,10 +655,14 @@ const Admin = () => {
       <Modal
         visible={isModalVisible}
         footer={false}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={() => {
+          setBanner();
+          setIsModalVisible(false);
+        }}
       >
         <div className="gadot-primary-modal-body">
           <div className="gadot-text-body">
+            <div>Хэмжээ: 750x370</div>
             <Upload
               name="avatar"
               listType="picture-card"

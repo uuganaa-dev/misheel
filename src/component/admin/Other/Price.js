@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Input, Upload, DatePicker } from "antd";
+import { Modal, Input, Upload, DatePicker, Button } from "antd";
 import { useAdminState } from "../../../contexts/AdminContext";
-import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
 import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import moment from "moment";
@@ -19,6 +19,12 @@ const Price = () => {
   const { admin, setAdmin } = useAdminState();
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [fileModal, setFileModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [img, setImg] = useState();
+  const [pdf, setPdf] = useState();
+  console.log(img?.Image);
 
   const Validate = () => {
     let validation = "";
@@ -112,6 +118,48 @@ const Price = () => {
           .finally(() => setAdmin({ type: "LOADING", data: false }));
       }
     });
+  };
+
+  const CoverSave = () => {
+    let validation = "";
+    title || (validation += "Гарчиг оруулна уу!<br/>");
+    img || (validation += "Зураг оруулна уу!<br/>");
+    pdf || (validation += "Файл оруулна уу!<br/>");
+    if (validation !== "") {
+      Swal.fire({
+        icon: "warning",
+        html: validation,
+        confirmButtonColor: "#0f56b3",
+      });
+    } else {
+      var coverFormData = new FormData();
+      coverFormData.append("title", title);
+      coverFormData.append("cover", img.Image);
+      coverFormData.append("file", pdf);
+      API.postPriceCover(coverFormData)
+        .then((res) => {
+          if (res.status === 200) {
+            setFileModal(false);
+            Swal.fire({
+              icon: "success",
+              title: "Амжилттай хадгалагдлаа.",
+              confirmButtonColor: "#0f56b3",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Алдаа гарлаа.",
+            text: "Хадгалах үед алдаа гарлаа дахин оролдоно уу.",
+            confirmButtonColor: "#0f56b3",
+          });
+        })
+        .finally(() => {
+          setFileModal(false);
+        });
+    }
   };
 
   useEffect(() => {
@@ -317,51 +365,133 @@ const Price = () => {
           </div>
         </div>
       </Modal>
-      <div className="brand-container">
-        {loading ? (
-          <div className="text-center mt-2">Уншиж байна...</div>
-        ) : (
-          <div className="category-body">
-            {admin.priceList.map((el, index) => {
-              return (
-                <div
-                  className="cat-card"
-                  key={index}
-                  style={{ cursor: "default" }}
+
+      <Modal
+        title=""
+        visible={fileModal}
+        onCancel={() => {
+          setFileModal(false);
+        }}
+        footer={false}
+        width={800}
+        centered
+      >
+        <div className="gadot-primary-modal-body">
+          <div className="gadot-text-body">
+            <div className="gadot-uploadType2">
+              <div className="gadot-uploadType2-2">
+                <Input
+                  size="large"
+                  placeholder="Гарчиг бичих хэсэг"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="mb-2"
+                />
+                <Upload
+                  name="avatar"
+                  listType="picture-card"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  beforeUpload={() => false}
+                  accept=".jpg, .png, .jpeg"
+                  maxCount={1}
+                  onChange={({ file }) => {
+                    getBase64(file, (base) => {
+                      setImg({ Image: file, ImageBase: base });
+                    });
+                  }}
                 >
-                  <div className="cat-card-div">
-                    <div className="cat-brand-img">
-                      <img
-                        src={
-                          el.priceImage.split("/")[1] === "uploads"
-                            ? URL + el.priceImage
-                            : el.priceImage
-                        }
-                        alt=""
-                        className="cat-brand-logo"
-                      />
-                    </div>
-                    <div className="cat-brand-title">
-                      <div className="cat-brand-title-name">
-                        {moment(el.priceDate).format("YYYY-MM-DD")}
-                      </div>
-                      <div className="cat-brand-desc">{el.priceTitle}</div>
-                    </div>
-                  </div>
+                  {img?.Image ? (
+                    <img
+                      src={img.ImageBase ? img.ImageBase : img.Image}
+                      alt=""
+                      className="upload-img"
+                    />
+                  ) : (
+                    <div>Ковер зураг оруулах 1900x650</div>
+                  )}
+                </Upload>
+                <Upload
+                  beforeUpload={() => false}
+                  maxCount={1}
+                  accept=".pdf"
+                  showUploadList={false}
+                  onChange={({ file }) => {
+                    setPdf(file);
+                  }}
+                >
+                  <Button icon={<UploadOutlined />}>PDF Файл оруулах</Button>
+                </Upload>
+                {pdf && <div className="pt-1">{pdf.name ? pdf.name : pdf}</div>}
+                <div className="gadot-modal-button">
                   <div
-                    className="brand-cart-delete"
-                    style={isDelete ? { display: "flex" } : { display: "none" }}
-                    onClick={() => PriceDelete(el.id)}
+                    className="modal-save-button"
+                    onClick={() => CoverSave()}
                   >
-                    <i className="fa fa-trash"></i>
+                    Хадгалах
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            </div>
           </div>
-        )}
+        </div>
+      </Modal>
 
+      <div className="brand-container">
         <div className="add-container">
+          <div
+            className="add-category-btn mr-2"
+            onClick={() => {
+              API.getPriceCover()
+                .then((res) => {
+                  if (res.data.data.length > 0) {
+                    setTitle(res.data.data[0].title);
+                    setImg({
+                      Image: res.data.data[0].cover,
+                      ImageBase: undefined,
+                    });
+                    setPdf(res.data.data[0].file);
+                  } else {
+                    setTitle("");
+                    setImg();
+                    setPdf();
+                  }
+                })
+                .catch(() => {})
+                .finally(() => setFileModal(true));
+            }}
+          >
+            <span className="mr-2">Cover</span>
+            <svg
+              width={22}
+              height={22}
+              viewBox="0 0 22 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                stroke="white"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M11 7V15"
+                stroke="white"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M7 11H15"
+                stroke="white"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
           <div
             className="add-category-btn"
             onClick={() => {
@@ -433,6 +563,48 @@ const Price = () => {
             </svg>
           </div>
         </div>
+        {loading ? (
+          <div className="text-center mt-2">Уншиж байна...</div>
+        ) : (
+          <div className="category-body">
+            {admin.priceList.map((el, index) => {
+              return (
+                <div
+                  className="cat-card"
+                  key={index}
+                  style={{ cursor: "default" }}
+                >
+                  <div className="cat-card-div">
+                    <div className="cat-brand-img">
+                      <img
+                        src={
+                          el.priceImage.split("/")[1] === "uploads"
+                            ? URL + el.priceImage
+                            : el.priceImage
+                        }
+                        alt=""
+                        className="cat-brand-logo"
+                      />
+                    </div>
+                    <div className="cat-brand-title">
+                      <div className="cat-brand-title-name">
+                        {moment(el.priceDate).format("YYYY-MM-DD")}
+                      </div>
+                      <div className="cat-brand-desc">{el.priceTitle}</div>
+                    </div>
+                  </div>
+                  <div
+                    className="brand-cart-delete"
+                    style={isDelete ? { display: "flex" } : { display: "none" }}
+                    onClick={() => PriceDelete(el.id)}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

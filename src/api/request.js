@@ -83,8 +83,8 @@ export async function getBanner() {
   const response = await MISHEEL().get("/banner");
   return response;
 }
-export async function putBanner(formData) {
-  const response = await MISHEEL().put("/banner", formData);
+export async function postBanner(formData) {
+  const response = await MISHEEL().post("/banner", formData);
   return response;
 }
 // Нүүр хуудас
@@ -160,6 +160,16 @@ export async function deletePrice(id) {
   const response = await MISHEEL().delete("/price/" + id);
   return response;
 }
+// Cover
+export async function postPriceCover(formData) {
+  const response = await MISHEEL().post("/priceHead", formData);
+  return response;
+}
+export async function getPriceCover() {
+  const response = await MISHEEL().get("/priceHead");
+  return response;
+}
+// Cover
 // Price
 // Social
 export async function postSocial(name, formData) {
