@@ -403,7 +403,7 @@ const Price = () => {
                 >
                   {img?.Image ? (
                     <img
-                      src={img.ImageBase ? img.ImageBase : img.Image}
+                      src={img.ImageBase ? img.ImageBase : URL + img.Image}
                       alt=""
                       className="upload-img"
                     />
