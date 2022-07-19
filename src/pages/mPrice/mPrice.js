@@ -6,7 +6,7 @@ import Unit from "./unit";
 import Swal from "sweetalert2";
 import * as API from "../../api/request";
 
-const URL = "http://mmmall.mn";
+const URL = "https://mmmall.mn";
 
 const MPrice = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
