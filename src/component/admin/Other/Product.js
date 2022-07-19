@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const { Option } = Select;
 const { TextArea } = Input;
 
-const URL = "http://mmmall.mn";
+const URL = "https://mmmall.mn";
 
 const Product = () => {
   const formData = new FormData();

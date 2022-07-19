@@ -6,7 +6,7 @@ import * as API from "../../../api/request";
 import Swal from "sweetalert2";
 import moment from "moment";
 
-const URL = "http://mmmall.mn";
+const URL = "https://mmmall.mn";
 
 function getBase64(img, callback) {
   const reader = new FileReader();

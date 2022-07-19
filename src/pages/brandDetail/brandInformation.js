@@ -24,7 +24,7 @@ const BrandInformation = ({ sx, data, txt }) => {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://mmmall.mn${data?.brandLogo}")`,
+            backgroundImage: `url("https://mmmall.mn${data?.brandLogo}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["58px", "142px", "201px"],

@@ -10,7 +10,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
 
-const URL = "http://mmmall.mn";
+const URL = "https://mmmall.mn";
 
 const Main = () => {
   const context = useContext(TheContext);

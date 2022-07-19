@@ -65,7 +65,7 @@ const Search = () => {
                 <div className="text-center">
                   <Zoom>
                     <img
-                      src={"http://mmmall.mn" + oneData.productImage[0]}
+                      src={"https://mmmall.mn" + oneData.productImage[0]}
                       alt=""
                       width={"100%"}
                       height="200px"
@@ -150,7 +150,7 @@ const Search = () => {
               return (
                 <div className="search-pruduct-item" key={index}>
                   <img
-                    src={"http://mmmall.mn" + el.productImage[0]}
+                    src={"https://mmmall.mn" + el.productImage[0]}
                     alt=""
                     height={"100%"}
                     width={"100%"}

@@ -245,7 +245,7 @@ const Service = () => {
                   <td className="vertical-center p-1">{el.text}</td>
                   <td className="vertical-center p-1">
                     <img
-                      src={"http://mmmall.mn" + el.imageUrl}
+                      src={"https://mmmall.mn" + el.imageUrl}
                       alt=""
                       width={50}
                       height={50}

@@ -24,7 +24,7 @@ const CreatedByProject = ({ data, show, setShow, index, click }) => {
       >
         <Grid
           sx={{
-            backgroundImage: `url("http://mmmall.mn${data.img}")`,
+            backgroundImage: `url("https://mmmall.mn${data.img}")`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: ["157px", "410px", "585px"],

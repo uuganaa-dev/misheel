@@ -286,7 +286,7 @@ const About = () => {
                 src={
                   admin.aboutCoverImg.aboutImageBase
                     ? admin.aboutCoverImg.aboutImageBase
-                    : "http://mmmall.mn" + admin.aboutCoverImg.aboutImage
+                    : "https://mmmall.mn" + admin.aboutCoverImg.aboutImage
                 }
                 alt=""
                 className="upload-img"
@@ -387,7 +387,7 @@ const About = () => {
                     src={
                       admin.aboutImg.aboutImgBase
                         ? admin.aboutImg.aboutImgBase
-                        : "http://mmmall.mn" + admin.aboutImg.aboutImg
+                        : "https://mmmall.mn" + admin.aboutImg.aboutImg
                     }
                     alt=""
                     className="upload-img"
@@ -440,7 +440,7 @@ const About = () => {
                       <tr key={index}>
                         <td className="vertical-center p-1">
                           <img
-                            src={"http://mmmall.mn" + el.img}
+                            src={"https://mmmall.mn" + el.img}
                             alt=""
                             style={{ width: "50px", height: "50px" }}
                           />

@@ -80,7 +80,7 @@ const MPrice = () => {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://mmmall.mn${lastItem?.priceImage}")`,
+              backgroundImage: `url("https://mmmall.mn${lastItem?.priceImage}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "100%",
@@ -229,7 +229,7 @@ const MPrice = () => {
                       return (
                         <img
                           key={index}
-                          src={"http://mmmall.mn" + el.img}
+                          src={"https://mmmall.mn" + el.img}
                           alt=""
                           width={"100%"}
                         />

@@ -63,7 +63,7 @@ const AboutUs = () => {
         <Grid sx={{ position: "relative" }}>
           <Grid
             sx={{
-              backgroundImage: `url("http://mmmall.mn${list?.cover}")`,
+              backgroundImage: `url("https://mmmall.mn${list?.cover}")`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
               width: "100%",

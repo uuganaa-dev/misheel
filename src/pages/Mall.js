@@ -53,7 +53,7 @@ const Mall = () => {
             return (
               <div className="service-item" key={index}>
                 <img
-                  src={"http://mmmall.mn" + el.imageUrl}
+                  src={"https://mmmall.mn" + el.imageUrl}
                   alt=""
                   className="service-item-img"
                 />

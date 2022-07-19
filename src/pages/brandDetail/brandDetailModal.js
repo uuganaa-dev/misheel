@@ -63,7 +63,7 @@ const BrandDetailModal = ({ handleClose, detail, txt }) => {
           <ArrowGreyBgColor click={left} />
           <img
             style={{ width: "255px", height: "255px", objectFit: "cover" }}
-            src={"http://mmmall.mn" + detail.productImage[index]}
+            src={"https://mmmall.mn" + detail.productImage[index]}
             alt="detail"
           />
           <ArrowGreyBgColor

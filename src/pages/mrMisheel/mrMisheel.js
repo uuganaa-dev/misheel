@@ -151,7 +151,7 @@ const MrMisheel = () => {
                 }}
               >
                 <img
-                  src={"http://mmmall.mn" + item.icon}
+                  src={"https://mmmall.mn" + item.icon}
                   alt=""
                   height={114}
                   width={218}
