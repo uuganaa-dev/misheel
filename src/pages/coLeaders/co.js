@@ -15,6 +15,7 @@ const Co = () => {
   const [data, setData] = useState([]);
 
   const OpenModal = (id) => {
+    console.log("id: ", id);
     setModal(true);
   };
 
@@ -135,7 +136,7 @@ const Co = () => {
                       sx={{
                         backgroundImage: `url("https://mmmall.mn${item.img}")`,
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
+                        backgroundSize: "contain",
                         width:
                           index % 2 === 0
                             ? ["174px", "415px", "585px"]

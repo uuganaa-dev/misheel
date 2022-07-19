@@ -22,6 +22,7 @@ import Admin from "./admin/Admin";
 import Brand from "./admin/Brand";
 import Product from "./admin/Product";
 import Social from "./admin/Social";
+import CoLeader from "../component/admin/Other/CoLeader";
 import Price from "./admin/Price";
 import About from "./admin/About";
 
@@ -62,6 +63,7 @@ const Router = () => {
               <Route path="/users" element={<Users />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/social" element={<Social />} />
+              <Route path="/social/detail" element={<CoLeader />} />
               <Route path="/about" element={<About />} />
               <Route path="/service" element={<Service />} />
             </>
