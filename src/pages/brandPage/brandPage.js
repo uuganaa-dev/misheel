@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import Appbar from "../../component/Appbar";
 import FooterMain from "../../component/footerMain";
-import ReclamImage from "../../asset/backgroundImages/brandPage/reclam.png";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../api/request";
 import Swal from "sweetalert2";
+
+const URL = "https://mmmall.mn";
 
 const BrandPage = () => {
   const navigate = useNavigate();
@@ -16,6 +17,17 @@ const BrandPage = () => {
   const [catList, setCatList] = useState([]);
   const [brandList, setBrandList] = useState([]);
   const [brandListFiltered, setBrandListFiltered] = useState([]);
+  const [banner, setBanner] = useState();
+
+  useEffect(() => {
+    API.getBanner(2)
+      .then((res) => {
+        if (res.data.data.length > 0) {
+          setBanner(URL + res.data.data[0].img);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (catValue !== undefined) {
@@ -255,15 +267,18 @@ const BrandPage = () => {
             </>
           )}
         </Grid>
-        <Grid
-          sx={{
-            backgroundImage: `url("${ReclamImage}")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            width: "100%",
-            height: "calc(100vw * 0.2)",
-          }}
-        />
+        {banner && (
+          <Grid
+            sx={{
+              backgroundImage: `url("${banner}")`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "100%",
+              height: "calc(100vw * 0.2)",
+            }}
+          />
+        )}
+
         <FooterMain />
       </Grid>
     </div>

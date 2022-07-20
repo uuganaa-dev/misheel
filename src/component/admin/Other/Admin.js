@@ -22,6 +22,7 @@ const Admin = () => {
     if (banner) {
       var formData22 = new FormData();
       formData22.append("img", banner?.file);
+      formData22.append("ordern", 1);
       API.postBanner(formData22)
         .then((res) => {
           Swal.fire({
@@ -635,7 +636,7 @@ const Admin = () => {
           cursor: "pointer",
         }}
         onClick={() => {
-          API.getBanner()
+          API.getBanner(1)
             .then((res) => {
               if (res.data.data.length > 0) {
                 setBanner({

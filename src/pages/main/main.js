@@ -28,7 +28,7 @@ const Main = () => {
   const [banner, setBanner] = useState();
 
   useEffect(() => {
-    API.getBanner()
+    API.getBanner(1)
       .then((res) => {
         if (res.data.data.length > 0) {
           setBanner(URL + res.data.data[0].img);
@@ -204,44 +204,48 @@ const Main = () => {
           <FeaturedBrand txt={context.txt.brand} list={list} />
         </Grid>
         <Footer />
-        <Modal open={open} onClose={handleClose}>
-          <Grid
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: ["80%", "51%"],
-              height: ["calc(80vw * 0.49)", "calc(51vw * 0.49)"],
-            }}
-          >
-            <Grid sx={{ width: "100%", height: "100%", position: "relative" }}>
+        {banner && (
+          <Modal open={open} onClose={handleClose}>
+            <Grid
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: ["80%", "51%"],
+                height: ["calc(80vw * 0.49)", "calc(51vw * 0.49)"],
+              }}
+            >
               <Grid
-                sx={{
-                  backgroundImage: `url("${banner}")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-              <Grid
-                sx={{
-                  backgroundImage: `url("${icons.cancel}")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  width: "20px",
-                  height: "20px",
-                  position: "absolute",
-                  top: "-44px",
-                  right: "-38px",
-                  cursor: "pointer",
-                }}
-                onClick={handleClose}
-              />
+                sx={{ width: "100%", height: "100%", position: "relative" }}
+              >
+                <Grid
+                  sx={{
+                    backgroundImage: `url("${banner}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+                <Grid
+                  sx={{
+                    backgroundImage: `url("${icons.cancel}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    width: "20px",
+                    height: "20px",
+                    position: "absolute",
+                    top: "-44px",
+                    right: "-38px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClose}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </Modal>
+          </Modal>
+        )}
       </Grid>
     </>
   );

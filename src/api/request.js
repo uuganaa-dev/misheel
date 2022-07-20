@@ -79,8 +79,8 @@ export async function deleteImg(id) {
   return response;
 }
 
-export async function getBanner() {
-  const response = await MISHEEL().get("/banner");
+export async function getBanner(id) {
+  const response = await MISHEEL().get("/banner/" + id);
   return response;
 }
 export async function postBanner(formData) {
