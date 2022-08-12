@@ -42,10 +42,13 @@ const Appbar = () => {
           color: ["white", "white", "white"],
           alignItems: "center",
           justifyContent: "space-between",
-          px: ["10px", "10px", "200px"],
+          maxWidth: "1370px",
+          marginLeft: "auto",
+          marginRight: "auto",
           zIndex: "2",
         }}
       >
+        <Grid></Grid>
         {isShow ? (
           <Input
             onChange={(e) => setSearchValue(e.target.value)}
@@ -59,14 +62,6 @@ const Appbar = () => {
           />
         ) : (
           <>
-            <MenuIcon
-              sx={{ ...style.pointer }}
-              onClick={() => {
-                setUser({ type: "CHANGE_LEFT_MENU", data: false });
-                setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu });
-              }}
-            />
-
             <Typography
               sx={{
                 ...style.txt,
@@ -86,27 +81,7 @@ const Appbar = () => {
             >
               {txt.price}
             </Typography>
-            <Grid
-              onClick={() => {
-                setUser({ type: "CHANGE_OPENMENU", data: false });
-                setUser({ type: "CHANGE_LEFT_MENU", data: false });
-                setSelect(txt.home);
-                navigate("/");
-              }}
-            >
-              <LogoYellow
-                ysx={{
-                  width: ["50px", "42px", "58px"],
-                  height: ["50px", "42px", "58px"],
-                  cursor: "pointer",
-                }}
-                sx={{
-                  width: ["50px", "42px", "45px"],
-                  height: ["50px", "42px", "45px"],
-                }}
-                backgroundColor={["#FFD662", "#FFD662", "#FFD662"]}
-              />
-            </Grid>
+
             <Typography
               sx={{
                 ...style.txt,
@@ -126,6 +101,7 @@ const Appbar = () => {
             >
               {txt.brand}
             </Typography>
+
             <Typography
               sx={{
                 ...style.txt,
@@ -145,77 +121,105 @@ const Appbar = () => {
             >
               {txt.ours}
             </Typography>
+            <Grid
+              sx={{
+                display: ["none", "flex", "flex"],
+                gap: ["8px", "24px", "24px"],
+                alignItems: "center",
+                fontSize: ["10px", "16px", "16px"],
+              }}
+            >
+              <SearchIcon
+                sx={{ ...style.pointer, fontSize: ["10px", "16px", "16px"] }}
+                onClick={() => {
+                  setUser({ type: "CHANGE_OPENMENU", data: false });
+                  setUser({ type: "CHANGE_LEFT_MENU", data: false });
+                  setIsShow(!isShow);
+                }}
+              />
+
+              <LocationOnIcon
+                sx={{
+                  ...style.pointer,
+                  ...(select === "map" && {
+                    color: ["white", "white", "white"],
+                  }),
+                  fontSize: ["10px", "16px", "16px"],
+                }}
+                onClick={() => {
+                  setUser({ type: "CHANGE_OPENMENU", data: false });
+                  setUser({ type: "CHANGE_LEFT_MENU", data: false });
+                  setSelect("map");
+                  navigate("/map");
+                }}
+              />
+              <i
+                className="fa fa-sign-in cursor-pointer"
+                onClick={() => {
+                  setUser({ type: "CHANGE_OPENMENU", data: false });
+                  setUser({ type: "CHANGE_LEFT_MENU", data: false });
+                  user.loggedIn
+                    ? user.userInfo.role === "1"
+                      ? navigate("/admin")
+                      : user.userInfo.role === "2"
+                      ? navigate("/brand")
+                      : user.userInfo.role === "3"
+                      ? navigate("/price")
+                      : navigate("/login")
+                    : navigate("/login");
+                }}
+              />
+            </Grid>
           </>
         )}
-
+        <MenuIcon
+          sx={{ ...style.pointer }}
+          onClick={() => {
+            setUser({ type: "CHANGE_LEFT_MENU", data: false });
+            setUser({ type: "CHANGE_OPENMENU", data: !user.openMenu });
+          }}
+        />
         <Grid
-          sx={{
-            display: ["none", "flex", "flex"],
-            gap: ["8px", "24px", "24px"],
-            alignItems: "center",
-            fontSize: ["10px", "16px", "16px"],
+          onClick={() => {
+            setUser({ type: "CHANGE_OPENMENU", data: false });
+            setUser({ type: "CHANGE_LEFT_MENU", data: false });
+            setSelect(txt.home);
+            navigate("/");
           }}
         >
-          <SearchIcon
-            sx={{ ...style.pointer, fontSize: ["10px", "16px", "16px"] }}
-            onClick={() => {
-              setUser({ type: "CHANGE_OPENMENU", data: false });
-              setUser({ type: "CHANGE_LEFT_MENU", data: false });
-              setIsShow(!isShow);
+          <LogoYellow
+            ysx={{
+              width: ["50px", "42px", "58px"],
+              height: ["50px", "42px", "58px"],
+              cursor: "pointer",
             }}
-          />
-
-          <LocationOnIcon
             sx={{
-              ...style.pointer,
-              ...(select === "map" && {
-                color: ["white", "white", "white"],
-              }),
-              fontSize: ["10px", "16px", "16px"],
+              width: ["50px", "42px", "45px"],
+              height: ["50px", "42px", "45px"],
             }}
-            onClick={() => {
-              setUser({ type: "CHANGE_OPENMENU", data: false });
-              setUser({ type: "CHANGE_LEFT_MENU", data: false });
-              setSelect("map");
-              navigate("/map");
-            }}
+            backgroundColor={["#FFD662", "#FFD662", "#FFD662"]}
           />
-          <i
-            className="fa fa-sign-in cursor-pointer"
-            onClick={() => {
-              setUser({ type: "CHANGE_OPENMENU", data: false });
-              setUser({ type: "CHANGE_LEFT_MENU", data: false });
-              user.loggedIn
-                ? user.userInfo.role === "1"
-                  ? navigate("/admin")
-                  : user.userInfo.role === "2"
-                  ? navigate("/brand")
-                  : user.userInfo.role === "3"
-                  ? navigate("/price")
-                  : navigate("/login")
-                : navigate("/login");
-            }}
-          />
-          <Typography
-            sx={{
-              ...style.txt,
-              ...style.sixHundred,
-              ...style.pointer,
-              ...(select === txt.lan && {
-                color: ["white", "white", "white"],
-              }),
-            }}
-            className="my-font-size"
-            onClick={() => {
-              setUser({ type: "CHANGE_OPENMENU", data: false });
-              setUser({ type: "CHANGE_LEFT_MENU", data: false });
-              setSelect(txt.lan);
-              context.index === 0 ? context.ChangeTxt(1) : context.ChangeTxt(0);
-            }}
-          >
-            {txt.lan}
-          </Typography>
         </Grid>
+        <Typography
+          sx={{
+            ...style.txt,
+            ...style.sixHundred,
+            ...style.pointer,
+            ...(select === txt.lan && {
+              color: ["white", "white", "white"],
+              display: ["none", "block", "block"],
+            }),
+          }}
+          className="my-font-size"
+          onClick={() => {
+            setUser({ type: "CHANGE_OPENMENU", data: false });
+            setUser({ type: "CHANGE_LEFT_MENU", data: false });
+            setSelect(txt.lan);
+            context.index === 0 ? context.ChangeTxt(1) : context.ChangeTxt(0);
+          }}
+        >
+          {txt.lan}
+        </Typography>
         <MenuIcon
           sx={{ ...style.pointer, display: ["block", "none", "none"] }}
           onClick={() => {
