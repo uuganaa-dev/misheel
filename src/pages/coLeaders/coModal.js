@@ -96,34 +96,68 @@ const CoModal = ({ CloseModal, data }) => {
         />
       </Grid>
       <Slider {...settings}>
-        {data.map((item, index) => (
-          <Grid
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-            key={index}
-          >
-            <Grid sx={{ display: "flex", gap: "30px" }}>
-              <Grid
-                sx={{
-                  backgroundImage: `url("https://mmmall.mn${item.img}")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  width: "50%",
-                  height: "calc(50vw * 0.68)",
-                }}
-              />
-              <Grid sx={{ width: "40%" }}>
-                <Typography sx={{ fontSize: "50px" }}>{item.name}</Typography>
-                <Typography sx={{ fontSize: "40px" }}>{item.txt}</Typography>
+        {data.data.map((item, index) => {
+          console.log(item);
+          return (
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+              }}
+              key={index}
+            >
+              <Grid sx={{ display: "flex", gap: "30px" }}>
+                <Grid
+                  sx={{
+                    backgroundImage: `url("https://mmmall.mn${item.img}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    width: "50%",
+                    height: "calc(50vw * 0.68)",
+                  }}
+                />
+                <Grid sx={{ width: "40%", textAlign: "left" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "20px",
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        marginRight: "10px",
+                      }}
+                    >
+                      Асуулт:
+                    </Typography>
+                    <Typography sx={{}}>{item.question}</Typography>
+                  </div>
+
+                  <div>
+                    <Typography
+                      sx={{
+                        fontSize: "20px",
+                        fontStyle: "italic",
+                        fontWeight: "bold",
+                        marginRight: "10px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Хариулт:
+                    </Typography>
+                    <Typography sx={{}}>{item.answer}</Typography>
+                  </div>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        ))}
+          );
+        })}
       </Slider>
     </Grid>
   );
