@@ -139,7 +139,7 @@ const Sidebar = (props) => {
                 <li
                   className={
                     location.pathname === "/social" ||
-                    location.pathname === "/social/detail"
+                    location.pathname === "/social/coleader"
                       ? "has-sub nav-item active"
                       : "has-sub nav-item"
                   }

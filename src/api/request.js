@@ -176,12 +176,20 @@ export async function postSocial(name, formData) {
   const response = await MISHEEL().post("/" + name, formData);
   return response;
 }
+export async function putSocial(id, formData) {
+  const response = await MISHEEL().put("/coleader/" + id, formData);
+  return response;
+}
 export async function getSocial(name) {
   const response = await MISHEEL().get("/" + name);
   return response;
 }
 export async function deleteSocial(name, id) {
   const response = await MISHEEL().delete("/" + name + "/" + id);
+  return response;
+}
+export async function deleteColeader(id, data_id) {
+  const response = await MISHEEL().delete("/coleader/" + id + "/" + data_id);
   return response;
 }
 // Social

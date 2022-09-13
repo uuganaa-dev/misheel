@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MShiidel from "./Social/MShiidel";
-import CoLeader from "./Social/CoLeader";
+
 import CreatedBy from "./Social/CreatedBy";
 import MrMisheel from "./Social/MrMisheel";
 import * as API from "../../../api/request";
@@ -11,6 +12,7 @@ const URL = "https://mmmall.mn";
 
 const Social = () => {
   const { admin, setAdmin } = useAdminState();
+  const navigate = useNavigate();
 
   const Delete = (name, id) => {
     Swal.fire({
@@ -109,25 +111,6 @@ const Social = () => {
           confirmButtonColor: "#0f56b3",
         });
       });
-    API.getSocial("coleader")
-      .then((res) => {
-        if (res.data.success) {
-          if (res.data.data.length > 0) {
-            setAdmin({ type: "CO_LEADER_DATA", data: res.data.data });
-            setAdmin({ type: "LOADING", data: false });
-          }
-        }
-      })
-      .catch((err) => {
-        setAdmin({ type: "LOADING", data: false });
-        console.log(err);
-        Swal.fire({
-          icon: "error",
-          title: "Алдаа гарлаа.",
-          text: "Лист унших үед алдаа гарлаа дахин оролдоно уу.",
-          confirmButtonColor: "#0f56b3",
-        });
-      });
   }, [admin.refresh, setAdmin]);
 
   return (
@@ -156,7 +139,9 @@ const Social = () => {
         </div>
         <div
           className="social-container-item"
-          onClick={() => setAdmin({ type: "CO_LEADER", data: true })}
+          onClick={() => {
+            navigate("/social/coleader");
+          }}
         >
           <div className="social-container-item-title">Co Leader</div>
           <div>хөтөлбөр</div>
@@ -165,7 +150,7 @@ const Social = () => {
 
       <CreatedBy />
       <MrMisheel />
-      <CoLeader />
+
       <MShiidel />
 
       {admin.loading ? (
@@ -244,34 +229,6 @@ const Social = () => {
                   className="fa fa-trash p-1 text-danger cursor-pointer"
                   onClick={() => {
                     Delete("mrmisheel", el._id);
-                  }}
-                ></i>
-              </div>
-            ))}
-          <h5>Co Leader</h5>
-          {admin.coLeaderData.length > 0 &&
-            admin.coLeaderData.map((el, index) => (
-              <div className="social-item-container-item" key={index}>
-                <img
-                  src={
-                    el.img
-                      ? el.img.split("/")[1] === "uploads"
-                        ? URL + el.img
-                        : el.img
-                      : ""
-                  }
-                  alt="Зураггүй"
-                  className="social-item-container-item-img"
-                />
-                <div className="social-item-container-item-div1">
-                  {el.episode}
-                </div>
-                <div className="social-item-container-item-div2">{el.name}</div>
-                <div className="social-item-container-item-div3">{el.txt}</div>
-                <i
-                  className="fa fa-trash p-1 text-danger cursor-pointer"
-                  onClick={() => {
-                    Delete("coleader", el._id);
                   }}
                 ></i>
               </div>

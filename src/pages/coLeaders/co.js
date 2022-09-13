@@ -13,13 +13,15 @@ const Co = () => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [one_data, setOne_data] = useState();
 
   const OpenModal = (id) => {
-    console.log("id: ", id);
+    setOne_data(data.find((el) => el.id === id));
     setModal(true);
   };
 
   const CloseModal = () => {
+    setOne_data();
     setModal(false);
   };
 
@@ -208,7 +210,7 @@ const Co = () => {
         <FooterMain />
         <Modal open={modal} onClose={() => CloseModal()}>
           <div>
-            <CoModal CloseModal={CloseModal} data={data} />
+            <CoModal CloseModal={CloseModal} data={one_data} />
           </div>
         </Modal>
       </Grid>
