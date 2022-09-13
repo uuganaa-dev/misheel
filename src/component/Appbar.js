@@ -48,7 +48,6 @@ const Appbar = () => {
           zIndex: "2",
         }}
       >
-        <Grid></Grid>
         {isShow ? (
           <Input
             onChange={(e) => setSearchValue(e.target.value)}

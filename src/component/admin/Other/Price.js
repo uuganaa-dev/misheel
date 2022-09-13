@@ -578,9 +578,9 @@ const Price = () => {
                     <div className="cat-brand-img">
                       <img
                         src={
-                          el.priceImage.split("/")[1] === "uploads"
-                            ? URL + el.priceImage
-                            : el.priceImage
+                          el?.priceImage.split("/")[1] === "uploads"
+                            ? URL + el?.priceImage
+                            : el?.priceImage
                         }
                         alt=""
                         className="cat-brand-logo"
